@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "documents": [
+    {
+      "id": "hello-world",
+      "titre": "Hello world",
+      "chapitre": "premiers-pas",
+      "resume": "Écrire et exécuter un premier programme Dystos.",
+      "texte": "print écrit une ligne sur la sortie standard. C'est la fonction la plus utile pour vérifier ce que fait un programme. La sortie est : Les chaînes de caractères Une chaîne se déclare avec des guillemets doubles. Les guillemets simples délimitent les caractères individuels. Les fonctions On regroupe le code dans des fonctions avec def. L'indentation délimite le bloc : pas d'accolades, pas de mot clé end. Le f devant la chaîne indique qu'elle est formatée : chaque {...} est remplacé par la valeur de l'expression qu'il contient. Exécuter Un fichier .dys s'exécute de haut en bas. La fonction main n'est pas obligatoire, mais elle rend le code plus lisible quand le programme grossit. Ce qu'il faut retenir print(...) affiche une ligne. def nom(...): déclare une fonction, le bloc est indenté. f\"...\" interpole des expressions dans une chaîne."
+    },
+    {
+      "id": "variables",
+      "titre": "Variables, val et var",
+      "chapitre": "premiers-pas",
+      "resume": "Déclarer des valeurs immuables avec val et mutables avec var.",
+      "texte": "Une variable associe un nom, un type et une valeur. Dystos distingue deux formes de déclaration : val pour une valeur qui ne change pas, var pour une variable modifiable. La forme courte déduit le type, sans annotation : Les types de base | Type | Exemple | | | | | int | 42, 7 | | float | 3.14, 1.0e 3 | | string | \"texte\" | | bool | true, false | | char | 'a' | Immuable ou mutable val refuse toute réassignation, et le compilateur le signale avant l'exécution. Utilise var quand la valeur doit changer. Interpolation Les chaînes formatées f\"...\" acceptent n'importe quelle expression entre accolades. Ce qu'il faut retenir val est immuable, var est modifiable. L'annotation de type est optionnelle mais recommandée. Le type est vérifié à la compilation, pas à l'exécution."
+    },
+    {
+      "id": "fonctions",
+      "titre": "Fonctions",
+      "chapitre": "premiers-pas",
+      "resume": "Déclarer des fonctions, paramètres, valeurs de retour et valeurs par défaut.",
+      "texte": "Une fonction regroupe un traitement sous un nom. def déclare le nom, les paramètres entre parenthèses, et le type de retour quand il y en a un. Déclaration Le mot clé return interrompt la fonction et rend une valeur. Sans return, une fonction rend void : elle fait quelque chose mais ne produit rien. Paramètres et valeurs par défaut Les paramètres peuvent avoir une valeur par défaut, et des paramètres nommés rendent l'appel plus lisible. Fonctions comme valeurs Une fonction est une valeur : on la passe en argument, on la renvoie, on la stocke. Fonctions récursives Une fonction s'appelle elle même. La condition d'arrêt est indispensable. Ce qu'il faut retenir def nom(param: type) type: déclare une fonction. return rend une valeur, son absence signifie void. Une fonction est une valeur qu'on peut passer autour."
+    }
+  ]
+}

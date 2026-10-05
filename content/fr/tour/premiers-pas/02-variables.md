@@ -1,0 +1,98 @@
+---
+id: variables
+titre: Variables, val et var
+chapitre: premiers-pas
+ordre: 2
+resume: Déclarer des valeurs immuables avec val et mutables avec var.
+exemple: 02-variables
+exercice:
+  consigne: |-
+    Corrige la troisième ligne pour que `message` contienne `Dystos 1.0`.
+    Le type de `message` est `string`.
+  code_initial: |
+    version: string = "1.0"
+    nom: string = "Dystos"
+    message: string = nom + version
+    print(message)
+  sortie_attendue: "Dystos 1.0"
+  indices:
+    - "L'opérateur `+` ne colle pas deux chaînes, il faut un espace entre."
+    - "`f\"{nom} {version}\"` interpole les deux variables."
+  solution: |
+    version: string = "1.0"
+    nom: string = "Dystos"
+    message: string = f"{nom} {version}"
+    print(message)
+---
+
+Une variable associe un nom, un type et une valeur. Dystos distingue deux formes
+de déclaration : `val` pour une valeur qui ne change pas, `var` pour une
+variable modifiable.
+
+```dystos
+val langage: string = "Dystos"
+var compteur: int = 0
+compteur += 1
+print(langage, compteur)
+```
+
+La forme courte déduit le type, sans annotation :
+
+```dystos
+val langage = "Dystos"
+var compteur = 0
+```
+
+## Les types de base
+
+| Type | Exemple |
+| --- | --- |
+| `int` | `42`, `-7` |
+| `float` | `3.14`, `1.0e-3` |
+| `string` | `"texte"` |
+| `bool` | `true`, `false` |
+| `char` | `'a'` |
+
+## Immuable ou mutable
+
+`val` refuse toute réassignation, et le compilateur le signale avant
+l'exécution.
+
+```dystos
+val pi: float = 3.14159
+pi = 3.0
+```
+
+```
+E0301 : ligne 2, colonne 1 : 'pi' est déclaré avec val et ne peut pas être réaffecté
+```
+
+Utilise `var` quand la valeur doit changer.
+
+```dystos
+var total: int = 0
+for i in range(1, 11):
+    total += i
+print(total)
+```
+
+```
+55
+```
+
+## Interpolation
+
+Les chaînes formatées `f"..."` acceptent n'importe quelle expression entre
+accolades.
+
+```dystos
+val langage = "Dystos"
+val version = "1.0"
+print(f"{langage} {version} — compilation le {12 + 3} mai")
+```
+
+## Ce qu'il faut retenir
+
+- `val` est immuable, `var` est modifiable.
+- L'annotation de type est optionnelle mais recommandée.
+- Le type est vérifié à la compilation, pas à l'exécution.

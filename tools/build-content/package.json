@@ -1,0 +1,21 @@
+{
+  "name": "@dystos/build-content",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Genere les pages du site et les assets Android a partir de content/",
+  "bin": {
+    "build-content": "./build-content.mjs"
+  },
+  "scripts": {
+    "build": "node build-content.mjs",
+    "check": "node build-content.mjs --check",
+    "validate": "node build-content.mjs --check"
+  },
+  "dependencies": {
+    "yaml": "^2.5.0"
+  },
+  "engines": {
+    "node": ">=20.0"
+  }
+}

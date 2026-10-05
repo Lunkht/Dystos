@@ -1,0 +1,9 @@
+﻿{
+    "label":  "Apprendre",
+    "link":  {
+                 "title":  "Parcours guidé",
+                 "type":  "generated-index",
+                 "slug":  "/tour"
+             },
+    "position":  3
+}

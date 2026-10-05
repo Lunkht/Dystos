@@ -1,0 +1,9 @@
+﻿{
+    "label":  "Communauté",
+    "link":  {
+                 "title":  "Communauté",
+                 "type":  "generated-index",
+                 "slug":  "/communaute"
+             },
+    "position":  7
+}

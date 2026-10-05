@@ -1,0 +1,9 @@
+﻿{
+    "label":  "Démarrer",
+    "link":  {
+                 "title":  "Démarrer",
+                 "type":  "generated-index",
+                 "slug":  "/demarrer"
+             },
+    "position":  2
+}

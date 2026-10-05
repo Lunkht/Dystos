@@ -1,23 +1,161 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
+/* CSS modules scopés à la page d'accueil. */
 
 .heroBanner {
-  padding: 4rem 0;
-  text-align: center;
   position: relative;
+  padding: 4.5rem 0 3.5rem;
+  text-align: center;
   overflow: hidden;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+.heroBanner::before {
+  content: '';
+  position: absolute;
+  inset: -40% 0 auto 0;
+  height: 80%;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    var(--dystos-hero-glow),
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+.heroTitle {
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 1rem;
+}
+
+.heroAccent {
+  color: var(--ifm-color-primary);
+}
+
+.heroTagline {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 42rem;
+  margin: 0 auto 2rem;
+  color: var(--ifm-color-emphasis-700);
 }
 
 .buttons {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
   justify-content: center;
+}
+
+.heroCode {
+  max-width: 46rem;
+  margin: 3rem auto 0;
+  text-align: left;
+  border: 1px solid var(--dystos-border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.section {
+  padding: 4rem 0;
+}
+
+.examplesSection {
+  background: var(--ifm-background-surface-color);
+  border-top: 1px solid var(--dystos-border);
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.5rem;
+}
+
+.feature {
+  border: 1px solid var(--dystos-border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  background: var(--ifm-background-surface-color);
+}
+
+.feature h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+  color: var(--ifm-color-primary);
+}
+
+.feature p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.sectionTitle {
+  font-size: 1.9rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.sectionSubtitle {
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 2rem;
+}
+
+.exampleGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: 1.5rem;
+}
+
+.example {
+  border: 1px solid var(--dystos-border);
+  border-radius: 10px;
+  padding: 1rem;
+  background: var(--ifm-background-color);
+}
+
+.exampleName {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 0.75rem;
+}
+
+.output {
+  margin: 0;
+  padding: 0.75rem;
+  background: var(--dystos-surface);
+  border: 1px dashed var(--dystos-border);
+  border-radius: 6px;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+}
+
+.outputLabel {
+  display: block;
+  font-family: var(--ifm-font-family-base);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.35rem;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 3rem 1rem 2.5rem;
+  }
+
+  .section {
+    padding: 3rem 0;
+  }
 }

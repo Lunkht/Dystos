@@ -1,0 +1,9 @@
+﻿{
+    "label":  "Compilateur",
+    "link":  {
+                 "title":  "Architecture du compilateur",
+                 "type":  "generated-index",
+                 "slug":  "/compilateur"
+             },
+    "position":  6
+}

@@ -1,0 +1,212 @@
+.playground {
+  border: 1px solid var(--dystos-border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--ifm-background-surface-color);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--dystos-border);
+  background: var(--ifm-background-color);
+}
+
+.endpoint {
+  margin-left: auto;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.75rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.panes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 26rem;
+}
+
+@media screen and (max-width: 996px) {
+  .panes {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pane {
+  display: flex;
+  min-width: 0;
+}
+
+.editorPane {
+  border-right: 1px solid var(--dystos-border);
+}
+
+@media screen and (max-width: 996px) {
+  .editorPane {
+    border-right: none;
+    border-bottom: 1px solid var(--dystos-border);
+  }
+}
+
+.gutter {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0.5rem;
+  background: var(--ifm-background-color);
+  color: var(--ifm-color-emphasis-500);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  text-align: right;
+  user-select: none;
+  overflow: hidden;
+}
+
+.editor {
+  flex: 1;
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 1rem;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  tab-size: 4;
+  white-space: pre;
+  overflow: auto;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--dystos-border);
+  flex-wrap: wrap;
+}
+
+.tab {
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.8rem;
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+}
+
+.tabActive {
+  border-color: var(--dystos-border);
+  background: var(--dystos-background-color, var(--ifm-background-color));
+  color: var(--ifm-color-primary);
+}
+
+.panel {
+  flex: 1;
+  padding: 1rem;
+  overflow: auto;
+  max-height: 26rem;
+}
+
+.diagnostics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.diagnostic {
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  padding: 0.5rem 0.65rem;
+  border-radius: 6px;
+  border-left: 3px solid var(--ifm-color-emphasis-400);
+  background: var(--ifm-background-color);
+}
+
+.diagnosticCode {
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.severityError {
+  border-left-color: #ff6b6b;
+}
+
+.severityError .diagnosticCode {
+  color: #ff6b6b;
+}
+
+.severityWarning {
+  border-left-color: #ffb020;
+}
+
+.severityWarning .diagnosticCode {
+  color: #ffb020;
+}
+
+.severityInfo .diagnosticCode {
+  color: var(--ifm-color-primary);
+}
+
+.okText,
+.errorText {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.okText {
+  color: var(--ifm-color-primary);
+}
+
+.errorText {
+  color: #ff6b6b;
+}
+
+.output {
+  margin: 0;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+
+.duration {
+  color: var(--ifm-color-emphasis-600);
+}
+
+.tokens {
+  margin: 0;
+  padding-left: 3rem;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.tokens li {
+  display: grid;
+  grid-template-columns: 9rem 1fr 5rem;
+  gap: 0.5rem;
+}
+
+.tokenKind {
+  color: var(--ifm-color-primary);
+}
+
+.tokenText {
+  color: var(--ifm-font-color-base);
+}
+
+.tokenPosition {
+  color: var(--ifm-color-emphasis-600);
+  text-align: right;
+}

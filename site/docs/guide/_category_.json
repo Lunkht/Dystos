@@ -1,0 +1,9 @@
+﻿{
+    "label":  "Guide du langage",
+    "link":  {
+                 "title":  "Guide du langage",
+                 "type":  "generated-index",
+                 "slug":  "/guide"
+             },
+    "position":  4
+}

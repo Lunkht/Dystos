@@ -1,0 +1,61 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border: 1px solid var(--dystos-border);
+  border-radius: 10px;
+  padding: 1rem;
+  background: var(--ifm-background-surface-color);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.cardTitle {
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.chapter {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ifm-color-primary);
+  white-space: nowrap;
+}
+
+.output {
+  margin: 0;
+  padding: 0.7rem;
+  background: var(--dystos-surface);
+  border: 1px dashed var(--dystos-border);
+  border-radius: 6px;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.82rem;
+  white-space: pre-wrap;
+}
+
+.outputLabel {
+  display: block;
+  font-family: var(--ifm-font-family-base);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.3rem;
+}
+
+.openInPlayground {
+  font-size: 0.85rem;
+  margin-top: auto;
+}

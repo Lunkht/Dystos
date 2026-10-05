@@ -4,35 +4,38 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+const REPO_URL = 'https://github.com/Lunkht/Dystos';
+
 const config: Config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: 'Dystos',
+  tagline: 'Un langage lisible comme Python, sûr comme Java, qui tourne sur la JVM.',
   favicon: 'img/favicon.ico',
 
-  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
-    v4: true, // Improve compatibility with the upcoming Docusaurus v4
+    v4: true,
   },
 
-  // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
+  url: 'https://dystos.dev',
   baseUrl: '/',
+  // Le bandeau de secours de Docusaurus contient un lien vers docusaurus.io.
+  // Le principe de souverainete interdit toute reference a un domaine externe.
+  baseUrlIssueBanner: false,
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'Lunkht',
+  projectName: 'Dystos',
 
   onBrokenLinks: 'throw',
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'fr',
+    locales: ['fr'],
+  },
+
+  markdown: {
+    format: 'detect',
+    hooks: {
+      onBrokenMarkdownLinks: 'throw',
+    },
   },
 
   presets: [
@@ -41,22 +44,18 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: `${REPO_URL}/tree/main/site/`,
+          routeBasePath: 'docs',
         },
         blog: {
           showReadingTime: true,
+          blogTitle: 'Actualités',
+          blogDescription: 'Versions de Dystos et décisions de conception.',
           feedOptions: {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          // Useful options to enforce blogging best practices
+          editUrl: `${REPO_URL}/tree/main/site/blog/`,
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
@@ -69,27 +68,28 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    metadata: [
+      {name: 'keywords', content: 'Dystos, langage de programmation, JVM, apprentissage, statique'},
+    ],
     colorMode: {
+      defaultMode: 'dark',
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'My Site',
+      title: 'Dystos',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Logo Dystos',
         src: 'img/logo.svg',
       },
       items: [
+        {to: '/docs/introduction', label: 'Documentation', position: 'left'},
+        {to: '/docs/tour', label: 'Apprendre', position: 'left'},
+        {to: '/playground', label: 'Playground', position: 'left'},
+        {to: '/examples', label: 'Exemples', position: 'left'},
+        {to: '/blog', label: 'Actualités', position: 'left'},
+        {to: '/telechargements', label: 'Téléchargements', position: 'left'},
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Tutorial',
-        },
-        {to: '/blog', label: 'Blog', position: 'left'},
-        {
-          href: 'https://github.com/facebook/docusaurus',
+          href: REPO_URL,
           label: 'GitHub',
           position: 'right',
         },
@@ -99,50 +99,38 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Documentation',
           items: [
-            {
-              label: 'Tutorial',
-              to: '/docs/intro',
-            },
+            {label: 'Introduction', to: '/docs/introduction'},
+            {label: 'Démarrer', to: '/docs/demarrer/installation'},
+            {label: 'Parcours guidé', to: '/docs/tour'},
           ],
         },
         {
-          title: 'Community',
+          title: 'Ressources',
           items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
-            },
+            {label: 'Playground', to: '/playground'},
+            {label: 'Exemples', to: '/examples'},
+            {label: 'Téléchargements', to: '/telechargements'},
+            {label: 'Aide-mémoire', to: '/docs/reference/aide-memoire'},
           ],
         },
         {
-          title: 'More',
+          title: 'Communauté',
           items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
-            },
+            {label: 'Dépôt GitHub', href: REPO_URL},
+            {label: 'Contribuer', to: '/docs/communaute/contribuer'},
+            {label: 'Signaler un bug', href: `${REPO_URL}/issues`},
+            {label: 'Actualités', to: '/blog'},
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Dystos. Langage libre, distribué sous licence MIT.`,
     },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+      additionalLanguages: ['dystos'],
     },
   } satisfies Preset.ThemeConfig,
 };

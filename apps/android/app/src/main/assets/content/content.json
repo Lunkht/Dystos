@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "langue": "fr",
+  "chapitres": [
+    {
+      "id": "premiers-pas",
+      "titre": "premiers-pas",
+      "ordre": 1,
+      "lessons": [
+        {
+          "id": "hello-world",
+          "titre": "Hello world",
+          "ordre": 1,
+          "resume": "Écrire et exécuter un premier programme Dystos.",
+          "exemple": "01-hello-world",
+          "corps": "`print` écrit une ligne sur la sortie standard. C'est la fonction la plus\nutile pour vérifier ce que fait un programme.\n\n```dystos\nprint(\"Bonjour, Dystos !\")\n```\n\nLa sortie est :\n\n```\nBonjour, Dystos !\n```\n\n## Les chaînes de caractères\n\nUne chaîne se déclare avec des guillemets doubles. Les guillemets simples\ndélimitent les caractères individuels.\n\n```dystos\nlangue: string = \"Dystos\"\ninitiale: char = 'D'\nprint(langue, initiale)\n```\n\n## Les fonctions\n\nOn regroupe le code dans des fonctions avec `def`. L'indentation délimite le\nbloc : pas d'accolades, pas de mot-clé `end`.\n\n```dystos\ndef bonjour(nom: string):\n    print(f\"Bonjour, {nom} !\")\n\nbonjour(\"Awa\")\nbonjour(\"Moussa\")\n```\n\nLe `f` devant la chaîne indique qu'elle est formatée : chaque `{...}` est\nremplacé par la valeur de l'expression qu'il contient.\n\n## Exécuter\n\nUn fichier `.dys` s'exécute de haut en bas. La fonction `main` n'est pas\nobligatoire, mais elle rend le code plus lisible quand le programme grossit.\n\n```dystos\ndef main():\n    print(\"Bonjour, Dystos !\")\n\nmain()\n```\n\n## Ce qu'il faut retenir\n\n- `print(...)` affiche une ligne.\n- `def nom(...):` déclare une fonction, le bloc est indenté.\n- `f\"...\"` interpole des expressions dans une chaîne.",
+          "exercice": {
+            "consigne": "Affiche le texte `Bonjour, Dystos !` en utilisant `print`.",
+            "codeInitial": "# à compléter\n",
+            "sortieAttendue": "Bonjour, Dystos !",
+            "indices": [
+              "`print(...)` écrit une ligne sur la sortie standard.",
+              "Le texte se met entre guillemets doubles."
+            ],
+            "solution": "print(\"Bonjour, Dystos !\")\n"
+          }
+        },
+        {
+          "id": "variables",
+          "titre": "Variables, val et var",
+          "ordre": 2,
+          "resume": "Déclarer des valeurs immuables avec val et mutables avec var.",
+          "exemple": "02-variables",
+          "corps": "Une variable associe un nom, un type et une valeur. Dystos distingue deux formes\nde déclaration : `val` pour une valeur qui ne change pas, `var` pour une\nvariable modifiable.\n\n```dystos\nval langage: string = \"Dystos\"\nvar compteur: int = 0\ncompteur += 1\nprint(langage, compteur)\n```\n\nLa forme courte déduit le type, sans annotation :\n\n```dystos\nval langage = \"Dystos\"\nvar compteur = 0\n```\n\n## Les types de base\n\n| Type | Exemple |\n| --- | --- |\n| `int` | `42`, `-7` |\n| `float` | `3.14`, `1.0e-3` |\n| `string` | `\"texte\"` |\n| `bool` | `true`, `false` |\n| `char` | `'a'` |\n\n## Immuable ou mutable\n\n`val` refuse toute réassignation, et le compilateur le signale avant\nl'exécution.\n\n```dystos\nval pi: float = 3.14159\npi = 3.0\n```\n\n```\nE0301 : ligne 2, colonne 1 : 'pi' est déclaré avec val et ne peut pas être réaffecté\n```\n\nUtilise `var` quand la valeur doit changer.\n\n```dystos\nvar total: int = 0\nfor i in range(1, 11):\n    total += i\nprint(total)\n```\n\n```\n55\n```\n\n## Interpolation\n\nLes chaînes formatées `f\"...\"` acceptent n'importe quelle expression entre\naccolades.\n\n```dystos\nval langage = \"Dystos\"\nval version = \"1.0\"\nprint(f\"{langage} {version} — compilation le {12 + 3} mai\")\n```\n\n## Ce qu'il faut retenir\n\n- `val` est immuable, `var` est modifiable.\n- L'annotation de type est optionnelle mais recommandée.\n- Le type est vérifié à la compilation, pas à l'exécution.",
+          "exercice": {
+            "consigne": "Corrige la troisième ligne pour que `message` contienne `Dystos 1.0`.\nLe type de `message` est `string`.",
+            "codeInitial": "version: string = \"1.0\"\nnom: string = \"Dystos\"\nmessage: string = nom + version\nprint(message)\n",
+            "sortieAttendue": "Dystos 1.0",
+            "indices": [
+              "L'opérateur `+` ne colle pas deux chaînes, il faut un espace entre.",
+              "`f\"{nom} {version}\"` interpole les deux variables."
+            ],
+            "solution": "version: string = \"1.0\"\nnom: string = \"Dystos\"\nmessage: string = f\"{nom} {version}\"\nprint(message)\n"
+          }
+        },
+        {
+          "id": "fonctions",
+          "titre": "Fonctions",
+          "ordre": 3,
+          "resume": "Déclarer des fonctions, paramètres, valeurs de retour et valeurs par défaut.",
+          "exemple": "03-fonctions",
+          "corps": "Une fonction regroupe un traitement sous un nom. `def` déclare le nom, les\nparamètres entre parenthèses, et `->` le type de retour quand il y en a un.\n\n## Déclaration\n\n```dystos\ndef carre(x: int) -> int:\n    return x * x\n\nprint(carre(7))\n```\n\n```\n49\n```\n\nLe mot-clé `return` interrompt la fonction et rend une valeur. Sans `return`, une\nfonction rend `void` : elle fait quelque chose mais ne produit rien.\n\n```dystos\ndef afficher_titre(titre: string):\n    print(f\"--- {titre} ---\")\n\nafficher_titre(\"Stock\")\n```\n\n## Paramètres et valeurs par défaut\n\nLes paramètres peuvent avoir une valeur par défaut, et des paramètres nommés\nrendent l'appel plus lisible.\n\n```dystos\ndef prix_ht(ht: float, tva: float = 0.20) -> float:\n    return ht * (1.0 + tva)\n\nprint(prix_ht(100.0))\nprint(prix_ht(100.0, tva: 0.055))\n```\n\n```\n120.0\n105.5\n```\n\n## Fonctions comme valeurs\n\nUne fonction est une valeur : on la passe en argument, on la renvoie, on la\nstocke.\n\n```dystos\ndef doubler(x: int) -> int:\n    return x * 2\n\nval operation = doubler\nprint(operation(21))\n```\n\n## Fonctions récursives\n\nUne fonction s'appelle elle-même. La condition d'arrêt est indispensable.\n\n```dystos\ndef fibonacci(n: int) -> int:\n    if n < 2:\n        return n\n    return fibonacci(n - 1) + fibonacci(n - 2)\n\nfor i in range(10):\n    print(fibonacci(i))\n```\n\n## Ce qu'il faut retenir\n\n- `def nom(param: type) -> type:` déclare une fonction.\n- `return` rend une valeur, son absence signifie `void`.\n- Une fonction est une valeur qu'on peut passer autour.",
+          "exercice": {
+            "consigne": "Complète `saluer` pour qu'elle affiche `Bonjour, <nom> !` puis `À bientôt`.\nUtilise deux appels à `print`.",
+            "codeInitial": "def saluer(nom: string):\n    # à compléter\n\nsaluer(\"Awa\")\nsaluer(\"Moussa\")\n",
+            "sortieAttendue": "Bonjour, Awa !\nÀ bientôt\nBonjour, Moussa !\nÀ bientôt",
+            "indices": [
+              "Une fonction sans `->` ne renvoie rien.",
+              "Les chaînes formatées s'écrivent `f\"...\"`."
+            ],
+            "solution": "def saluer(nom: string):\n    print(f\"Bonjour, {nom} !\")\n    print(\"À bientôt\")\n\nsaluer(\"Awa\")\nsaluer(\"Moussa\")\n"
+          }
+        }
+      ]
+    }
+  ]
+}

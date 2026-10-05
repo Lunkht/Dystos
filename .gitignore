@@ -1,0 +1,27 @@
+# Dependances installees
+node_modules/
+
+# Build du site
+site/build/
+site/.docusaurus/
+site/.cache-loader/
+
+# Java / Android
+**/build/
+**/.gradle/
+**/local.properties
+*.apk
+*.aab
+
+# Cles et secrets
+*.jks
+*.keystore
+.env
+.env.*
+
+# Editeurs et OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db

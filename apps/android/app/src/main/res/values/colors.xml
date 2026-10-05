@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Palette claire : accent turquoise, fonds clairs, contraste AA. -->
+    <color name="dystos_primary">#0F7A6C</color>
+    <color name="dystos_on_primary">#FFFFFF</color>
+    <color name="dystos_primary_container">#9FF2E3</color>
+    <color name="dystos_on_primary_container">#00201B</color>
+    <color name="dystos_secondary">#4A635E</color>
+    <color name="dystos_on_secondary">#FFFFFF</color>
+    <color name="dystos_background">#F6F8F8</color>
+    <color name="dystos_on_background">#161D1B</color>
+    <color name="dystos_surface">#FFFFFF</color>
+    <color name="dystos_on_surface">#161D1B</color>
+    <color name="dystos_surface_variant">#DCE5E2</color>
+    <color name="dystos_on_surface_variant">#3F4947</color>
+    <color name="dystos_outline">#6F7977</color>
+    <color name="dystos_error">#BA1A1A</color>
+    <color name="dystos_on_error">#FFFFFF</color>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dystos</string>
+    <string name="theme_toggle">Thème</string>
+    <string name="chapter_progress">%1$d leçons sur %2$d lues</string>
+    <string name="exercise_title">Exercice</string>
+    <string name="lesson_missing">Leçon introuvable</string>
+    <string name="expected_output">sortie attendue</string>
+
+    <plurals name="chapter_lesson_count">
+        <item quantity="one">%d leçon</item>
+        <item quantity="other">%d leçons</item>
+    </plurals>
+
+    <plurals name="chapter_read_count">
+        <item quantity="one">%1$d lue sur %2$d</item>
+        <item quantity="other">%1$d lues sur %2$d</item>
+    </plurals>
+</resources>

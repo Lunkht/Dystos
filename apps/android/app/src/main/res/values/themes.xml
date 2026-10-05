@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Thème clair : fonds clairs, accent turquoise foncé pour le contraste. -->
+    <style name="Theme.Dystos" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/dystos_primary</item>
+        <item name="colorOnPrimary">@color/dystos_on_primary</item>
+        <item name="colorPrimaryContainer">@color/dystos_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/dystos_on_primary_container</item>
+        <item name="colorSecondary">@color/dystos_secondary</item>
+        <item name="colorOnSecondary">@color/dystos_on_secondary</item>
+        <item name="android:colorBackground">@color/dystos_background</item>
+        <item name="colorSurface">@color/dystos_surface</item>
+        <item name="colorOnSurface">@color/dystos_on_surface</item>
+        <item name="colorSurfaceVariant">@color/dystos_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/dystos_on_surface_variant</item>
+        <item name="colorOutline">@color/dystos_outline</item>
+        <item name="colorError">@color/dystos_error</item>
+        <item name="colorOnError">@color/dystos_on_error</item>
+        <item name="android:statusBarColor">@color/dystos_background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/dystos_background</item>
+        <item name="android:windowBackground">@color/dystos_background</item>
+        <item name="materialAlertDialogTheme">@style/Theme.Dystos.Dialog</item>
+    </style>
+
+    <style name="Theme.Dystos.Dialog" parent="ThemeOverlay.Material3.MaterialAlertDialog" />
+
+</resources>

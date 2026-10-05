@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- La progression est sauvegardee, pas le contenu qui est dans
+         l'APK. Aucune donnee n'est envoyee ailleurs. -->
+    <include domain="database" path="dystos.db" />
+</full-backup-content>

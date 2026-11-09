@@ -1,0 +1,11 @@
+def main():
+    xs = [(i * 7919) % 10007 for i in range(1000000)]
+    pairs = sorted(xs)
+    s = 0
+    for x in pairs:
+        s += x
+    freq: map[int, int] = {}
+    for x in xs:
+        freq[x] = freq.get(x) ?: 0
+        freq[x] += 1
+    print(s, len(freq), pairs[0], pairs[-1])

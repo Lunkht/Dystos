@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Lance le service playground : scripts/playground [--port 8080] [--mode process] ... (voir --help)
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+[ -f "$DIR/build/dystos-playground.jar" ] || "$DIR/scripts/build.sh" >&2
+exec java -Dfile.encoding=UTF-8 -jar "$DIR/build/dystos-playground.jar" "$@"

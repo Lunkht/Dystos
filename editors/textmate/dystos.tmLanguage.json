@@ -1,0 +1,333 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Dystos",
+  "scopeName": "source.dystos",
+  "fileTypes": ["dys"],
+  "patterns": [
+    {
+      "include": "#expression"
+    }
+  ],
+  "repository": {
+    "comment": {
+      "name": "comment.line.number-sign.dystos",
+      "match": "#.*$"
+    },
+    "decorator": {
+      "name": "entity.name.function.decorator.dystos",
+      "match": "@[A-Za-z_][A-Za-z0-9_.]*"
+    },
+    "escape": {
+      "name": "constant.character.escape.dystos",
+      "match": "\\\\(?:[nrt0\\\\'\"\\n]|u[0-9a-fA-F]{4})"
+    },
+    "string": {
+      "patterns": [
+        {
+          "name": "string.quoted.triple.dystos",
+          "begin": "\"\"\"",
+          "end": "\"\"\"",
+          "patterns": [
+            {
+              "include": "#escape"
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.triple.dystos",
+          "begin": "'''",
+          "end": "'''",
+          "patterns": [
+            {
+              "include": "#escape"
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.double.dystos",
+          "begin": "\"",
+          "end": "\"|$",
+          "patterns": [
+            {
+              "include": "#escape"
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.dystos",
+          "begin": "'",
+          "end": "'|$",
+          "patterns": [
+            {
+              "include": "#escape"
+            }
+          ]
+        }
+      ]
+    },
+    "fstring": {
+      "patterns": [
+        {
+          "name": "string.quoted.other.fstring.dystos",
+          "begin": "[fF](\"\"\")",
+          "end": "\"\"\"",
+          "beginCaptures": {
+            "0": {
+              "name": "string.quoted.other.fstring.dystos"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#escape"
+            },
+            {
+              "match": "\\{\\{|\\}\\}"
+            },
+            {
+              "include": "#interpolation"
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.other.fstring.dystos",
+          "begin": "[fF](''')",
+          "end": "'''",
+          "beginCaptures": {
+            "0": {
+              "name": "string.quoted.other.fstring.dystos"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#escape"
+            },
+            {
+              "match": "\\{\\{|\\}\\}"
+            },
+            {
+              "include": "#interpolation"
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.other.fstring.dystos",
+          "begin": "[fF](\")",
+          "end": "\"|$",
+          "beginCaptures": {
+            "0": {
+              "name": "string.quoted.other.fstring.dystos"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#escape"
+            },
+            {
+              "match": "\\{\\{|\\}\\}"
+            },
+            {
+              "include": "#interpolation"
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.other.fstring.dystos",
+          "begin": "[fF](')",
+          "end": "'|$",
+          "beginCaptures": {
+            "0": {
+              "name": "string.quoted.other.fstring.dystos"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#escape"
+            },
+            {
+              "match": "\\{\\{|\\}\\}"
+            },
+            {
+              "include": "#interpolation"
+            }
+          ]
+        }
+      ]
+    },
+    "interpolation": {
+      "name": "meta.interpolation.dystos",
+      "begin": "\\{(?!\\{)",
+      "end": "\\}",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.interpolation.begin.dystos"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.interpolation.end.dystos"
+        }
+      },
+      "patterns": [
+        {
+          "name": "constant.other.format-spec.dystos",
+          "match": "(?<!\\?):[^{}'\"\\[\\]()\\n]*(?=\\})"
+        },
+        {
+          "begin": "\\(",
+          "end": "\\)",
+          "patterns": [
+            {
+              "include": "#expression"
+            }
+          ]
+        },
+        {
+          "begin": "\\[",
+          "end": "\\]",
+          "patterns": [
+            {
+              "include": "#expression"
+            }
+          ]
+        },
+        {
+          "include": "#expression"
+        }
+      ]
+    },
+    "expression": {
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#decorator"
+        },
+        {
+          "include": "#fstring"
+        },
+        {
+          "include": "#string"
+        },
+        {
+          "include": "#number"
+        },
+        {
+          "include": "#declaration"
+        },
+        {
+          "include": "#keyword"
+        },
+        {
+          "include": "#constant"
+        },
+        {
+          "include": "#self"
+        },
+        {
+          "include": "#type"
+        },
+        {
+          "include": "#builtin"
+        },
+        {
+          "include": "#call"
+        },
+        {
+          "include": "#constant-name"
+        },
+        {
+          "include": "#class-name"
+        },
+        {
+          "include": "#operator"
+        },
+        {
+          "include": "#punctuation"
+        }
+      ]
+    },
+    "number": {
+      "name": "constant.numeric.dystos",
+      "match": "\\b(?:0[xX][0-9a-fA-F_]+|0[bB][01_]+|[0-9][0-9_]*(?:\\.[0-9][0-9_]*)?(?:[eE][+-]?[0-9]+)?)\\b"
+    },
+    "declaration": {
+      "patterns": [
+        {
+          "match": "\\b(def)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "storage.type.function.dystos"
+            },
+            "2": {
+              "name": "entity.name.function.dystos"
+            }
+          }
+        },
+        {
+          "match": "\\b(class|interface|enum)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+          "captures": {
+            "1": {
+              "name": "storage.type.class.dystos"
+            },
+            "2": {
+              "name": "entity.name.type.class.dystos"
+            }
+          }
+        }
+      ]
+    },
+    "keyword": {
+      "patterns": [
+        {
+          "name": "keyword.control.dystos",
+          "match": "\\b(?:if|elif|else|for|while|return|break|continue|pass|try|except|finally|raise|assert|match|case|with)\\b"
+        },
+        {
+          "name": "storage.modifier.dystos",
+          "match": "\\b(?:abstract|final|import|package|val|var|as)\\b"
+        },
+        {
+          "name": "keyword.operator.word.dystos",
+          "match": "\\b(?:and|or|not|in|is)\\b"
+        }
+      ]
+    },
+    "constant": {
+      "name": "constant.language.dystos",
+      "match": "\\b(?:true|false|null)\\b"
+    },
+    "self": {
+      "name": "variable.language.self.dystos",
+      "match": "\\bself\\b"
+    },
+    "type": {
+      "name": "support.type.dystos",
+      "match": "\\b(?:int|float|bool|str|list|map|set|unit|any|Entry|Exception|ValueError|RuntimeError)\\b"
+    },
+    "builtin": {
+      "name": "support.function.builtin.dystos",
+      "match": "\\b(?:print|len|range|sum|sorted|filter|enumerate|abs|min|max)(?=\\()"
+    },
+    "call": {
+      "name": "entity.name.function.call.dystos",
+      "match": "\\b[A-Za-z_][A-Za-z0-9_]*(?=\\()"
+    },
+    "constant-name": {
+      "name": "constant.other.dystos",
+      "match": "\\b[A-Z][A-Z0-9_]+\\b"
+    },
+    "class-name": {
+      "name": "entity.name.type.dystos",
+      "match": "\\b[A-Z](?:[A-Za-z0-9_]*[a-z][A-Za-z0-9_]*)?\\b"
+    },
+    "operator": {
+      "name": "keyword.operator.dystos",
+      "match": "\\*\\*|\\->|\\?\\.|\\?:|==|!=|<=|>=|\\+=|\\-=|\\*=|/=|%=|\\+|\\-|\\*|/|%|<|>|=|\\?|\\|"
+    },
+    "punctuation": {
+      "name": "punctuation.separator.dystos",
+      "match": "[()\\[\\]{},:.]"
+    }
+  }
+}

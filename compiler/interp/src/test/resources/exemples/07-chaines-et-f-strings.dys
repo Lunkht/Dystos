@@ -1,0 +1,7 @@
+def main():
+    s = "Développeur"
+    print(s.upper(), s.length, s[0:4])
+    pi = 3.14159265
+    print(f"{pi:.2f} | {42:05d} | {'ok' if pi > 3 else 'ko'}")
+    lignes = "a,b,c".split(",")
+    print("-".join(lignes))

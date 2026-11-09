@@ -1,0 +1,15 @@
+class Point:
+    x: float
+    y: float
+    def init(self, x: float, y: float):
+        self.x = x
+        self.y = y
+    def norme2(self) -> float:
+        return self.x * self.x + self.y * self.y
+
+def main():
+    total = 0.0
+    for i in range(4000000):
+        p = Point(i * 0.5, i * 0.25)
+        total += p.norme2()
+    print(total)

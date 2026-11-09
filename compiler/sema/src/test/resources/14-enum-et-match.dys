@@ -1,0 +1,12 @@
+enum Jour:
+    LUNDI, MARDI, SAMEDI, DIMANCHE
+
+def type_jour(j: Jour) -> str:
+    match j:
+        case Jour.SAMEDI | Jour.DIMANCHE:
+            return "week-end"
+        case _:
+            return "semaine"
+
+def main():
+    print(type_jour(Jour.SAMEDI))

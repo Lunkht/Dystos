@@ -1,0 +1,19 @@
+def main():
+    for i in range(1, 16):
+        if i % 15 == 0:
+            print("FizzBuzz")
+        elif i % 3 == 0:
+            print("Fizz")
+        elif i % 5 == 0:
+            print("Buzz")
+        else:
+            print(i)
+
+    n = 0
+    while true:
+        n += 1
+        if n == 3:
+            continue
+        if n > 5:
+            break
+        print(n)

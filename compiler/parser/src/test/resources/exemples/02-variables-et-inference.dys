@@ -1,0 +1,7 @@
+def main():
+    val nom = "Lunkht"
+    var age = 30
+    age = age + 1
+    taille: float = 1.75
+    actif = true
+    print(f"{nom} a {age} ans, {taille} m, actif={actif}")

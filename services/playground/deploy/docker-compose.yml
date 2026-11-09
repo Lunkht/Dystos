@@ -1,0 +1,38 @@
+# Déploiement durci du playground, derrière un proxy inverse (Caddy).
+# NON TESTÉ dans l'environnement de développement : à valider chez vous.
+#
+#   cd services/playground/deploy && docker compose up -d --build
+#   curl -s http://127.0.0.1:8081/api/v1/health
+#
+# Le réseau « backend » est interne : le playground n'a AUCUN accès à Internet ni au réseau de l'hôte,
+# et n'est joignable que par le proxy.
+services:
+  playground:
+    build:
+      context: ../../..
+      dockerfile: services/playground/Dockerfile
+    read_only: true
+    tmpfs:
+      - /tmp:size=32m,mode=1777
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 512m
+    cpus: 1.0
+    pids_limit: 128
+    restart: unless-stopped
+    networks: [backend]
+
+  proxy:
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8081:8081"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    depends_on: [playground]
+    networks: [backend, default]
+
+networks:
+  backend:
+    internal: true

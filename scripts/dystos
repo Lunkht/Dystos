@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Lanceur Dystos.
+#   scripts/dystos run   prog.dys            exécuter avec l'interpréteur
+#   scripts/dystos test  prog.dys            lancer les fonctions @test (interpréteur)
+#   scripts/dystos build prog.dys [-o x.jar] compiler en .jar autonome (backend JVM)
+#   scripts/dystos jrun  prog.dys            compiler puis exécuter le bytecode
+# Options de run/test : --sandbox --json --max-steps N --timeout-ms N --max-output N
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+[ -f "$DIR/build/dystos.jar" ] || "$DIR/scripts/build.sh" >&2
+JAVA="java -Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8"
+case "${1:-}" in
+  build) shift; exec $JAVA -cp "$DIR/build/dystos.jar" com.vulsoft.dystos.jvm.BuildMain build "$@" ;;
+  jrun)  shift; exec $JAVA -cp "$DIR/build/dystos.jar" com.vulsoft.dystos.jvm.BuildMain run "$@" ;;
+  *)     exec $JAVA -jar "$DIR/build/dystos.jar" "$@" ;;
+esac

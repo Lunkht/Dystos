@@ -1,0 +1,6 @@
+def longueur(s: str?) -> int:
+    return s?.length ?: 0
+
+def main():
+    print(longueur("abc"), longueur(null))
+    x: str = null     # ERREUR DE COMPILATION attendue

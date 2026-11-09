@@ -7,6 +7,10 @@ site/.docusaurus/
 site/.cache-loader/
 
 # Java / Android
+build/
+target/
+*.class
+*.jar
 **/build/
 **/.gradle/
 **/local.properties
@@ -25,3 +29,6 @@ site/.cache-loader/
 *.iml
 .DS_Store
 Thumbs.db
+
+# Archive du projet complet (contenu deja fusionne a la racine)
+Dystos-projet-complet/

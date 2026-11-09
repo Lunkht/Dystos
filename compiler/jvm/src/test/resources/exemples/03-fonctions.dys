@@ -1,0 +1,6 @@
+def saluer(nom: str, titre: str = "M.") -> str:
+    return f"Bonjour {titre} {nom}"
+
+def main():
+    print(saluer("Diallo"))
+    print(saluer("Martin", titre="Dr"))

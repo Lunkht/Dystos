@@ -1,0 +1,8 @@
+# fichier app/outils.dys
+package app
+
+def _secret() -> int:
+    return 42
+
+def public() -> int:
+    return _secret() + 1

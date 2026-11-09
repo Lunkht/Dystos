@@ -1,0 +1,9 @@
+import concurrent
+
+def calcul(n: int) -> int:
+    return n * n
+
+def main():
+    taches = [concurrent.run(() -> calcul(i)) for i in range(4)]
+    resultats = [t.await() for t in taches]
+    print(resultats)

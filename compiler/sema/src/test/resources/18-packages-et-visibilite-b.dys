@@ -1,0 +1,6 @@
+# fichier main.dys
+import app.outils
+
+def main():
+    print(outils.public())    # 43
+    print(outils._secret())   # ERREUR DE COMPILATION attendue

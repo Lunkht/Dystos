@@ -1,0 +1,8 @@
+# Proxy inverse minimal. Remplacer :8081 par votre domaine pour obtenir HTTPS automatiquement.
+:8081 {
+	encode gzip
+	request_body {
+		max_size 32KB
+	}
+	reverse_proxy playground:8080
+}

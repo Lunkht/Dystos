@@ -1,0 +1,14 @@
+{
+  "name": "dystos-editors",
+  "private": true,
+  "description": "Grammaires de coloration de Dystos (TextMate, Prism) et leurs tests",
+  "scripts": {
+    "generate": "node -e \"console.log('Voir scripts/generate-grammar.sh')\"",
+    "test": "node tests/verify.js"
+  },
+  "devDependencies": {
+    "prismjs": "^1.29.0",
+    "vscode-oniguruma": "^2.0.1",
+    "vscode-textmate": "^9.0.0"
+  }
+}

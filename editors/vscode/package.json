@@ -1,0 +1,28 @@
+{
+  "name": "dystos",
+  "displayName": "Dystos",
+  "description": "Coloration syntaxique pour le langage Dystos",
+  "version": "0.1.0",
+  "publisher": "vulsoft",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": ["Programming Languages"],
+  "contributes": {
+    "languages": [
+      {
+        "id": "dystos",
+        "aliases": ["Dystos", "dystos"],
+        "extensions": [".dys"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "dystos",
+        "scopeName": "source.dystos",
+        "path": "./syntaxes/dystos.tmLanguage.json"
+      }
+    ]
+  }
+}

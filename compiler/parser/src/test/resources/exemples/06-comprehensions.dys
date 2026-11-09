@@ -1,0 +1,5 @@
+def main():
+    carres = [x * x for x in range(10) if x % 2 == 0]
+    longueurs = {mot: len(mot) for mot in ["a", "bcd", "ef"]}
+    pairs = {x for x in range(6) if x % 2 == 0}
+    print(carres, longueurs, pairs)

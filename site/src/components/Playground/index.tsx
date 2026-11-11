@@ -179,7 +179,7 @@ export default function Playground(): ReactNode {
             className={styles.sidebarClose}
             onClick={() => setSidebarOpen(false)}
             aria-label="Fermer l'explorateur">
-            ✕
+            Fermer
           </button>
         </div>
         <div className={styles.sidebarSection}>
@@ -230,11 +230,11 @@ export default function Playground(): ReactNode {
               className={clsx(styles.toolbarButton, styles.sidebarToggle)}
               onClick={() => setSidebarOpen(true)}
               aria-label="Ouvrir l'explorateur">
-              ☰
+              Menu
             </button>
             {loadedExample && (
               <span className={styles.activeExample}>
-                📄 {loadedExample}
+                {loadedExample}
               </span>
             )}
           </div>
@@ -246,7 +246,7 @@ export default function Playground(): ReactNode {
               onClick={() => void analyze()}
               disabled={busy}
               aria-label="Analyser le code">
-              ▶ Analyser
+              Analyser
             </button>
             <button
               type="button"
@@ -254,7 +254,7 @@ export default function Playground(): ReactNode {
               onClick={() => void run()}
               disabled={busy}
               aria-label="Exécuter le code">
-              ⌘ Entrée Exécuter
+              Exécuter
             </button>
           </div>
 
@@ -344,7 +344,7 @@ export default function Playground(): ReactNode {
             <div className={styles.panel}>
               {error && (
                 <div className={styles.errorBanner}>
-                  <span className={styles.errorIcon}>⚠</span>
+                  <span className={styles.errorIcon}>Erreur</span>
                   <span className={styles.errorText}>{error}</span>
                 </div>
               )}
@@ -353,7 +353,7 @@ export default function Playground(): ReactNode {
                 <ul className={styles.diagnostics}>
                   {diagnostics.length === 0 && (
                     <li className={styles.okText}>
-                      <span className={styles.okIcon}>✓</span> Aucune erreur
+                      <span className={styles.okIcon}>OK</span> Aucune erreur
                       détectée.
                     </li>
                   )}
@@ -428,8 +428,4 @@ export default function Playground(): ReactNode {
       </div>
     </div>
   );
-}
-
-function capitalize(value: string): string {
-  return value.charAt(0).toUpperCase() + value.slice(1);
 }

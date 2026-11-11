@@ -6,8 +6,7 @@
 .playground {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  min-height: 60rem;
+  min-height: 80vh;
   background: var(--dystos-black);
   color: var(--dystos-gray-100);
   font-family: var(--ifm-font-family-base);

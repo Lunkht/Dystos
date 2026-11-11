@@ -146,6 +146,14 @@
   filter: drop-shadow(0 0 24px rgba(0, 242, 255, 0.35));
 }
 
+.heroLogo {
+  width: clamp(12rem, 25vw, 22rem);
+  height: auto;
+  filter: drop-shadow(0 0 24px rgba(0, 242, 255, 0.45));
+  animation: dystosFadeUp 0.8s ease-out both;
+  animation-delay: 0.15s;
+}
+
 .heroAccent {
   color: var(--ifm-color-primary);
   filter: drop-shadow(0 0 16px rgba(0, 242, 255, 0.8));

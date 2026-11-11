@@ -5,6 +5,8 @@ import CodeBlock from '@theme/CodeBlock';
 import Layout from '@theme/Layout';
 import {Icon} from '@site/src/components/Icon';
 
+import LogoDystos from '@site/static/img/dystos.svg';
+
 import styles from './index.module.css';
 
 const HERO_CODE = `enum Role:
@@ -133,7 +135,7 @@ export default function Home(): ReactNode {
               Dystos — Langage de programmation moderne
             </div>
             <h1 className={styles.heroTitle}>
-              Dystos<span className={styles.heroAccent}>.</span>
+              <LogoDystos className={styles.heroLogo} />
             </h1>
             <p className={styles.heroTagline}>
               Un langage lisible comme Python, sûr comme Java, qui tourne sur la

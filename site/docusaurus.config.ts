@@ -9,7 +9,7 @@ const REPO_URL = 'https://github.com/Lunkht/Dystos';
 const config: Config = {
   title: 'Dystos',
   tagline: 'Un langage lisible comme Python, sûr comme Java, qui tourne sur la JVM.',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
 
   future: {
     v4: true,

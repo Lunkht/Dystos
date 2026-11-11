@@ -34,22 +34,26 @@ const POINTS_FORTS = [
   {
     title: 'Lisible comme Python',
     description:
-      'Indentation significant, pas de point-virgule, mots-clés explicites. On lit du code Dystos sans le connaître.',
+      'Indentation significative, pas de point-virgule, mots-clés explicites. On lit du code Dystos sans le connaître.',
+    icon: '🐍',
   },
   {
     title: 'Sûr comme Java',
     description:
-      'Types statiques, null-safety avec ? et ?., exceptions explicites. Les erreurs apparaissent avant lexécution.',
+      'Types statiques, null-safety avec ? et ?., exceptions explicites. Les erreurs apparaissent avant l’exécution.',
+    icon: '☕',
   },
   {
     title: 'Tourne sur la JVM',
     description:
-      'Interopérabilité directe avec Java et la bibliothèque standard JVM. Tu réutilises lécosystème existant.',
+      'Interopérabilité directe avec Java et la bibliothèque standard JVM. Tu réutilises l’écosystème existant.',
+    icon: '🚀',
   },
   {
     title: 'Autohébergé',
     description:
       'Aucun service tiers, aucune police externe, aucun traçage. Le site et le compilateur tournent sur ton infrastructure.',
+    icon: '🏠',
   },
 ];
 
@@ -93,35 +97,74 @@ export default function Home(): ReactNode {
     <Layout
       title="Dystos, un langage simple et sûr"
       description="Dystos est un langage de programmation lisible comme Python, sûr comme Java, qui tourne sur la JVM. Apprends-le sur le web ou hors ligne sur Android.">
+      {/* ======== HERO FUTURISTE ======== */}
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
+        {/* Fond en grille animée */}
+        <div className={styles.heroGrid} />
+        {/* Lueurs néon abstraites */}
+        <div className={`${styles.heroGlow} ${styles.glow1}`} />
+        <div className={`${styles.heroGlow} ${styles.glow2}`} />
+        <div className={`${styles.heroGlow} ${styles.glow3}`} />
+        {/* Particules flottantes */}
+        {Array.from({length: 12}).map((_, i) => (
+          <div
+            key={i}
+            className={styles.heroParticle}
+            style={{
+              left: `${10 + i * 8}%`,
+              top: `${20 + (i % 4) * 15}%`,
+              animationDelay: `${i * 0.5}s`,
+              animationDuration: `${6 + i * 2}s`,
+            }}
+          />
+        ))}
+
         <div className="container">
-          <h1 className={styles.heroTitle}>
-            Dystos<span className={styles.heroAccent}>.</span>
-          </h1>
-          <p className={styles.heroTagline}>
-            Un langage lisible comme Python, sûr comme Java, qui tourne sur la
-            JVM.
-          </p>
-          <div className={styles.buttons}>
-            <Link className="button button--primary button--lg" to="/playground">
-              Essayer en ligne
-            </Link>
-            <Link className="button button--secondary button--lg" to="/docs/tour">
-              Commencer
-            </Link>
+          <div className={styles.heroContent}>
+            <div className={styles.heroBadge}>
+              <span className={styles.heroBadgeDot} aria-hidden="true" />
+              Dystos — Langage de programmation moderne
+            </div>
+            <h1 className={styles.heroTitle}>
+              Dystos<span className={styles.heroAccent}>.</span>
+            </h1>
+            <p className={styles.heroTagline}>
+              Un langage lisible comme Python, sûr comme Java, qui tourne sur la
+              JVM. Écris, teste et compile sans rien installer.
+            </p>
+            <div className={styles.buttons}>
+              <Link className="button button--primary button--lg" to="/playground">
+                Essayer en ligne
+              </Link>
+              <Link className="button button--secondary button--lg" to="/docs/tour">
+                Commencer
+              </Link>
+            </div>
           </div>
-          <div className={styles.heroCode}>
-            <CodeBlock language="dystos">{HERO_CODE}</CodeBlock>
+          <div className={styles.heroCodeWrapper}>
+            <div className={styles.heroCode}>
+              <CodeBlock language="dystos">{HERO_CODE}</CodeBlock>
+            </div>
           </div>
         </div>
       </header>
 
       <main>
+        {/* ======== SECTION POINTS FORTS ======== */}
         <section className={styles.section}>
           <div className="container">
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Pourquoi Dystos ?</h2>
+              <p className={styles.sectionSubtitle}>
+                Quatre piliers pour apprendre et programmer en toute confiance.
+              </p>
+            </div>
             <div className={styles.featureGrid}>
-              {POINTS_FORTS.map((point) => (
-                <article key={point.title} className={styles.feature}>
+              {POINTS_FORTS.map((point, i) => (
+                <article
+                  key={point.title}
+                  className={clsx(styles.feature, `feature-${i + 1}`)}>
+                  <div className={styles.featureIcon}>{point.icon}</div>
                   <h3>{point.title}</h3>
                   <p>{point.description}</p>
                 </article>
@@ -130,13 +173,16 @@ export default function Home(): ReactNode {
           </div>
         </section>
 
+        {/* ======== SECTION EXEMPLES ======== */}
         <section className={clsx(styles.section, styles.examplesSection)}>
           <div className="container">
-            <h2 className={styles.sectionTitle}>Quelques exemples</h2>
-            <p className={styles.sectionSubtitle}>
-              Vingt programmes courts, du premier hello à une gestion de stock
-              complète.
-            </p>
+            <div className={styles.sectionHeader}>
+              <h2 className={styles.sectionTitle}>Quelques exemples</h2>
+              <p className={styles.sectionSubtitle}>
+                Vingt programmes courts, du premier hello à une gestion de stock
+                complète.
+              </p>
+            </div>
             <div className={styles.exampleGrid}>
               {EXAMPLES.map((example) => (
                 <article key={example.id} className={styles.example}>

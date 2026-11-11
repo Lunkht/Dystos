@@ -1,42 +1,164 @@
-/* CSS modules scopés à la page d'accueil. */
+/* CSS modules scopés à la page d'accueil — thème Noir / Blanc / Gris */
+
+/* ============================================================
+   HERO — look futuriste
+   ============================================================ */
 
 .heroBanner {
   position: relative;
-  padding: 4.5rem 0 3.5rem;
+  padding: 6rem 0 5rem;
   text-align: center;
   overflow: hidden;
+  background: radial-gradient(
+      ellipse at 80% -10%,
+      rgba(0, 242, 255, 0.06) 0%,
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at 20% 110%,
+      rgba(0, 242, 255, 0.04) 0%,
+      transparent 40%
+    ),
+    var(--dystos-black);
 }
 
-.heroBanner::before {
-  content: '';
+/* Grille d'arrière-plan animée */
+.heroGrid {
   position: absolute;
-  inset: -40% 0 auto 0;
-  height: 80%;
-  background: radial-gradient(
-    ellipse at 50% 40%,
-    var(--dystos-hero-glow),
-    transparent 65%
-  );
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      var(--dystos-gray-800) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, var(--dystos-gray-800) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: 0 0;
+  opacity: 0.35;
   pointer-events: none;
+  z-index: 0;
+  animation: dystosGridMove 20s linear infinite;
+}
+
+/* Lueurs néon abstraites derrière le contenu */
+.heroGlow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.35;
+  z-index: 0;
+  pointer-events: none;
+  animation: dystosPulseGlow 6s ease-in-out infinite;
+}
+
+.heroGlow.glow1 {
+  width: 560px;
+  height: 560px;
+  background: var(--ifm-color-primary);
+  top: -10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+.heroGlow.glow2 {
+  width: 420px;
+  height: 420px;
+  background: #7c3aed;
+  bottom: -5%;
+  right: 10%;
+  animation-delay: -2s;
+}
+.heroGlow.glow3 {
+  width: 300px;
+  height: 300px;
+  background: var(--ifm-color-primary);
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: -4s;
+}
+
+/* Particules flottantes */
+.heroParticle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--dystos-white);
+  border-radius: 50%;
+  opacity: 0.6;
+  z-index: 1;
+  box-shadow: 0 0 8px var(--ifm-color-primary);
+  animation: dystosFloat linear infinite;
+}
+
+/* Contenu du hero */
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary);
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid rgba(0, 242, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(0, 242, 255, 0.08);
+  backdrop-filter: blur(6px);
+  animation: dystosFadeUp 0.8s ease-out both;
+}
+
+.heroBadgeDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ifm-color-primary);
+  box-shadow: 0 0 12px var(--ifm-color-primary);
+  animation: dystosPulseGlow 2s ease-in-out infinite;
 }
 
 .heroTitle {
-  font-size: clamp(3rem, 10vw, 5.5rem);
-  line-height: 1;
-  letter-spacing: -0.04em;
-  margin-bottom: 1rem;
+  font-size: clamp(3rem, 11vw, 7rem);
+  line-height: 1.02;
+  letter-spacing: -0.06em;
+  margin: 0 0 1.25rem;
+  color: var(--dystos-white);
+  animation: dystosFadeUp 0.8s ease-out both;
+  animation-delay: 0.15s;
+  background: linear-gradient(
+    135deg,
+    var(--dystos-white) 0%,
+    var(--dystos-gray-300) 45%,
+    var(--dystos-white) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 24px rgba(0, 242, 255, 0.35));
 }
 
 .heroAccent {
   color: var(--ifm-color-primary);
+  filter: drop-shadow(0 0 16px rgba(0, 242, 255, 0.8));
 }
 
 .heroTagline {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  max-width: 42rem;
-  margin: 0 auto 2rem;
-  color: var(--ifm-color-emphasis-700);
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  line-height: 1.7;
+  max-width: 48rem;
+  margin: 0 auto 2.5rem;
+  color: var(--dystos-gray-300);
+  animation: dystosFadeUp 0.8s ease-out both;
+  animation-delay: 0.3s;
 }
 
 .buttons {
@@ -44,94 +166,211 @@
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
+  animation: dystosFadeUp 0.8s ease-out both;
+  animation-delay: 0.45s;
+}
+
+/* Bloc de code dans le hero — verre dépoli + bordure néon */
+.heroCodeWrapper {
+  position: relative;
+  z-index: 2;
+  max-width: 56rem;
+  margin: 4rem auto 0;
+  animation: dystosFadeUp 0.8s ease-out both;
+  animation-delay: 0.6s;
 }
 
 .heroCode {
-  max-width: 46rem;
-  margin: 3rem auto 0;
+  max-width: 100%;
   text-align: left;
   border: 1px solid var(--dystos-border);
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  background: var(--dystos-gray-900);
+  box-shadow: var(--dystos-shadow-card);
+  position: relative;
 }
 
+.heroCode::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    var(--ifm-color-primary),
+    #7c3aed
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.heroCode > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+
 .section {
-  padding: 4rem 0;
+  padding: 5rem 0;
+  background: var(--dystos-black);
+}
+
+.sectionHeader {
+  text-align: center;
+  max-width: 60rem;
+  margin: 0 auto 3.5rem;
+}
+
+.sectionTitle {
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+  color: var(--dystos-white);
+}
+
+.sectionSubtitle {
+  color: var(--dystos-gray-400);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
 }
 
 .examplesSection {
-  background: var(--ifm-background-surface-color);
+  background: var(--dystos-gray-900);
   border-top: 1px solid var(--dystos-border);
 }
 
+/* ============================================================
+   POINTS FORTS — cartes en verre dépoli
+   ============================================================ */
+
 .featureGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.75rem;
 }
 
 .feature {
+  position: relative;
   border: 1px solid var(--dystos-border);
-  border-radius: 10px;
-  padding: 1.5rem;
-  background: var(--ifm-background-surface-color);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+  backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+}
+
+.feature::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 242, 255, 0.25),
+    rgba(124, 58, 237, 0.25)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.feature:hover {
+  transform: translateY(-8px);
+  border-color: rgba(0, 242, 255, 0.5);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(0, 242, 255, 0.15);
+}
+
+.feature:hover::before {
+  opacity: 1;
+}
+
+.featureIcon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+  filter: drop-shadow(0 0 12px rgba(0, 242, 255, 0.25));
+  transition: transform 0.3s ease;
+}
+
+.feature:hover .featureIcon {
+  transform: scale(1.15) rotate(-3deg);
 }
 
 .feature h3 {
-  font-size: 1.05rem;
-  margin-bottom: 0.5rem;
-  color: var(--ifm-color-primary);
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.75rem;
+  color: var(--dystos-white);
 }
 
 .feature p {
   margin: 0;
   font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--ifm-color-emphasis-700);
+  line-height: 1.7;
+  color: var(--dystos-gray-300);
 }
 
-.sectionTitle {
-  font-size: 1.9rem;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.5rem;
-}
-
-.sectionSubtitle {
-  color: var(--ifm-color-emphasis-700);
-  margin-bottom: 2rem;
-}
+/* ============================================================
+   EXEMPLES — cartes de code
+   ============================================================ */
 
 .exampleGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 1.75rem;
 }
 
 .example {
   border: 1px solid var(--dystos-border);
-  border-radius: 10px;
-  padding: 1rem;
-  background: var(--ifm-background-color);
+  border-radius: 14px;
+  padding: 1.5rem;
+  background: var(--dystos-gray-800);
+  transition: all 0.35s ease;
+}
+
+.example:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 242, 255, 0.45);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
 }
 
 .exampleName {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--ifm-color-emphasis-700);
+  letter-spacing: 0.08em;
+  color: var(--ifm-color-primary);
   margin-bottom: 0.75rem;
+  font-weight: 700;
 }
 
 .output {
   margin: 0;
-  padding: 0.75rem;
-  background: var(--dystos-surface);
+  padding: 0.75rem 1rem;
+  background: var(--dystos-gray-900);
   border: 1px dashed var(--dystos-border);
-  border-radius: 6px;
+  border-radius: 8px;
   font-family: var(--ifm-font-family-monospace);
   font-size: 0.85rem;
   white-space: pre-wrap;
+  color: var(--dystos-gray-200);
 }
 
 .outputLabel {
@@ -147,15 +386,50 @@
 .centered {
   display: flex;
   justify-content: center;
-  margin-top: 2.5rem;
+  margin-top: 3rem;
 }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
 
 @media screen and (max-width: 996px) {
   .heroBanner {
-    padding: 3rem 1rem 2.5rem;
+    padding: 4.5rem 1rem 3.5rem;
+  }
+
+  .heroTitle {
+    font-size: clamp(2.2rem, 9vw, 4.5rem);
   }
 
   .section {
-    padding: 3rem 0;
+    padding: 4rem 0;
+  }
+
+  .featureGrid {
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1.25rem;
+  }
+
+  .exampleGrid {
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .heroBanner {
+    padding: 3.5rem 1rem 2.5rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .button--lg {
+    width: 100%;
+    max-width: 22rem;
+    text-align: center;
   }
 }

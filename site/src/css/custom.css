@@ -1,70 +1,169 @@
 /**
- * Variables globales de Dystos : fond sombre par défaut, accent vif,
- * contraste AA, mise en valeur forte du code.
+ * Variables globales de Dystos — thème Noir / Blanc / Gris
+ * Fond sombre profond, accents électriques, contrastes élevés,
+ * mise en valeur forte du code et animations futuristes.
  */
 
 :root {
-  --ifm-color-primary: #4dd4c0;
-  --ifm-color-primary-dark: #37cbb6;
-  --ifm-color-primary-darker: #32c0ac;
-  --ifm-color-primary-darkest: #289b8b;
-  --ifm-color-primary-light: #63ddca;
-  --ifm-color-primary-lighter: #70e0cf;
-  --ifm-color-primary-lightest: #93eade;
+  /* Nuances de gris / noir / blanc */
+  --dystos-black: #0a0a0a;
+  --dystos-black-deep: #050505;
+  --dystos-gray-900: #111111;
+  --dystos-gray-800: #1a1a1a;
+  --dystos-gray-700: #2a2a2a;
+  --dystos-gray-600: #3a3a3a;
+  --dystos-gray-500: #525252;
+  --dystos-gray-400: #737373;
+  --dystos-gray-300: #a8a8a8;
+  --dystos-gray-200: #d4d4d4;
+  --dystos-gray-100: #e8e8e8;
+  --dystos-white: #ffffff;
+
+  /* Accent électrique (cyan néon) pour le look futuriste */
+  --ifm-color-primary: #00f2ff;
+  --ifm-color-primary-dark: #00cfe0;
+  --ifm-color-primary-darker: #00b8c9;
+  --ifm-color-primary-darkest: #009aa8;
+  --ifm-color-primary-light: #33f6ff;
+  --ifm-color-primary-lighter: #66f9ff;
+  --ifm-color-primary-lightest: #99fcff;
 
   --ifm-code-font-size: 92%;
   --ifm-font-family-base: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto,
     sans-serif;
   --ifm-font-family-monospace: 'JetBrains Mono', ui-monospace, SFMono-Regular,
     Menlo, Consolas, monospace;
-  --ifm-heading-font-weight: 700;
-  --ifm-navbar-height: 3.75rem;
-  --ifm-navbar-shadow: 0 1px 0 0 var(--ifm-color-emphasis-200);
+  --ifm-heading-font-weight: 800;
+  --ifm-navbar-height: 4rem;
+  --ifm-navbar-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
 
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.12);
+  --docusaurus-highlighted-code-line-bg: rgba(0, 242, 255, 0.1);
 
-  --dystos-surface: #10161d;
-  --dystos-surface-raised: #161f28;
-  --dystos-border: #22303c;
-  --dystos-hero-glow: rgba(77, 212, 192, 0.14);
+  --dystos-surface: #0a0a0a;
+  --dystos-surface-raised: #111111;
+  --dystos-border: #2a2a2a;
+  --dystos-hero-glow: rgba(0, 242, 255, 0.15);
+
+  /* Ombres et lueurs néon */
+  --dystos-shadow-neon: 0 0 20px rgba(0, 242, 255, 0.35),
+    0 0 40px rgba(0, 242, 255, 0.15);
+  --dystos-shadow-card: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
 [data-theme='dark'] {
-  --ifm-color-primary: #4dd4c0;
-  --ifm-color-primary-dark: #37cbb6;
-  --ifm-color-primary-darker: #32c0ac;
-  --ifm-color-primary-darkest: #289b8b;
-  --ifm-color-primary-light: #63ddca;
-  --ifm-color-primary-lighter: #70e0cf;
-  --ifm-color-primary-lightest: #93eade;
+  --ifm-color-primary: #00f2ff;
+  --ifm-color-primary-dark: #00cfe0;
+  --ifm-color-primary-darker: #00b8c9;
+  --ifm-color-primary-darkest: #009aa8;
+  --ifm-color-primary-light: #33f6ff;
+  --ifm-color-primary-lighter: #66f9ff;
+  --ifm-color-primary-lightest: #99fcff;
 
-  --ifm-background-color: #0b1016;
-  --ifm-background-surface-color: var(--dystos-surface);
-  --ifm-background-color-dark: #080c11;
-  --ifm-background-color-light: #131b23;
-  --ifm-font-color-base: #dfe7ee;
-  --ifm-font-color-dark: #0b1016;
-  --ifm-heading-color: #f2f7fa;
-  --ifm-toc-border-color: var(--dystos-border);
+  --ifm-background-color: var(--dystos-black);
+  --ifm-background-surface-color: var(--dystos-gray-900);
+  --ifm-background-color-dark: var(--dystos-black-deep);
+  --ifm-background-color-light: var(--dystos-gray-800);
+  --ifm-font-color-base: var(--dystos-gray-100);
+  --ifm-font-color-dark: var(--dystos-black-deep);
+  --ifm-heading-color: var(--dystos-white);
 
-  --ifm-navbar-background-color: rgba(11, 16, 22, 0.92);
-  --ifm-footer-background-color: var(--dystos-surface);
+  --ifm-navbar-background-color: rgba(5, 5, 5, 0.92);
+  --ifm-footer-background-color: var(--dystos-black-deep);
 
-  --docusaurus-highlighted-code-line-bg: rgba(77, 212, 192, 0.12);
+  --docusaurus-highlighted-code-line-bg: rgba(0, 242, 255, 0.12);
 
-  --dystos-hero-glow: rgba(77, 212, 192, 0.2);
+  --dystos-hero-glow: rgba(0, 242, 255, 0.2);
 }
 
 [data-theme='dark'] .docusaurus-highlight-code-line {
-  --docusaurus-highlighted-code-line-bg: rgba(77, 212, 192, 0.12);
+  --docusaurus-highlighted-code-line-bg: rgba(0, 242, 255, 0.12);
 }
 
-/* Accessibilité : lien d'évitement visible au clavier. */
+/* ============================================================
+   Animations clé — look futuriste
+   ============================================================ */
+
+/* Lueur pulsante derrière le hero */
+@keyframes dystosPulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.15);
+  }
+}
+
+/* Défilement lent de la grille d'arrière-plan */
+@keyframes dystosGridMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+/* Flottement vertical doux */
+@keyframes dystosFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* Apparition progressive avec décalage */
+@keyframes dystosFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Remplissage néon au survol */
+@keyframes dystosNeonFill {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 242, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(0, 242, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 242, 255, 0);
+  }
+}
+
+/* Texte qui brille (gradient animé) */
+@keyframes dystosGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ============================================================
+   Accessibilité : lien d'évitement visible au clavier
+   ============================================================ */
 .skipToContent_fallback:focus {
   background: var(--ifm-color-primary);
-  color: #06121a;
+  color: #050505;
 }
 
+/* ============================================================
+   Thème général
+   ============================================================ */
 .theme-doc-markdown h1 {
   letter-spacing: -0.02em;
 }
@@ -75,6 +174,95 @@
 }
 
 .navbar__title {
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -0.01em;
+  background: linear-gradient(
+    90deg,
+    var(--dystos-white),
+    var(--dystos-gray-300)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Navbar plus discrète sur fond noir */
+.navbar {
+  background: var(--ifm-navbar-background-color) !important;
+  border-bottom: 1px solid var(--dystos-border);
+}
+
+.navbar__logo img {
+  filter: drop-shadow(0 0 8px rgba(0, 242, 255, 0.4));
+}
+
+/* Boutons Docusaurus personnalisés */
+.button {
+  border-radius: 8px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: all 0.3s ease;
+}
+
+.button--primary {
+  background: var(--ifm-color-primary);
+  color: var(--dystos-black-deep);
+  border: none;
+}
+
+.button--primary:hover {
+  background: var(--ifm-color-primary-light);
+  color: var(--dystos-black-deep);
+  transform: translateY(-2px);
+  box-shadow: var(--dystos-shadow-neon);
+}
+
+.button--secondary {
+  background: transparent;
+  color: var(--ifm-color-primary);
+  border: 1px solid var(--ifm-color-primary);
+}
+
+.button--secondary:hover {
+  background: var(--ifm-color-primary);
+  color: var(--dystos-black-deep);
+  transform: translateY(-2px);
+  box-shadow: var(--dystos-shadow-neon);
+}
+
+/* Pied de page sombre */
+footer {
+  border-top: 1px solid var(--dystos-border);
+  background: var(--ifm-footer-background-color) !important;
+}
+
+/* ============================================================
+   Utilitaires d'animation réutilisables
+   ============================================================ */
+.animate-fade-up {
+  animation: dystosFadeUp 0.8s ease-out both;
+}
+
+.animate-float {
+  animation: dystosFloat 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: dystosPulseGlow 4s ease-in-out infinite;
+}
+
+.delay-100 {
+  animation-delay: 0.1s;
+}
+.delay-200 {
+  animation-delay: 0.2s;
+}
+.delay-300 {
+  animation-delay: 0.3s;
+}
+.delay-400 {
+  animation-delay: 0.4s;
+}
+.delay-500 {
+  animation-delay: 0.5s;
 }

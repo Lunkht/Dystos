@@ -1,66 +1,356 @@
+/* ============================================================
+   Playground — look IDE moderne
+   Thème Noir / Blanc / Gris, accent cyan néon (#00f2ff)
+   ============================================================ */
+
 .playground {
-  border: 1px solid var(--dystos-border);
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--ifm-background-surface-color);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 60rem;
+  background: var(--dystos-black);
+  color: var(--dystos-gray-100);
+  font-family: var(--ifm-font-family-base);
 }
 
+/* ---------- Sidebar ---------- */
+.sidebar {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: 260px;
+  max-width: 80vw;
+  background: var(--dystos-gray-900);
+  border-right: 1px solid var(--dystos-border);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  transform: translatex(-100%);
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: var(--dystos-shadow-card);
+}
+
+.sidebarOpen .sidebar {
+  transform: translatex(0);
+}
+
+.sidebarOpen {
+  /* classe appliquée sur le conteneur quand la sidebar est ouverte */
+}
+
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--dystos-border);
+  background: var(--dystos-gray-800);
+}
+
+.sidebarTitle {
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary);
+}
+
+.sidebarClose {
+  background: transparent;
+  border: 1px solid var(--dystos-border);
+  color: var(--dystos-gray-300);
+  width: 2rem;
+  height: 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.sidebarClose:hover {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+.sidebarSection {
+  padding: 1rem 1.25rem;
+}
+
+.sidebarSection + .sidebarSection {
+  border-top: 1px solid var(--dystos-border);
+}
+
+.sidebarSectionLabel {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--dystos-gray-500);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.exampleList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.exampleItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: var(--dystos-gray-300);
+  font-family: var(--ifm-font-family-base);
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.exampleItem:hover {
+  background: var(--dystos-gray-800);
+  color: var(--dystos-white);
+}
+
+.exampleItem.exampleActive {
+  background: rgba(0, 242, 255, 0.12);
+  color: var(--ifm-color-primary);
+  border-left: 3px solid var(--ifm-color-primary);
+}
+
+.sidebarOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 45;
+  backdrop-filter: blur(2px);
+}
+
+/* ---------- Main ---------- */
+.main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Toolbar ---------- */
 .toolbar {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
   border-bottom: 1px solid var(--dystos-border);
-  background: var(--ifm-background-color);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.toolbarLeft,
+.toolbarCenter,
+.toolbarRight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.toolbarButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--dystos-border);
+  border-radius: 6px;
+  background: var(--dystos-gray-800);
+  color: var(--dystos-gray-100);
+  font-size: 0.85rem;
+  font-weight: 500;
+  font-family: var(--ifm-font-family-base);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toolbarButton:hover:not(:disabled) {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+  box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+}
+
+.toolbarButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btnAnalyze {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+  background: rgba(0, 242, 255, 0.08);
+}
+
+.btnAnalyze:hover:not(:disabled) {
+  background: rgba(0, 242, 255, 0.18);
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.35);
+}
+
+.btnRun {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+  background: rgba(0, 242, 255, 0.08);
+}
+
+.btnRun:hover:not(:disabled) {
+  background: rgba(0, 242, 255, 0.18);
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.35);
+}
+
+.sidebarToggle {
+  font-size: 1.2rem;
+}
+
+.activeExample {
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--dystos-border);
+  border-radius: 4px;
+  background: var(--dystos-gray-800);
+  font-size: 0.75rem;
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+.statusIndicator {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
 }
 
 .endpoint {
-  margin-left: auto;
   font-family: var(--ifm-font-family-monospace);
-  font-size: 0.75rem;
-  color: var(--ifm-color-emphasis-600);
+  font-size: 0.7rem;
+  color: var(--dystos-gray-500);
+  background: var(--dystos-gray-900);
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  border: 1px solid var(--dystos-border);
 }
 
+/* ---------- Panes ---------- */
 .panes {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 26rem;
-}
-
-@media screen and (max-width: 996px) {
-  .panes {
-    grid-template-columns: 1fr;
-  }
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .pane {
   display: flex;
+  flex-direction: column;
   min-width: 0;
 }
 
 .editorPane {
+  flex: 1.2;
   border-right: 1px solid var(--dystos-border);
 }
 
+.resultPane {
+  flex: 1;
+  border-left: 1px solid var(--dystos-border);
+  display: flex;
+  flex-direction: column;
+}
+
 @media screen and (max-width: 996px) {
+  .panes {
+    flex-direction: column;
+  }
   .editorPane {
     border-right: none;
     border-bottom: 1px solid var(--dystos-border);
+    flex: 1;
   }
+  .resultPane {
+    border-left: none;
+    border-top: 1px solid var(--dystos-border);
+    flex: 0.8;
+  }
+}
+
+/* ---------- Éditeur ---------- */
+.editorHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--dystos-border);
+  background: var(--dystos-gray-800);
+}
+
+.editorTab {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.75rem;
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+.editorActions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.editorActionButton {
+  background: transparent;
+  border: none;
+  color: var(--dystos-gray-500);
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.editorActionButton:hover {
+  background: var(--dystos-gray-700);
+  color: var(--dystos-white);
+}
+
+.editorWrapper {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  overflow: hidden;
 }
 
 .gutter {
   display: flex;
   flex-direction: column;
-  padding: 1rem 0.5rem;
-  background: var(--ifm-background-color);
-  color: var(--ifm-color-emphasis-500);
+  padding: 1rem 0.75rem;
+  background: var(--dystos-gray-900);
+  color: var(--dystos-gray-500);
   font-family: var(--ifm-font-family-monospace);
   font-size: 0.85rem;
   line-height: 1.6;
   text-align: right;
   user-select: none;
-  overflow: hidden;
+  border-right: 1px solid var(--dystos-border);
+  flex-shrink: 0;
 }
 
 .editor {
@@ -69,8 +359,8 @@
   outline: none;
   resize: none;
   padding: 1rem;
-  background: var(--ifm-background-color);
-  color: var(--ifm-font-color-base);
+  background: var(--dystos-black);
+  color: var(--dystos-gray-100);
   font-family: var(--ifm-font-family-monospace);
   font-size: 0.9rem;
   line-height: 1.6;
@@ -79,27 +369,77 @@
   overflow: auto;
 }
 
+.editor:focus {
+  outline: none;
+}
+
+/* ---------- Résultat ---------- */
+.resultHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--dystos-border);
+  background: var(--dystos-gray-800);
+}
+
+.resultActions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.clearButton {
+  background: transparent;
+  border: none;
+  color: var(--dystos-gray-500);
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.clearButton:hover {
+  background: var(--dystos-gray-700);
+  color: #ff6b6b;
+}
+
 .tabs {
   display: flex;
   gap: 0.25rem;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   border-bottom: 1px solid var(--dystos-border);
+  background: var(--dystos-gray-900);
   flex-wrap: wrap;
 }
 
 .tab {
   border: 1px solid transparent;
-  border-radius: 6px;
+  border-bottom: 2px solid transparent;
+  border-radius: 4px 4px 0 0;
   background: transparent;
-  color: var(--ifm-color-emphasis-700);
+  color: var(--dystos-gray-500);
   font-size: 0.8rem;
-  padding: 0.35rem 0.7rem;
+  font-weight: 600;
+  padding: 0.5rem 0.9rem;
   cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--ifm-font-family-base);
+}
+
+.tab:hover {
+  color: var(--dystos-gray-200);
+  background: var(--dystos-gray-800);
 }
 
 .tabActive {
   border-color: var(--dystos-border);
-  background: var(--dystos-background-color, var(--ifm-background-color));
+  border-bottom-color: var(--ifm-color-primary);
+  background: var(--dystos-black);
   color: var(--ifm-color-primary);
 }
 
@@ -107,9 +447,11 @@
   flex: 1;
   padding: 1rem;
   overflow: auto;
-  max-height: 26rem;
+  background: var(--dystos-black);
+  color: var(--dystos-gray-100);
 }
 
+/* ---------- Diagnostics ---------- */
 .diagnostics {
   list-style: none;
   margin: 0;
@@ -125,10 +467,16 @@
   align-items: baseline;
   font-family: var(--ifm-font-family-monospace);
   font-size: 0.85rem;
-  padding: 0.5rem 0.65rem;
+  padding: 0.6rem 0.75rem;
   border-radius: 6px;
-  border-left: 3px solid var(--ifm-color-emphasis-400);
-  background: var(--ifm-background-color);
+  border-left: 3px solid var(--dystos-border);
+  background: var(--dystos-gray-900);
+  transition: all 0.2s ease;
+}
+
+.diagnostic:hover {
+  border-left-color: var(--ifm-color-primary);
+  box-shadow: 0 0 10px rgba(0, 242, 255, 0.1);
 }
 
 .diagnosticCode {
@@ -152,6 +500,10 @@
   color: #ffb020;
 }
 
+.severityInfo {
+  border-left-color: var(--ifm-color-primary);
+}
+
 .severityInfo .diagnosticCode {
   color: var(--ifm-color-primary);
 }
@@ -160,6 +512,9 @@
 .errorText {
   font-size: 0.9rem;
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .okText {
@@ -170,21 +525,58 @@
   color: #ff6b6b;
 }
 
+.okIcon {
+  font-size: 0.9rem;
+}
+
+.errorBanner {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.2);
+  margin-bottom: 1rem;
+}
+
+.errorIcon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.errorText {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.85rem;
+}
+
+/* ---------- Sortie ---------- */
+.outputWrapper {
+  background: var(--dystos-gray-900);
+  border: 1px solid var(--dystos-border);
+  border-radius: 6px;
+  overflow: auto;
+}
+
 .output {
   margin: 0;
   font-family: var(--ifm-font-family-monospace);
   font-size: 0.85rem;
   white-space: pre-wrap;
   line-height: 1.6;
+  padding: 1rem;
+  color: var(--dystos-gray-200);
 }
 
 .duration {
   color: var(--ifm-color-emphasis-600);
 }
 
+/* ---------- Tokens ---------- */
 .tokens {
   margin: 0;
-  padding-left: 3rem;
+  padding: 0;
+  list-style: none;
   font-family: var(--ifm-font-family-monospace);
   font-size: 0.8rem;
   display: flex;
@@ -194,8 +586,15 @@
 
 .tokens li {
   display: grid;
-  grid-template-columns: 9rem 1fr 5rem;
+  grid-template-columns: 10rem 1fr 5rem;
   gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.tokens li:hover {
+  background: var(--dystos-gray-800);
 }
 
 .tokenKind {
@@ -203,10 +602,64 @@
 }
 
 .tokenText {
-  color: var(--ifm-font-color-base);
+  color: var(--dystos-gray-200);
 }
 
 .tokenPosition {
-  color: var(--ifm-color-emphasis-600);
+  color: var(--dystos-gray-500);
   text-align: right;
+}
+
+/* ---------- Barre de statut ---------- */
+.statusBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1.25rem;
+  border-top: 1px solid var(--dystos-border);
+  background: var(--dystos-gray-800);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.75rem;
+  color: var(--dystos-gray-500);
+}
+
+.statusLeft,
+.statusRight {
+  display: flex;
+  gap: 1rem;
+}
+
+.statusLeft > span,
+.statusRight > span {
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  background: var(--dystos-gray-900);
+  border: 1px solid var(--dystos-border);
+}
+
+/* ---------- Responsive ---------- */
+@media screen and (max-width: 996px) {
+  .playground {
+    min-height: 50rem;
+  }
+  .toolbar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .toolbarRight {
+    margin-top: 0.5rem;
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .toolbarCenter {
+    display: none;
+  }
+  .toolbarButton.btnAnalyze,
+  .toolbarButton.btnRun {
+    width: 100%;
+    justify-content: center;
+  }
 }

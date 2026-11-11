@@ -76,7 +76,6 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'Dystos',
       logo: {
         alt: 'Logo Dystos',
         src: 'img/logo.svg',

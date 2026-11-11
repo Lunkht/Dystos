@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import CodeBlock from '@theme/CodeBlock';
 import Layout from '@theme/Layout';
+import {Icon} from '@site/src/components/Icon';
 
 import styles from './index.module.css';
 
@@ -30,30 +31,36 @@ def main():
     for compte in [Compte("Awa", Role.CLIENT), Compte("Moussa", Role.ADMIN)]:
         print(compte.deposer(150.0))`;
 
-const POINTS_FORTS = [
+type PointFort = {
+  title: string;
+  description: string;
+  iconName: Parameters<typeof Icon>[0]['name'];
+};
+
+const POINTS_FORTS: PointFort[] = [
   {
     title: 'Lisible comme Python',
     description:
       'Indentation significative, pas de point-virgule, mots-clés explicites. On lit du code Dystos sans le connaître.',
-    icon: '🐍',
+    iconName: 'code',
   },
   {
     title: 'Sûr comme Java',
     description:
       'Types statiques, null-safety avec ? et ?., exceptions explicites. Les erreurs apparaissent avant l’exécution.',
-    icon: '☕',
+    iconName: 'coffee',
   },
   {
     title: 'Tourne sur la JVM',
     description:
       'Interopérabilité directe avec Java et la bibliothèque standard JVM. Tu réutilises l’écosystème existant.',
-    icon: '🚀',
+    iconName: 'rocket',
   },
   {
     title: 'Autohébergé',
     description:
       'Aucun service tiers, aucune police externe, aucun traçage. Le site et le compilateur tournent sur ton infrastructure.',
-    icon: '🏠',
+    iconName: 'home',
   },
 ];
 
@@ -164,7 +171,7 @@ export default function Home(): ReactNode {
                 <article
                   key={point.title}
                   className={clsx(styles.feature, `feature-${i + 1}`)}>
-                  <div className={styles.featureIcon}>{point.icon}</div>
+                  <Icon name={point.iconName} className={styles.featureIcon} />
                   <h3>{point.title}</h3>
                   <p>{point.description}</p>
                 </article>

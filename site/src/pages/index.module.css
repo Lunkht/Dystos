@@ -303,9 +303,11 @@
 }
 
 .featureIcon {
-  font-size: 2rem;
+  width: 2rem;
+  height: 2rem;
   margin-bottom: 1rem;
   display: block;
+  color: var(--ifm-color-primary);
   filter: drop-shadow(0 0 12px rgba(0, 242, 255, 0.25));
   transition: transform 0.3s ease;
 }

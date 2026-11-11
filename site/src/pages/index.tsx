@@ -1,4 +1,4 @@
-import type {ReactNode} from 'react';
+import {useEffect, useState, type ReactNode} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import CodeBlock from '@theme/CodeBlock';
@@ -6,6 +6,7 @@ import Layout from '@theme/Layout';
 import {Icon} from '@site/src/components/Icon';
 
 import LogoDystos from '@site/static/img/dystos.svg';
+import LogoDystosDark from '@site/static/img/dystos_for_dark_mode.svg';
 
 import styles from './index.module.css';
 
@@ -102,6 +103,24 @@ for nom, qte in produits.items():
 ];
 
 export default function Home(): ReactNode {
+  const [isDark, setIsDark] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const update = () => {
+      setIsDark(root.dataset.theme === 'dark');
+    };
+    update();
+
+    // Écoute les changements de thème (bascule clair/sombre de Docusaurus)
+    const observer = new MutationObserver(() => update());
+    observer.observe(root, {attributes: true, attributeFilter: ['data-theme']});
+
+    return () => observer.disconnect();
+  }, []);
+
+  const Logo = isDark === false ? LogoDystos : LogoDystosDark;
+
   return (
     <Layout
       title="Dystos, un langage simple et sûr"
@@ -135,7 +154,7 @@ export default function Home(): ReactNode {
               Dystos — Langage de programmation moderne
             </div>
             <h1 className={styles.heroTitle}>
-              <LogoDystos className={styles.heroLogo} />
+              <Logo className={styles.heroLogo} />
             </h1>
             <p className={styles.heroTagline}>
               Un langage lisible comme Python, sûr comme Java, qui tourne sur la

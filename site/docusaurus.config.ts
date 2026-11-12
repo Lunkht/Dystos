@@ -86,6 +86,7 @@ const config: Config = {
         {to: '/playground', label: 'Playground', position: 'left'},
         {to: '/examples', label: 'Exemples', position: 'left'},
         {to: '/blog', label: 'Actualités', position: 'left'},
+        {to: '/communaute', label: 'Communauté', position: 'left'},
         {to: '/telechargements', label: 'Téléchargements', position: 'left'},
         {
           href: REPO_URL,
@@ -117,6 +118,8 @@ const config: Config = {
         {
           title: 'Communauté',
           items: [
+            {label: 'Page communauté', to: '/communaute'},
+            {label: 'Le créateur', to: '/createur'},
             {label: 'Dépôt GitHub', href: REPO_URL},
             {label: 'Contribuer', to: '/docs/communaute/contribuer'},
             {label: 'Signaler un bug', href: `${REPO_URL}/issues`},

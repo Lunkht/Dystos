@@ -33,7 +33,10 @@
     sans-serif;
   --ifm-font-family-monospace: 'JetBrains Mono', ui-monospace, SFMono-Regular,
     Menlo, Consolas, monospace;
-  --ifm-heading-font-weight: 800;
+  --ifm-heading-font-weight: 600;
+  --ifm-font-weight-normal: 400;
+  --ifm-font-weight-semibold: 500;
+  --ifm-font-weight-bold: 600;
   --ifm-navbar-height: 4rem;
   --ifm-navbar-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
 
@@ -174,7 +177,7 @@
 }
 
 .navbar__title {
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: -0.01em;
   background: linear-gradient(
     90deg,
@@ -199,7 +202,7 @@
 /* Boutons Docusaurus personnalisés */
 .button {
   border-radius: 8px;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.02em;
   transition: all 0.3s ease;
 }
@@ -228,6 +231,20 @@
   color: var(--dystos-black-deep);
   transform: translateY(-2px);
   box-shadow: var(--dystos-shadow-neon);
+}
+
+/* ============================================================
+   Graisses allégées — cohérence sur tout le site
+   ============================================================ */
+strong,
+b,
+th,
+.footer__title,
+.pagination-nav__label,
+.menu__link--active,
+.navbar__link--active,
+.table-of-contents__link--active {
+  font-weight: var(--ifm-font-weight-bold);
 }
 
 /* Pied de page noir */

@@ -161,9 +161,9 @@ export default function Playground(): ReactNode {
   const lineCount = code.split('\n').length;
 
   return (
-    <div className={styles.playground}>
+    <div className={clsx(styles.playground, sidebarOpen && styles.sidebarOpen)}>
       {/* Sidebar — explorateur */}
-      <aside className={clsx(styles.sidebar, sidebarOpen && styles.sidebarOpen)}>
+      <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
           <span className={styles.sidebarTitle}>Explorateur</span>
           <button

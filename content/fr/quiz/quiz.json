@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "quiz": [
+    {
+      "id": "quiz-hello-world",
+      "lecon": "01-hello-world",
+      "titre": "Premiers pas",
+      "questions": [
+        {
+          "question": "Quelle fonction affiche une valeur à l'écran ?",
+          "choix": ["show()", "print()", "echo()", "afficher()"],
+          "reponse": "print()",
+          "explication": "print() écrit sur une ligne, les arguments séparés par une espace."
+        },
+        {
+          "question": "Que produit `print(\"Bonjour\")` exactement ?",
+          "choix": [
+            "Le mot Bonjour sans retour à la ligne",
+            "Bonjour suivi d'un retour à la ligne",
+            "La chaîne `\"Bonjour\"` avec ses guillemets",
+            "Une erreur, car une chaîne doit avoir des guillemets simples"
+          ],
+          "reponse": "Bonjour suivi d'un retour à la ligne",
+          "explication": "print() ajoute toujours le retour à la ligne, et retire les guillemets."
+        },
+        {
+          "question": "Quel est le nom de fichier d'un programme Dystos ?",
+          "choix": [".dystos", ".dys", ".dysos", "extension libre"],
+          "reponse": ".dys",
+          "explication": "Les programmes Dystos s'enregistrent en .dys."
+        }
+      ]
+    },
+    {
+      "id": "quiz-variables",
+      "lecon": "02-variables",
+      "titre": "Variables et types",
+      "questions": [
+        {
+          "question": "Quel mot-clé déclare une valeur qui ne change plus ?",
+          "choix": ["var", "val", "let", "const"],
+          "reponse": "val",
+          "explication": "val rend la valeur immuable ; var la rend modifiable."
+        },
+        {
+          "question": "Que produit `3 / 2` en Dystos ?",
+          "choix": ["1", "1.5", "2", "Une erreur de type"],
+          "reponse": "1.5",
+          "explication": "Une division non exacte donne un flottant, comme en Python."
+        },
+        {
+          "question": "Comment écrit-on une chaîne formatée avec une variable ?",
+          "choix": [
+            "\"${nom}\"",
+            "f\"{nom}\"",
+            "\"%{nom}\"",
+            "string(nom)"
+          ],
+          "reponse": "f\"{nom}\"",
+          "explication": "Le préfixe f active l'interpolation entre accolades."
+        },
+        {
+          "question": "Quel type convient pour 1_000 ?",
+          "choix": ["int", "float", "string", "bool"],
+          "reponse": "int",
+          "explication": "Le séparateur _ rend le nombre plus lisible sans changer son type."
+        }
+      ]
+    },
+    {
+      "id": "quiz-fonctions",
+      "lecon": "03-fonctions",
+      "titre": "Fonctions",
+      "questions": [
+        {
+          "question": "Quel mot-clé déclare une fonction ?",
+          "choix": ["fun", "def", "fn", "func"],
+          "reponse": "def",
+          "explication": "def nom(paramètres) -> type: puis un corps indenté."
+        },
+        {
+          "question": "Comment une fonction indique-t-elle ce qu'elle renvoie ?",
+          "choix": [
+            "Avec return",
+            "Avec la dernière expression du corps",
+            "Avec ->",
+            "Avec yield"
+          ],
+          "reponse": "Avec return",
+          "explication": "return rend une valeur et interrompt la fonction."
+        },
+        {
+          "question": "Comment donne-t-on une valeur par défaut à un paramètre ?",
+          "choix": [
+            "def f(n: int = 0)",
+            "def f(n: int 0)",
+            "def f(default n = 0)",
+            "def f(n: int -> 0)"
+          ],
+          "reponse": "def f(n: int = 0)",
+          "explication": "Le paramètre par défaut vient après le type, avec un signe égal."
+        },
+        {
+          "question": "Que fait `def double(n: int) -> int:` sans `return` ?",
+          "choix": [
+            "Elle renvoie la dernière ligne",
+            "Elle ne renvoie rien",
+            "Elle renvoie n",
+            "C'est une erreur de syntaxe"
+          ],
+          "reponse": "Elle ne renvoie rien",
+          "explication": "Une fonction sans return ne produit pas de valeur."
+        }
+      ]
+    }
+  ]
+}

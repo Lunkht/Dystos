@@ -18,25 +18,41 @@ description: Liste complète des mots-clés, opérateurs et littéraux de Dystos
 | `class` | Déclare une classe |
 | `interface` | Déclare un contrat |
 | `enum` | Déclare une énumération |
+| `abstract` | Classe qui ne peut pas être instanciée directement |
+| `final` | Empêche l'héritage ou la surcharge |
+| `import` `package` | Modules |
 | `if` `elif` `else` | Condition |
 | `for` `while` | Boucle |
 | `match` `case` | Motif |
 | `return` | Rend une valeur |
 | `break` `continue` | Contrôle de boucle |
-| `import` `package` | Modules |
-| `extends` `implements` | Héritage |
-| `new` | Instancie un objet |
-| `this` `self` `super` | Référence courante et parent |
-| `try` `catch` `finally` `throw` | Exceptions |
-| `as` `is` | Conversion et test de type |
+| `pass` | Corps vide (espace réservé) |
+| `try` `except` `finally` `raise` | Exceptions |
+| `assert` | Assertion |
+| `as` | Alias d'import / cast de type |
+| `is` | Test de type |
 | `in` | Appartenance |
 | `and` `or` `not` | Logique |
-| `typealias` | Alias de type |
-| `static` `public` `private` `protected` `internal` | Visibilité |
+| `with` | Bloc avec gestion de ressource |
 
-## Types élémentaires
+Il n'y a pas de `new`, `throw`, `catch`, `this` ni `__init__`.
 
-`int` `float` `double` `string` `bool` `char` `void` `any` `unit`
+## Types
+
+| Type | Rôle |
+| --- | --- |
+| `int` | Entier |
+| `float` | Nombre à virgule |
+| `bool` | `true` ou `false` |
+| `str` | Chaîne de caractères |
+| `list[T]` | Liste |
+| `map[K, V]` | Dictionnaire |
+| `set[T]` | Ensemble |
+| `unit` | Aucune valeur de retour |
+| `any` | Tout type |
+
+Il n'y a pas de `string`, `char`, `double` ni `void` : utilisez `str` et
+`unit`. Un type nullable s'écrit `T?`.
 
 ## Opérateurs
 
@@ -44,33 +60,19 @@ description: Liste complète des mots-clés, opérateurs et littéraux de Dystos
 | --- | --- |
 | Arithmétique | `+` `-` `*` `/` `%` `**` |
 | Comparaison | `==` `!=` `<` `<=` `>` `>=` |
-| Logique | `and` `or` `not` |
+| Appartenance / type | `in` `not in` `is` `is not` |
+| Null-sûreté | `?.` `?:` |
 | Affectation | `=` `+=` `-=` `*=` `/=` `%=` |
-| Null-sûreté | `?` `?.` `??` `?:` |
-| Divers | `|` `&` `^` `~` `<<` `>>` |
+| Chaîne | `+` concatène |
+
+`/` est une vraie division : `7 / 2` vaut `3.5`.
 
 ## Littéraux
 
-| Catégorie | Exemple |
-| --- | --- |
-| Entier | `42` `1_000` `0xFF` `0b1010` `0o17` |
-| Flottant | `3.14` `1e-3` `2.0f` |
-| Booléen | `true` `false` |
-| Chaîne | `"texte"` `'c'` `"""bloc"""` |
-| Formatée | `f"{nom} a {age} ans"` |
-| Brute | `r"\d+"` |
-| Liste | `[1, 2, 3]` |
-| Dictionnaire | `{"a": 1}` |
-| Ensemble | `{1, 2, 3}` |
-
-## Bibliothèque standard minimale
-
-| Fonction | Effet |
-| --- | --- |
-| `print(...)` | Écrit sur la sortie standard |
-| `len(c)` | Longueur d'une collection ou d'une chaîne |
-| `range(...)` | Suite d'entiers |
-| `int` `float` `string` `bool` | Conversions |
-| `sorted` `reversed` `enumerate` `zip` | Manipulations de séquences |
-| `abs` `min` `max` `sum` | Agrégats |
-| `open` `read` `write` | Fichiers |
+- Entiers : `42`, `-7`, `1_000`, `0xFF`, `0b1010`
+- Flottants : `3.14`, `1.0e-3`
+- Chaînes : `"texte"`, `'texte'`, `f"valeur {x}"`
+- Booléens : `true`, `false`
+- Listes : `[1, 2, 3]`
+- Dictionnaires : `{"clé": 1}`
+- Ensembles : `{1, 2, 3}`

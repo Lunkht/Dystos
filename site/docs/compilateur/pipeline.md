@@ -10,10 +10,10 @@ description: Les étapes du compilateur Dystos, de la source au bytecode JVM.
 
 ```
 source
-  → lexing      jetons + diagnostics lexicaux
-  → parsing     AST + diagnostics syntaxiques
-  → resolution  table des symboles, résolution des noms
-  → typage      null-safety, compatibilité des types
+  → lexing      jetons + diagnostics lexicaux (E0001)
+  → parsing     AST + diagnostics syntaxiques (E0002)
+  → resolution  table des symboles, résolution des noms (E01xx)
+  → typage      null-safety, compatibilité des types (E02xx)
   → generation  bytecode JVM (.class)
 ```
 
@@ -23,29 +23,30 @@ unique, partagé par la CLI, le site et l'application.
 ## Lexing
 
 Le lexer transforme le texte en jetons. Il gère les commentaires (`#`), les
-chaînes simples, brutes (`r"..."`) et formatées (`f"..."`), les littéraux
-numériques dans toutes leurs bases, et l'indentation.
+chaînes simples et formatées (`f"..."`), les littéraux numériques dans toutes
+leurs bases, et l'indentation.
 
 C'est la grammaire de coloration des trois cibles qui dérive de ses jetons :
 le site utilise une grammaire Prism, l'application colore avec le lexer lui-même.
 
 ## Parsing
 
-Le parser produit un AST. Indentation et délimiteurs ouvrants sont vérifiés à
-ce stade, d'où les diagnostics du type `E0101`.
+Le parser produit un AST. L'indentation et les délimiteurs ouvrants sont
+vérifiés à ce stade, d'où les diagnostics du type `E0002`.
 
 ## Résolution et typage
 
-La table des symboles associe noms et portée. Le système de types vérifie les
-affectations, les arguments, les returns, et applique la null-safety : lire une
-valeur nullable sans `?` est une erreur, pas une exception à l'exécution.
+La table des symboles associe noms et portée (`E01xx` : nom inconnu, déjà
+défini, membre privé, etc.). Le système de types vérifie les affectations, les
+arguments, les returns, et applique la null-safety : lire une valeur nullable
+sans `?.` est une erreur de compilation, pas une exception à l'exécution
+(`E02xx`).
 
 ## Exécution
 
 Deux chemins existent :
 
-- l'**interpréteur d'AST**, pour le playground et l'application Android, où la
-  Startup compte ;
+- l'**interpréteur d'AST**, pour le playground et l'application Android ;
 - le **backend JVM**, pour la performance et les `.jar`.
 
 ## Compatibilité Android

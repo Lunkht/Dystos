@@ -3,22 +3,27 @@ id: fonctionnel
 title: Fonctionnel
 sidebar_label: Fonctionnel
 sidebar_position: 6
-description: Lambdas, fonctions d'ordre supérieur, map, filter et reduce.
+description: Lambdas, fonctions d'ordre supérieur, compréhensions et tris.
 ---
 
 # Fonctionnel
 
 ## Lambdas
 
-Une lambda n'a pas de nom et s'écrit entre chevrons. Si le type des paramètres
-est évident, l'annotation est omise.
+Une lambda n'a pas de nom et s'écrit avec `->`. Si le type des paramètres est
+évident, l'annotation est omise.
 
 ```dystos
-val doubler = (x: int) => x * 2
+val doubler = (x: int) -> x * 2
 print(doubler(21))
 
-val incrementer = (x: int) => x + 1
+val incrementer = (x: int) -> x + 1
 print(incrementer(41))
+```
+
+```
+42
+42
 ```
 
 ## Fonctions d'ordre supérieur
@@ -32,49 +37,53 @@ def appliquer(x: int, f: (int) -> int) -> int:
 print(appliquer(10, doubler))
 
 def composer(f, g):
-    return (x) => f(g(x))
+    return (x: int) -> f(g(x))
 ```
 
-## `map`, `filter`, `reduce`
+## Compréhensions et filtres
+
+Une compréhension transforme une collection avec un `for` et un filtre optionnel.
 
 ```dystos
 val nombres = [1, 2, 3, 4, 5]
 
-val doubles = nombres.map((n) => n * 2)
-val pairs = nombres.filter((n) => n % 2 == 0)
-val somme = nombres.reduce((acc, n) => acc + n, 0)
-
-print(doubles)   # [2, 4, 6, 8, 10]
-print(pairs)     # [2, 4]
-print(somme)     # 15
+val doubles = [n * 2 for n in nombres]
+val pairs = [n for n in nombres if n % 2 == 0]
+val somme = 0
+for n in nombres:
+    somme += n
+print(somme)
 ```
 
-| Fonction | Signature |
-| --- | --- |
-| `map` | `(T) -> U` transforme chaque élément |
-| `filter` | `(T) -> bool` garde certains éléments |
-| `reduce` | `(A, T) -> A` réduit à une valeur |
-| `sorted` | trie selon une clé |
-| `any`, `all` | quantificateur logique |
+```
+[2, 4, 6, 8, 10]
+[2, 4]
+15
+```
 
-## Tri et regroupement
+`filter(f, xs)` garde les éléments pour lesquels `f` renvoie `true` :
 
 ```dystos
-val produits = ["pain", "fromage", "poire", "figue"]
-
-produits.sort()
-produits.sort((a, b) => len(a) - len(b))
+val pairs = filter(x -> x % 2 == 0, doubles)
+print(pairs)   # [2, 4]
 ```
 
-## Portée et Capture
-
-Une lambda capture les variables de la portée englobante. attention à ne pas
-muter une variable capturée depuis une lambda.
+`sorted(xs, key = f)` trie selon une fonction de clé :
 
 ```dystos
-val prefixe = "M."
-def nom_complet(nom: string) -> string:
-    return f"{prefixe} {nom}"
-
-print([nom_complet(n) for n in ["Awa", "Ibrahim"]])
+val tries = sorted(["bb", "a", "ccc"], key=s -> s.length)
+print(tries)   # ["a", "bb", "ccc"]
 ```
+
+`abs`, `min` et `max` sont disponibles :
+
+```dystos
+print(abs(-5), min(3, 7), max(3, 7))
+```
+
+```
+5 3 7
+```
+
+Il n'y a pas de méthode `.map` ni `.reduce` sur les listes : utilisez une
+compréhension ou une boucle `for`.

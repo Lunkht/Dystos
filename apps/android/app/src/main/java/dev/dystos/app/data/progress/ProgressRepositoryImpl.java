@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import dev.dystos.app.core.ActivityTracker;
 import dev.dystos.app.domain.model.Progress;
 import dev.dystos.app.domain.repository.ProgressRepository;
 
@@ -22,9 +23,11 @@ import dev.dystos.app.domain.repository.ProgressRepository;
 public final class ProgressRepositoryImpl implements ProgressRepository {
 
     private final ProgressDatabase database;
+    private final Context context;
 
     public ProgressRepositoryImpl(Context context) {
-        this.database = new ProgressDatabase(context.getApplicationContext());
+        this.context = context.getApplicationContext();
+        this.database = new ProgressDatabase(context);
     }
 
     @Override
@@ -60,6 +63,7 @@ public final class ProgressRepositoryImpl implements ProgressRepository {
             return;
         }
         database.update(lessonId, true, false);
+        ActivityTracker.record(context);
     }
 
     @Override
@@ -68,6 +72,7 @@ public final class ProgressRepositoryImpl implements ProgressRepository {
             return;
         }
         database.update(lessonId, true, true);
+        ActivityTracker.record(context);
     }
 
     @Override

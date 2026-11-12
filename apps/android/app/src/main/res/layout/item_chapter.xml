@@ -1,52 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="12dp"
+    android:orientation="horizontal"
     android:clickable="true"
+    android:background="@drawable/chapter_item_gradient_bg"
     android:focusable="true"
-    android:minHeight="72dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="0dp"
-    app:strokeColor="?attr/colorOutline"
-    app:strokeWidth="1dp">
+    android:minHeight="72dp">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_margin="7dp"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progress_bar2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:max="100"
+                app:indicatorColor="?attr/colorPrimary"
+                app:indicatorSize="120dp"
+                app:trackColor="?attr/colorSurfaceVariant"
+                app:trackThickness="10dp" />
+            <TextView
+                android:id="@+id/chapter_progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorPrimary"
+                android:layout_gravity="center"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+    </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_gravity="center"
         android:padding="16dp">
 
         <TextView
             android:id="@+id/chapter_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceTitleMedium" />
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/chapter_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:textAppearance="?attr/textAppearanceBodySmall" />
-
-        <TextView
-            android:id="@+id/chapter_progress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textAppearance="?attr/textAppearanceLabelMedium"
-            android:textColor="?attr/colorPrimary" />
-
-        <com.google.android.material.progressindicator.LinearProgressIndicator
-            android:id="@+id/chapter_progress_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:max="100"
-            app:trackCornerRadius="3dp"
-            app:trackThickness="4dp" />
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="13sp" />
+
     </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+</LinearLayout>

@@ -33,12 +33,13 @@ Bonjour, Dystos !
 
 ## Les chaînes de caractères
 
-Une chaîne se déclare avec des guillemets doubles. Les guillemets simples
-délimitent les caractères individuels.
+Le type des chaînes est `str`. Une chaîne s'écrit avec des guillemets doubles
+ou simples : les deux formes produisent une `str`, et les échappements comme
+`\n` fonctionnent dans les deux.
 
 ```dystos
-langue: string = "Dystos"
-initiale: char = 'D'
+langue: str = "Dystos"
+initiale: str = 'D'
 print(langue, initiale)
 ```
 
@@ -48,7 +49,7 @@ On regroupe le code dans des fonctions avec `def`. L'indentation délimite le
 bloc : pas d'accolades, pas de mot-clé `end`.
 
 ```dystos
-def bonjour(nom: string):
+def bonjour(nom: str):
     print(f"Bonjour, {nom} !")
 
 bonjour("Awa")
@@ -60,18 +61,20 @@ remplacé par la valeur de l'expression qu'il contient.
 
 ## Exécuter
 
-Un fichier `.dys` s'exécute de haut en bas. La fonction `main` n'est pas
-obligatoire, mais elle rend le code plus lisible quand le programme grossit.
+Un fichier `.dys` s'exécute de haut en bas. Si le fichier définit une fonction
+`main`, elle est appelée automatiquement à la fin : il ne faut pas l'appeler
+soi-même, sinon le compilateur signale un point d'entrée ambigu (`E0307`).
 
 ```dystos
 def main():
     print("Bonjour, Dystos !")
-
-main()
 ```
+
+Un fichier sans `main` exécute simplement ses instructions de premier niveau.
 
 ## Ce qu'il faut retenir
 
 - `print(...)` affiche une ligne.
 - `def nom(...):` déclare une fonction, le bloc est indenté.
 - `f"..."` interpole des expressions dans une chaîne.
+- `main` est appelée automatiquement, sans appel explicite.

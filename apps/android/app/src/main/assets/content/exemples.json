@@ -1,0 +1,205 @@
+{
+  "version": 1,
+  "exemples": [
+    {
+      "id": "01-hello-world",
+      "titre": "Hello world",
+      "chapitre": "premiers-pas",
+      "categorie": "Premiers pas",
+      "ordre": 1,
+      "code": "print(\"Bonjour, Dystos !\")",
+      "sortieAttendue": "Bonjour, Dystos !",
+      "note": null
+    },
+    {
+      "id": "02-variables",
+      "titre": "Variables",
+      "chapitre": "premiers-pas",
+      "categorie": "Premiers pas",
+      "ordre": 2,
+      "code": "val langage: str = \"Dystos\"\nvar compteur: int = 0\n\ncompteur += 1\nprint(f\"{langage} {compteur}\")",
+      "sortieAttendue": "Dystos 1",
+      "note": null
+    },
+    {
+      "id": "03-fonctions",
+      "titre": "Fonctions",
+      "chapitre": "premiers-pas",
+      "categorie": "Premiers pas",
+      "ordre": 3,
+      "code": "def saluer(nom: str, titre: str = \"M.\") -> str:\n    return f\"Bonjour {titre} {nom}\"\n\nprint(saluer(\"Diallo\"))\nprint(saluer(\"Martin\", \"Dr\"))",
+      "sortieAttendue": "Bonjour M. Diallo\nBonjour Dr Martin",
+      "note": null
+    },
+    {
+      "id": "04-conditions",
+      "titre": "Conditions et boucles",
+      "chapitre": "controle",
+      "categorie": "Contrôle",
+      "ordre": 4,
+      "code": "for i in range(1, 16):\n    if i % 15 == 0:\n        print(\"FizzBuzz\")\n    elif i % 3 == 0:\n        print(\"Fizz\")\n    elif i % 5 == 0:\n        print(\"Buzz\")\n    else:\n        print(i)\n\nvar n = 0\nwhile true:\n    n += 1\n    if n == 3:\n        continue\n    if n > 5:\n        break\n    print(n)",
+      "sortieAttendue": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz\n1\n2\n4\n5",
+      "note": null
+    },
+    {
+      "id": "05-collections",
+      "titre": "Collections",
+      "chapitre": "donnees",
+      "categorie": "Données",
+      "ordre": 5,
+      "code": "def main():\n    fruits: list[str] = [\"pomme\", \"poire\"]\n    fruits.add(\"kiwi\")\n    print(fruits[0], len(fruits))\n\n    stock: map[str, int] = {\"pomme\": 3, \"poire\": 5}\n    stock[\"kiwi\"] = 7\n    for nom, qte in stock.items():\n        print(f\"{nom}: {qte}\")\n\n    uniques = {1, 2, 2, 3}\n    print(len(uniques))",
+      "sortieAttendue": null,
+      "note": "Nécessite les méthodes de collection (.add, .items) et les ensembles, pas encore implémentés dans l’application."
+    },
+    {
+      "id": "06-comprehensions",
+      "titre": "Compréhensions",
+      "chapitre": "donnees",
+      "categorie": "Données",
+      "ordre": 6,
+      "code": "def main():\n    carres = [x * x for x in range(10) if x % 2 == 0]\n    longueurs = {mot: len(mot) for mot in [\"a\", \"bcd\", \"ef\"]}\n    pairs = {x for x in range(6) if x % 2 == 0}\n    print(carres, longueurs, pairs)",
+      "sortieAttendue": null,
+      "note": "Nécessite les compréhensions de liste, de dictionnaire et d’ensemble, pas encore implémentées dans l’application."
+    },
+    {
+      "id": "07-f-strings",
+      "titre": "Chaînes formatées",
+      "chapitre": "donnees",
+      "categorie": "Données",
+      "ordre": 7,
+      "code": "def main():\n    s = \"Développeur\"\n    print(s.upper(), s.length, s[0:4])\n    pi = 3.14159265\n    print(f\"{pi:.2f} | {42:05d} | {'ok' if pi > 3 else 'ko'}\")\n    lignes = \"a,b,c\".split(\",\")\n    print(\"-\".join(lignes))",
+      "sortieAttendue": null,
+      "note": "Nécessite les méthodes de chaîne (.upper, .length, .split, .join) et les tranches, pas encore implémentées dans l’application."
+    },
+    {
+      "id": "08-classes",
+      "titre": "Classes et constructeurs",
+      "chapitre": "objets",
+      "categorie": "Objets",
+      "ordre": 8,
+      "code": "class Compte:\n    titulaire: str\n    _solde: float = 0.0\n\n    def init(self, titulaire: str):\n        self.titulaire = titulaire\n\n    def deposer(self, montant: float):\n        self._solde += montant\n\n    def solde(self) -> float:\n        return self._solde\n\n    def toString(self) -> str:\n        return f\"Compte({self.titulaire}, {self._solde})\"\n\ndef main():\n    c = Compte(\"Awa\")\n    c.deposer(150.0)\n    print(c)",
+      "sortieAttendue": null,
+      "note": "Nécessite les classes et la méthode init, pas encore implémentées dans l’application."
+    },
+    {
+      "id": "09-heritage",
+      "titre": "Héritage et interfaces",
+      "chapitre": "objets",
+      "categorie": "Objets",
+      "ordre": 9,
+      "code": "interface Forme:\n    def aire(self) -> float\n\nabstract class Base(Forme):\n    nom: str\n    def init(self, nom: str):\n        self.nom = nom\n\nclass Carre(Base):\n    cote: float\n    def init(self, cote: float):\n        super().init(\"carré\")\n        self.cote = cote\n    def aire(self) -> float:\n        return self.cote * self.cote\n\ndef main():\n    formes: list[Forme] = [Carre(2.0), Carre(3.0)]\n    total = sum(f.aire() for f in formes)\n    print(total)",
+      "sortieAttendue": null,
+      "note": "Nécessite l’héritage de classes, les interfaces et super, pas encore implémentés dans l’application."
+    },
+    {
+      "id": "10-generiques",
+      "titre": "Génériques",
+      "chapitre": "objets",
+      "categorie": "Objets",
+      "ordre": 10,
+      "code": "class Boite[T]:\n    contenu: T\n    def init(self, contenu: T):\n        self.contenu = contenu\n    def get(self) -> T:\n        return self.contenu\n\ndef premier[T](items: list[T]) -> T:\n    return items[0]\n\ndef main():\n    b = Boite[int](42)\n    print(b.get(), premier([\"x\", \"y\"]))",
+      "sortieAttendue": null,
+      "note": "Nécessite les types génériques, pas encore implémentés dans l’application."
+    },
+    {
+      "id": "11-null-safety",
+      "titre": "Null-sûreté",
+      "chapitre": "surete",
+      "categorie": "Sûreté",
+      "ordre": 11,
+      "code": "def longueur(s: str?) -> int:\n    return s?.length ?: 0\n\ndef main():\n    print(longueur(\"abc\"), longueur(null))",
+      "sortieAttendue": null,
+      "note": "Nécessite les types nullables et les opérateurs ?., ?:, pas encore implémentés dans l’application."
+    },
+    {
+      "id": "12-exceptions",
+      "titre": "Exceptions",
+      "chapitre": "surete",
+      "categorie": "Sûreté",
+      "ordre": 12,
+      "code": "class SoldeInsuffisant(Exception):\n    def init(self, manque: float):\n        super().init(f\"Il manque {manque}\")\n\ndef retirer(solde: float, montant: float) -> float:\n    if montant > solde:\n        raise SoldeInsuffisant(montant - solde)\n    return solde - montant\n\ndef main():\n    try:\n        retirer(10.0, 25.0)\n    except SoldeInsuffisant as e:\n        print(\"Erreur :\", e.message)\n    finally:\n        print(\"Fin\")",
+      "sortieAttendue": null,
+      "note": "Nécessite les exceptions et le bloc try, pas encore implémentés dans l’application."
+    },
+    {
+      "id": "13-lambdas",
+      "titre": "Fonctions d’ordre supérieur",
+      "chapitre": "fonctionnel",
+      "categorie": "Fonctionnel",
+      "ordre": 13,
+      "code": "def appliquer(f: (int) -> int, valeurs: list[int]) -> list[int]:\n    return [f(v) for v in valeurs]\n\ndef main():\n    doubles = appliquer(x -> x * 2, [1, 2, 3])\n    pairs = filter(x -> x % 2 == 0, doubles)\n    tries = sorted([\"bb\", \"a\", \"ccc\"], key=s -> s.length)\n    print(doubles, pairs, tries)",
+      "sortieAttendue": null,
+      "note": "Nécessite les fonctions lambda et les fonctions d’ordre supérieur, pas encore implémentées dans l’application."
+    },
+    {
+      "id": "14-enum-match",
+      "titre": "Enum et match",
+      "chapitre": "structurer",
+      "categorie": "Structurer",
+      "ordre": 14,
+      "code": "enum Jour:\n    LUNDI, MARDI, SAMEDI, DIMANCHE\n\ndef type_jour(j: Jour) -> str:\n    match j:\n        case Jour.SAMEDI | Jour.DIMANCHE:\n            return \"week-end\"\n        case _:\n            return \"semaine\"\n\ndef main():\n    print(type_jour(Jour.SAMEDI))",
+      "sortieAttendue": null,
+      "note": "Nécessite les énumérations et le motif match, pas encore implémentés dans l’application."
+    },
+    {
+      "id": "15-fichiers",
+      "titre": "Fichiers",
+      "chapitre": "monde-reel",
+      "categorie": "Monde réel",
+      "ordre": 15,
+      "code": "import io\n\ndef main():\n    with io.open(\"notes.txt\", \"w\") as f:\n        f.write(\"ligne 1\\nligne 2\\n\")\n    with io.open(\"notes.txt\") as f:\n        for ligne in f.lines():\n            print(ligne.strip())",
+      "sortieAttendue": null,
+      "note": "Nécessite la lecture et l’écriture de fichiers, pas encore implémentées dans l’application."
+    },
+    {
+      "id": "16-interop-java",
+      "titre": "Interop Java",
+      "chapitre": "monde-reel",
+      "categorie": "Monde réel",
+      "ordre": 16,
+      "code": "import java.util.ArrayList\nimport java.time.LocalDate\n\ndef main():\n    liste = ArrayList[str]()\n    liste.add(\"a\")\n    liste.add(\"b\")\n    print(liste.size(), LocalDate.now().year)",
+      "sortieAttendue": null,
+      "note": "Nécessite l’interopérabilité Java, volontairement absente de l’application mobile."
+    },
+    {
+      "id": "17-concurrence",
+      "titre": "Concurrence",
+      "chapitre": "monde-reel",
+      "categorie": "Monde réel",
+      "ordre": 17,
+      "code": "import concurrent\n\ndef calcul(n: int) -> int:\n    return n * n\n\ndef main():\n    taches = [concurrent.run(() -> calcul(i)) for i in range(4)]\n    resultats = [t.await() for t in taches]\n    print(resultats)",
+      "sortieAttendue": null,
+      "note": "Nécessite la concurrence (threads, verrous), volontairement absente de l’application mobile."
+    },
+    {
+      "id": "18-packages",
+      "titre": "Packages et visibilité",
+      "chapitre": "structurer",
+      "categorie": "Structurer",
+      "ordre": 18,
+      "code": "package app\n\nclass Depot:\n    _interne: int = 0\n\n    def incrementer(self, n: int = 1) -> int:\n        self._interne += n\n        return self._interne\n\ndef main():\n    print(Depot().incrementer(5))",
+      "sortieAttendue": null,
+      "note": "Nécessite les packages et la visibilité, volontairement absents de l’application mobile."
+    },
+    {
+      "id": "19-tests",
+      "titre": "Tests intégrés",
+      "chapitre": "qualite",
+      "categorie": "Qualité",
+      "ordre": 19,
+      "code": "def additionner(a: int, b: int) -> int:\n    return a + b\n\n@test\ndef test_addition():\n    assert additionner(2, 3) == 5\n    assert additionner(-1, 1) == 0",
+      "sortieAttendue": null,
+      "note": "Nécessite le décorateur @test et la commande dystos test, absents de l’application mobile."
+    },
+    {
+      "id": "20-gestion-stock",
+      "titre": "Gestion de stock",
+      "chapitre": "projet",
+      "categorie": "Projet",
+      "ordre": 20,
+      "code": "class Produit:\n    nom: str\n    prix: float\n    quantite: int\n\n    def init(self, nom: str, prix: float, quantite: int = 0):\n        self.nom = nom\n        self.prix = prix\n        self.quantite = quantite\n\n    def valeur(self) -> float:\n        return self.prix * self.quantite\n\nclass Stock:\n    _produits: map[str, Produit] = {}\n\n    def ajouter(self, p: Produit):\n        self._produits[p.nom] = p\n\n    def trouver(self, nom: str) -> Produit?:\n        return self._produits.get(nom)\n\n    def total(self) -> float:\n        return sum(p.valeur() for p in self._produits.values())\n\ndef main():\n    stock = Stock()\n    stock.ajouter(Produit(\"riz\", 1.5, 100))\n    stock.ajouter(Produit(\"huile\", 3.2, 40))\n\n    p = stock.trouver(\"riz\")\n    print(p?.nom ?: \"introuvable\")\n    print(stock.trouver(\"sucre\")?.nom ?: \"introuvable\")\n    print(f\"Valeur totale : {stock.total():.2f}\")",
+      "sortieAttendue": null,
+      "note": "Nécessite les classes, les collections et la null-sûreté, pas encore implémentées dans l’application."
+    }
+  ]
+}

@@ -12,20 +12,20 @@ import java.util.List;
 import dev.dystos.app.databinding.ItemChapterBinding;
 
 /** Adaptateur de la liste des chapitres. */
-final class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterHolder> {
+public final class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterHolder> {
 
-    interface OnChapterSelected {
+    public interface OnChapterSelected {
         void onChapterSelected(ChapterListViewModel.ChapterItem item);
     }
 
     private final List<ChapterListViewModel.ChapterItem> items = new ArrayList<>();
     private final OnChapterSelected listener;
 
-    ChapterAdapter(OnChapterSelected listener) {
+    public ChapterAdapter(OnChapterSelected listener) {
         this.listener = listener;
     }
 
-    void submit(List<ChapterListViewModel.ChapterItem> newItems) {
+    public void submit(List<ChapterListViewModel.ChapterItem> newItems) {
         items.clear();
         items.addAll(newItems);
         notifyDataSetChanged();
@@ -71,11 +71,6 @@ final class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterHo
                             item.getReadCount(),
                             item.getReadCount(),
                             item.getLessonCount()));
-
-            int ratio = item.getLessonCount() == 0
-                    ? 0
-                    : Math.round(item.getReadCount() * 100f / item.getLessonCount());
-            binding.chapterProgressBar.setProgress(ratio);
 
             binding.getRoot().setOnClickListener(view -> listener.onChapterSelected(item));
         }

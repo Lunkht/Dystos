@@ -3,6 +3,7 @@ package dev.dystos.app.domain.repository;
 import java.util.List;
 
 import dev.dystos.app.domain.model.Chapter;
+import dev.dystos.app.domain.model.Example;
 import dev.dystos.app.domain.model.Lesson;
 
 /**
@@ -21,4 +22,15 @@ public interface ContentRepository {
 
     /** Nombre total de leçons du parcours. */
     int countLessons();
+
+    /**
+     * Les programmes d'exemple, dans l'ordre du catalogue.
+     *
+     * Les exemples ne sont pas des leçons : ils n'ont ni exercice ni
+     * progression, et s'ouvrent directement dans l'éditeur.
+     */
+    List<Example> getExamples();
+
+    /** Un exemple par identifiant, ou null s'il n'existe pas. */
+    Example getExample(String exampleId);
 }

@@ -8,20 +8,20 @@ exemple: 02-variables
 exercice:
   consigne: |-
     Corrige la troisième ligne pour que `message` contienne `Dystos 1.0`.
-    Le type de `message` est `string`.
+    Le type de `message` est `str`.
   code_initial: |
-    version: string = "1.0"
-    nom: string = "Dystos"
-    message: string = nom + version
+    version: str = "1.0"
+    nom: str = "Dystos"
+    message: str = nom + version
     print(message)
   sortie_attendue: "Dystos 1.0"
   indices:
     - "L'opérateur `+` ne colle pas deux chaînes, il faut un espace entre."
     - "`f\"{nom} {version}\"` interpole les deux variables."
   solution: |
-    version: string = "1.0"
-    nom: string = "Dystos"
-    message: string = f"{nom} {version}"
+    version: str = "1.0"
+    nom: str = "Dystos"
+    message: str = f"{nom} {version}"
     print(message)
 ---
 
@@ -30,7 +30,7 @@ de déclaration : `val` pour une valeur qui ne change pas, `var` pour une
 variable modifiable.
 
 ```dystos
-val langage: string = "Dystos"
+val langage: str = "Dystos"
 var compteur: int = 0
 compteur += 1
 print(langage, compteur)
@@ -49,13 +49,15 @@ var compteur = 0
 | --- | --- |
 | `int` | `42`, `-7` |
 | `float` | `3.14`, `1.0e-3` |
-| `string` | `"texte"` |
+| `str` | `"texte"`, `'a'` |
 | `bool` | `true`, `false` |
-| `char` | `'a'` |
+| `list` | `[1, 2, 3]` |
+| `map` | `{"clé": 1}` |
+| `set` | `{1, 2, 3}` |
 
 ## Immuable ou mutable
 
-`val` refuse toute réassignation, et le compilateur le signale avant
+`val` refuse toute réaffectation, et le compilateur le signale avant
 l'exécution.
 
 ```dystos
@@ -64,7 +66,7 @@ pi = 3.0
 ```
 
 ```
-E0301 : ligne 2, colonne 1 : 'pi' est déclaré avec val et ne peut pas être réaffecté
+E0212 : ligne 2, colonne 1 : impossible de réaffecter 'pi' : déclaré avec 'val'
 ```
 
 Utilise `var` quand la valeur doit changer.

@@ -2,36 +2,63 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/card_skill"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
-    android:background="@drawable/chapter_item_gradient_bg"
-    android:clickable="true"
-    android:focusable="true">
+    android:layout_marginVertical="2dp"
+    android:background="@drawable/code_block_bg"
+    android:orientation="vertical"
+    android:padding="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="4dp">
 
         <TextView
-            android:id="@+id/tv_skill_name"
-            android:layout_width="wrap_content"
+            android:id="@+id/code_header_title"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Dystos"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="16sp"
+            android:layout_weight="1"
+            android:text="Code Dys"
+            android:textColor="#8FC1E9"
+            android:textSize="12sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_skill_learners"
+        <LinearLayout
+            android:id="@+id/copy_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="87.5K learners"
-            android:textColor="?attr/colorOnSurfaceVariant"
-            android:textSize="12sp" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:src="@drawable/copy"
+                app:tint="@color/dystos_on_surface"
+                android:contentDescription="Copier" />
+            <TextView
+                android:id="@+id/btn_copy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="6dp"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:text="Copier"
+                android:textColor="#8FC1E9"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/code_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        android:textIsSelectable="true" />
 </LinearLayout>

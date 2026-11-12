@@ -11,19 +11,20 @@ description: L'essentiel de Dystos sur une page.
 ## Programme
 
 ```dystos
-def main() -> void:
+def main():
     print("bonjour")
-
-main()
 ```
+
+`main` est appelée automatiquement : ne l'appelez pas vous-même.
 
 ## Variables
 
 ```dystos
-val nom: string = "Awa"      # immuable
-var compteur: int = 0        # modifiable
+val nom: str = "Awa"      # immuable
+var compteur: int = 0     # modifiable
 compteur += 1
-val deduit = 42              # type inféré
+val deduit = 42           # type inféré
+val texte: str? = null    # nullable
 ```
 
 ## Contrôle
@@ -41,7 +42,7 @@ for i in range(10):
         continue
     print(i)
 
-while True:
+while true:
     break
 
 match statut:
@@ -57,80 +58,76 @@ match statut:
 def somme(a: int, b: int = 0) -> int:
     return a + b
 
-val double = (x: int) => x * 2
+val double = (x: int) -> x * 2
+val pairs = filter(x -> x % 2 == 0, [1, 2, 3, 4])
 ```
 
 ## Collections
 
 ```dystos
 val liste = [1, 2, 3]
-liste.append(4)
-print(liste[0], liste[1:], len(liste))
+liste.add(4)
+print(liste[0], len(liste))
 
-val dict = {"a": 1, "b": 2}
-for cle, valeur in dict.items():
-    print(cle, valeur)
+val stock = {"clavier": 5}
+stock["ecran"] = 3
+for nom, qte in stock.items():
+    print(nom, qte)
 
-val pairs = [n for n in range(20) if n % 2 == 0]
-val init = {nom: len(nom) for nom in ["a", "bb"]}
+val uniques = {1, 2, 2, 3}
+print(len(uniques))   # 2
+
+val pairs = [n * 2 for n in range(5) if n % 2 == 0]
 ```
 
-## Objets
+## Chaînes
+
+```dystos
+val s = "Dystos"
+print(s.upper(), s.length, s[0:4])
+print(f"Bonjour, {nom} !")
+print("-".join(["a", "b", "c"]))
+```
+
+## Null-sûreté
+
+```dystos
+val alias: str? = null
+print(alias?.length ?: 0)   # 0
+```
+
+## Exceptions
+
+```dystos
+raise ValueError("montant invalide")
+```
+
+```dystos
+try:
+    retirer(10.0, 25.0)
+except SoldeInsuffisant as e:
+    print("Erreur :", e.message)
+finally:
+    print("Fin")
+```
+
+## Classes
 
 ```dystos
 class Compte:
+    titulaire: str
     _solde: float = 0.0
 
-    def __init__(self, nom: string):
-        self.nom = nom
+    def init(self, titulaire: str):
+        self.titulaire = titulaire
 
-    def __str__(self) -> string:
-        return f"{self.nom} ({self._solde:.2f})"
+    def deposer(self, montant: float):
+        self._solde += montant
+
+    def toString(self) -> str:
+        return f"Compte({self.titulaire}, {self._solde})"
+
+c = Compte("Awa")
+c.deposer(150.0)
+print(c)
 ```
-
-## Null-sûreté et exceptions
-
-```dystos
-val alias: string? = null
-print(alias?.len() ?? 0)
-
-if alias?:
-    print(alias)
-
-try:
-    risky()
-except ValueError as e:
-    print(e.message)
-finally:
-    print("fini")
-```
-
-## Fonctionnel
-
-```dystos
-val xs = [1, 2, 3, 4]
-print(xs.map((n) => n * 2))
-print(xs.filter((n) => n > 2))
-print(xs.reduce((a, n) => a + n, 0))
-```
-
-## Interop Java
-
-```dystos
-import java.util.ArrayList
-
-var liste = ArrayList<String>()
-liste.add("Dystos")
-for element in liste:
-    print(element)
-```
-
-## Diagnostics courants
-
-| Code | Signification |
-| --- | --- |
-| `E0101` | Délimiteur ouvrant manquant |
-| `E0104` | Identifiant inconnu |
-| `E0201` | Type non assignable |
-| `E0301` | Réaffectation d'une `val` |
-| `E0302` | Accès à une valeur nullable sans `?` |

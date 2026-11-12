@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_mission"
+        android:icon="@drawable/ic_nav_mission"
+        android:title="@string/nav_mission" />
+
+    <item
+        android:id="@+id/nav_ide"
+        android:icon="@drawable/code_window"
+        android:title="IDE" />
+
+    <item
+        android:id="@+id/nav_revision"
+        android:icon="@drawable/ic_nav_revision"
+        android:title="@string/nav_revision" />
+
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/ic_nav_settings"
+        android:title="@string/nav_settings" />
+
+</menu>

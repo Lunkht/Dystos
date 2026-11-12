@@ -42,6 +42,105 @@ export const lessonSchema = {
   optional: ['resume', 'exemple', 'exercice', 'duree', 'prerequis'],
 };
 
+/** Un exemple : un programme complet, hors parcours. */
+export const exampleSchema = {
+  required: ['id', 'titre', 'chapitre', 'ordre'],
+  optional: ['categorie', 'resume', 'sortie_attendue', 'note'],
+};
+
+/** Valide le catalogue de quiz. Retourne la liste des erreurs. */
+export function validateQuizzes(quizzes) {
+  const errors = [];
+  const seenIds = new Set();
+
+  for (const quiz of quizzes) {
+    const label = quiz.id ?? '(sans id)';
+
+    if (!quiz.id) {
+      errors.push('quiz sans identifiant');
+      continue;
+    }
+    if (seenIds.has(quiz.id)) {
+      errors.push(`identifiant de quiz dupliqué : ${quiz.id}`);
+    }
+    seenIds.add(quiz.id);
+
+    if (!quiz.lecon) {
+      errors.push(`${label} : champ requis manquant : lecon`);
+    }
+    if (!Array.isArray(quiz.questions) || quiz.questions.length === 0) {
+      errors.push(`${label} : questions doit être une liste non vide`);
+      continue;
+    }
+
+    for (const [index, question] of quiz.questions.entries()) {
+      const at = `${label} question ${index + 1}`;
+
+      if (!question.question) {
+        errors.push(`${at} : énoncé manquant`);
+      }
+      if (!Array.isArray(question.choix) || question.choix.length < 2) {
+        errors.push(`${at} : il faut au moins deux choix`);
+        continue;
+      }
+      if (!question.reponse) {
+        errors.push(`${at} : reponse manquant`);
+        continue;
+      }
+      // La correction se fait par contenu : si la bonne réponse n'est pas dans
+      // les choix, l'application ne pourra jamais valider la question.
+      if (!question.choix.includes(question.reponse)) {
+        errors.push(
+          `${at} : la reponse "${question.reponse}" ne figure pas parmi les choix`,
+        );
+      }
+      if (new Set(question.choix).size !== question.choix.length) {
+        errors.push(`${at} : choix dupliqué`);
+      }
+    }
+  }
+
+  return errors;
+}
+
+/** Valide un exemple. Retourne la liste des erreurs, vide si tout est correct. */
+export function validateExample(example) {
+  const errors = [];
+
+  for (const key of exampleSchema.required) {
+    if (example[key] === undefined || example[key] === null || example[key] === '') {
+      errors.push(`champ requis manquant : ${key}`);
+    }
+  }
+
+  if (example.id !== undefined && !ID_PATTERN.test(String(example.id))) {
+    errors.push(`id invalide : ${example.id} (attendu kebab-case ASCII)`);
+  }
+
+  if (
+    example.chapitre !== undefined &&
+    !CONTENT_CHAPTERS.includes(String(example.chapitre))
+  ) {
+    errors.push(`chapitre inconnu : ${example.chapitre}`);
+  }
+
+  if (!example.code || example.code.trim() === '') {
+    errors.push('code de l\'exemple vide');
+  }
+
+  // Un exemple doit dire quelque chose de vérifiable : soit une sortie attendue,
+  // soit la raison pour laquelle l'application ne peut pas encore l'exécuter.
+  // Sans l'un des deux, l'utilisateur ouvre un exemple et ne comprend pas ce
+  // qui se passe quand il appuie sur Exécuter.
+  if (!example.sortie_attendue && !example.note) {
+    errors.push(
+      'ni sortie attendue ni note : l\'exemple est-il exécutable par l\'application ?',
+    );
+  }
+
+  return errors;
+}
+
 const ID_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 
 /**

@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Palette sombre : ambiance technique, accent turquoise vif. -->
-    <color name="dystos_primary">#4DD4C0</color>
-    <color name="dystos_on_primary">#00382F</color>
-    <color name="dystos_primary_container">#005044</color>
-    <color name="dystos_on_primary_container">#9FF2E3</color>
-    <color name="dystos_secondary">#B1CCC6</color>
-    <color name="dystos_on_secondary">#1C3531</color>
-    <color name="dystos_background">#0B1016</color>
-    <color name="dystos_on_background">#DFE7EE</color>
-    <color name="dystos_surface">#10161D</color>
-    <color name="dystos_on_surface">#DFE7EE</color>
-    <color name="dystos_surface_variant">#22303C</color>
-    <color name="dystos_on_surface_variant">#B4C2CE</color>
-    <color name="dystos_outline">#5A6875</color>
+    <!-- Palette sombre monochrome : fond noir, texte et accent blancs. -->
+    <color name="dystos_primary">#FFFFFF</color>
+    <color name="dystos_on_primary">#000000</color>
+    <color name="dystos_primary_container">#303030</color>
+    <color name="dystos_on_primary_container">#FFFFFF</color>
+    <color name="dystos_secondary">#D0D0D0</color>
+    <color name="dystos_on_secondary">#000000</color>
+    <color name="dystos_background">#000000</color>
+    <color name="dystos_on_background">#FFFFFF</color>
+    <color name="dystos_surface">#111111</color>
+    <color name="dystos_on_surface">#FFFFFF</color>
+    <color name="dystos_surface_variant">#242424</color>
+    <color name="dystos_on_surface_variant">#D0D0D0</color>
+    <color name="dystos_outline">#777777</color>
     <color name="dystos_error">#FFB4AB</color>
-    <color name="dystos_on_error">#690005</color>
+    <color name="dystos_on_error">#000000</color>
+    <color name="dystos_ripple">#1FFFFFFF</color>
+
+    <!-- Blocs de code : bleu nuit profond, teintes plus lumineuses qu'en jour. -->
+    <color name="dystos_code_background">#0D1526</color>
+    <color name="dystos_code_on_background">#E2E8F0</color>
+    <color name="dystos_code_keyword">#7DD3FC</color>
+    <color name="dystos_code_builtin">#FDE68A</color>
+    <color name="dystos_code_string">#86EFAC</color>
+    <color name="dystos_code_number">#FCD34D</color>
+    <color name="dystos_code_comment">#94A3B8</color>
+    <color name="dystos_code_operator">#F0ABFC</color>
+    <color name="dystos_code_inline_background">#242424</color>
+    <color name="dystos_code_inline_text">#E5E7EB</color>
 </resources>

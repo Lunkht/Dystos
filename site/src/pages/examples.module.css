@@ -55,6 +55,24 @@
   margin-bottom: 0.3rem;
 }
 
+.note {
+  margin: 0;
+  padding: 0.7rem;
+  background: var(--dystos-surface);
+  border: 1px solid var(--dystos-border);
+  border-radius: 6px;
+  font-size: 0.82rem;
+}
+
+.noteLabel {
+  display: block;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.3rem;
+}
+
 .openInPlayground {
   font-size: 0.85rem;
   margin-top: auto;

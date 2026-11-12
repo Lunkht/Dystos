@@ -31,6 +31,21 @@
             </intent-filter>
         </activity>
 
+        <!--
+          Partage de programmes .dys et ouverture d'un .dys reçu : aucune
+          permission n'est necessaire, seul un grant URI temporaire est
+          accorde a l'application qui recoit le fichier.
+        -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.partage"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
     </application>
 
 </manifest>

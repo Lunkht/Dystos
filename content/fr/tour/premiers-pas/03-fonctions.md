@@ -10,7 +10,7 @@ exercice:
     Complète `saluer` pour qu'elle affiche `Bonjour, <nom> !` puis `À bientôt`.
     Utilise deux appels à `print`.
   code_initial: |
-    def saluer(nom: string):
+    def saluer(nom: str):
         # à compléter
 
     saluer("Awa")
@@ -20,7 +20,7 @@ exercice:
     - "Une fonction sans `->` ne renvoie rien."
     - "Les chaînes formatées s'écrivent `f\"...\"`."
   solution: |
-    def saluer(nom: string):
+    def saluer(nom: str):
         print(f"Bonjour, {nom} !")
         print("À bientôt")
 
@@ -45,10 +45,10 @@ print(carre(7))
 ```
 
 Le mot-clé `return` interrompt la fonction et rend une valeur. Sans `return`, une
-fonction rend `void` : elle fait quelque chose mais ne produit rien.
+fonction rend `unit` : elle fait quelque chose mais ne produit rien.
 
 ```dystos
-def afficher_titre(titre: string):
+def afficher_titre(titre: str):
     print(f"--- {titre} ---")
 
 afficher_titre("Stock")
@@ -56,15 +56,16 @@ afficher_titre("Stock")
 
 ## Paramètres et valeurs par défaut
 
-Les paramètres peuvent avoir une valeur par défaut, et des paramètres nommés
-rendent l'appel plus lisible.
+Les paramètres peuvent avoir une valeur par défaut, et des arguments nommés
+rendent l'appel plus lisible. Un argument nommé s'écrit `nom=valeur`, avec le
+même `=` que l'affectation.
 
 ```dystos
 def prix_ht(ht: float, tva: float = 0.20) -> float:
     return ht * (1.0 + tva)
 
 print(prix_ht(100.0))
-print(prix_ht(100.0, tva: 0.055))
+print(prix_ht(100.0, tva=0.055))
 ```
 
 ```
@@ -102,5 +103,5 @@ for i in range(10):
 ## Ce qu'il faut retenir
 
 - `def nom(param: type) -> type:` déclare une fonction.
-- `return` rend une valeur, son absence signifie `void`.
+- `return` rend une valeur, son absence signifie `unit`.
 - Une fonction est une valeur qu'on peut passer autour.

@@ -24,11 +24,11 @@ print(fibonacci(10))
 ## Les trois propriétés
 
 **Lisible.** L'indentation marque les blocs, il n'y a pas de point-virgule, et
-les mots-clés sont en français comme en anglais quand c'est utile. Un programme
-Dystos se lit de haut en bas sans explication.
+la syntaxe reste proche de Python. Un programme Dystos se lit de haut en bas
+sans explication.
 
 **Sûr.** Les types sont vérifiés avant l'exécution. Le null-safety est intégré
-avec `?` et `?.` : pas de `NullPointerException` surprise. Les erreurs
+avec `?`, `?.` et `?:` : pas de `NullPointerException` surprise. Les erreurs
 lexicales, syntaxiques et de types sont rapportées avec une ligne, une colonne
 et un code de diagnostic.
 
@@ -47,13 +47,13 @@ import java.util.ArrayList
 
 def est_premier(n: int) -> bool:
     if n < 2:
-        return False
+        return false
     for d in range(2, n):
         if n % d == 0:
-            return False
-    return True
+            return false
+    return true
 
-var liste = ArrayList<String>()
+liste = ArrayList[str]()
 liste.add("Dystos")
 print(liste)
 print([i for i in range(2, 20) if est_premier(i)])

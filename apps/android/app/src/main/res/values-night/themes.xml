@@ -2,10 +2,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--
-      Thème sombre : c'est l'ambiance par défaut de Dystos. Les mêmes noms de
-      couleurs pointent vers la palette values-night/colors.xml.
+      Thème sombre : les mêmes noms de couleurs pointent vers la palette
+      monochrome de values-night/colors.xml.
     -->
     <style name="Theme.Dystos" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="mainBackground">@drawable/black_white_gradient_main_bg</item>
         <item name="colorPrimary">@color/dystos_primary</item>
         <item name="colorOnPrimary">@color/dystos_on_primary</item>
         <item name="colorPrimaryContainer">@color/dystos_primary_container</item>
@@ -20,10 +21,13 @@
         <item name="colorOutline">@color/dystos_outline</item>
         <item name="colorError">@color/dystos_error</item>
         <item name="colorOnError">@color/dystos_on_error</item>
+        <item name="colorControlActivated">@color/dystos_primary</item>
+        <item name="colorControlNormal">@color/dystos_outline</item>
         <item name="android:statusBarColor">@color/dystos_background</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:navigationBarColor">@color/dystos_background</item>
-        <item name="android:windowBackground">@color/dystos_background</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+        <item name="android:windowBackground">@drawable/black_white_gradient_main_bg</item>
         <item name="materialAlertDialogTheme">@style/Theme.Dystos.Dialog</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>

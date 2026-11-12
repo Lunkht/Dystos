@@ -13,84 +13,69 @@ description: Opérateur ?, appel sûr ?., exceptions et types nullables.
 Un type simple n'accepte jamais `null`. Il faut l'écrire explicitement avec `?`.
 
 ```dystos
-val nom: string = "Awa"
-val alias: string? = null
-alias = "A"
+val nom: str = "Awa"
+val alias: str? = null
+alias = "Awa"
 ```
 
-Le compilateur refuse l'affectation d'une valeur non nullable à un type
-nullable inverse, et l'accès direct à une valeur potentiellement nulle.
+Le compilateur refuse d'affecter `null` à un type non nullable, et d'accéder
+directement à une valeur potentiellement nulle.
 
 ```dystos
-alias = null
-print(alias.len())     # E0302 : alias est peut-être null
+val alias: str? = null
+print(alias.length)     # E0201 : accès à '.length' sur le type nullable 'str?'
 ```
 
-## Opérateur de nullabilité `?`
-
-`?` « déballe » une valeur nullable juste après avoir testé qu'elle existe.
-
-```dystos
-val alias: string? = "Awa"
-
-if alias?:
-    print(alias?.len() ?? 0)
-```
+## Opérateur de nullabilité `?.`
 
 `?.` court-circuite : si le récepteur est `null`, toute l'expression vaut
 `null` au lieu de lever une exception.
 
 ```dystos
-val alias: string? = null
-print(alias?.len() ?? 0)      # 0
+val alias: str? = "Awa"
+print(alias?.length)    # 3
+
+val absent: str? = null
+print(absent?.length)   # null
 ```
 
-| Opérateur | Effet |
-| --- | --- |
-| `x?` | `true` si `x` n'est pas `null` |
-| `x?.champ` | Accès sûr, rend `null` si absent |
-| `x ?? defaut` | Rend `defaut` si `x` est `null` |
+## Valeur par défaut `?:`
+
+`?:` rend une valeur par défaut quand l'expression de gauche est `null`.
+
+```dystos
+val alias: str? = null
+print(alias?.length ?: 0)   # 0
+print(alias ?: "inconnu")   # inconnu
+```
 
 ## Exceptions
 
-```dystos
-def diviser(a: int, b: int) -> float:
-    if b == 0:
-        throw ArithmeticError("division par zéro")
-    return float(a) / float(b)
-```
-
-Attraper avec `try` / `catch` / `finally` :
-
-```dystos
-try:
-    print(diviser(1, 0))
-except ArithmeticError as e:
-    print("erreur :", e.message)
-finally:
-    print("terminé")
-```
-
-## Lever une exception personnalisée
+`raise` lève une exception, `try` / `except` / `finally` la gère.
 
 ```dystos
 class SoldeInsuffisant(Exception):
-    def __init__(self, manque: float):
-        self.manque = manque
+    def init(self, manque: float):
+        super().init(f"Il manque {manque}")
 
-def retirer(compte: Compte, montant: float):
-    if compte.solde() < montant:
-        throw SoldeInsuffisant(montant - compte.solde())
-    compte.deposer(-montant)
+def retirer(solde: float, montant: float) -> float:
+    if montant > solde:
+        raise SoldeInsuffisant(montant - solde)
+    return solde - montant
+
+def main():
+    try:
+        retirer(10.0, 25.0)
+    except SoldeInsuffisant as e:
+        print("Erreur :", e.message)
+    finally:
+        print("Fin")
 ```
 
-## Assertions
-
-`assert` vérifie une condition et interrompt le programme si elle est fausse.
-Utile en développement, à éviter pour valider une entrée utilisateur.
-
-```dystos
-def racine_carree(x: float) -> float:
-    assert x >= 0.0
-    return x ** 0.5
 ```
+Erreur : Il manque 15.0
+Fin
+```
+
+`except` attrape une exception spécifique ; `Exception` attrape toute exception.
+Le bloc `finally` s'exécute toujours.

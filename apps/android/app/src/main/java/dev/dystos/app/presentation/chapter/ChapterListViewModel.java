@@ -12,13 +12,13 @@ import dev.dystos.app.domain.usecase.GetChapter;
 import dev.dystos.app.domain.usecase.GetProgress;
 
 /** Prépare la liste des chapitres et la progression associée. */
-final class ChapterListViewModel {
+public final class ChapterListViewModel {
 
     private final GetChapter getChapter;
     private final GetProgress getProgress;
     private final ContentRepository contentRepository;
 
-    ChapterListViewModel(
+    public ChapterListViewModel(
             GetChapter getChapter,
             GetProgress getProgress,
             ContentRepository contentRepository) {
@@ -27,7 +27,7 @@ final class ChapterListViewModel {
         this.contentRepository = contentRepository;
     }
 
-    State load() {
+    public State load() {
         List<Chapter> chapters = getChapter.execute();
         Progress progress = getProgress.execute();
         int totalLessons = contentRepository.countLessons();
@@ -51,69 +51,69 @@ final class ChapterListViewModel {
     }
 
     /** Ligne de la liste : un chapitre et son avancement. */
-    static final class ChapterItem {
+    public static final class ChapterItem {
         private final Chapter chapter;
         private final int readCount;
         private final int solvedCount;
 
-        ChapterItem(Chapter chapter, int readCount, int solvedCount) {
+        public ChapterItem(Chapter chapter, int readCount, int solvedCount) {
             this.chapter = chapter;
             this.readCount = readCount;
             this.solvedCount = solvedCount;
         }
 
-        String getId() {
+        public String getId() {
             return chapter.getId();
         }
 
-        String getTitle() {
+        public String getTitle() {
             return chapter.getTitle();
         }
 
-        int getLessonCount() {
+        public int getLessonCount() {
             return chapter.getLessonCount();
         }
 
-        int getReadCount() {
+        public int getReadCount() {
             return readCount;
         }
 
-        int getSolvedCount() {
+        public int getSolvedCount() {
             return solvedCount;
         }
 
-        List<Lesson> getLessons() {
+        public List<Lesson> getLessons() {
             return chapter.getLessons();
         }
     }
 
     /** État rendu par l'écran : chapitres, progression globale. */
-    static final class State {
+    public static final class State {
         private final List<ChapterItem> items;
         private final int readLessons;
         private final int totalLessons;
         private final float ratio;
 
-        State(List<ChapterItem> items, int readLessons, int totalLessons, float ratio) {
+        public State(List<ChapterItem> items, int readLessons, int totalLessons, float ratio) {
             this.items = items;
             this.readLessons = readLessons;
             this.totalLessons = totalLessons;
             this.ratio = ratio;
         }
 
-        List<ChapterItem> getItems() {
+        public List<ChapterItem> getItems() {
             return items;
         }
 
-        int getReadLessons() {
+        public int getReadLessons() {
             return readLessons;
         }
 
-        int getTotalLessons() {
+        public int getTotalLessons() {
             return totalLessons;
         }
 
-        float getRatio() {
+        public float getRatio() {
             return ratio;
         }
     }

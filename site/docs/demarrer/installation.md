@@ -20,18 +20,9 @@ Le compilateur s'installe avec le gestionnaire de paquets de ta plateforme.
 Il ne dépend d'aucun service distant : les artefacts sont publiés sur le
 dépôt GitHub du projet.
 
-```bash
-# Linux et macOS
-curl -fsSL https://dystos.dev/install.sh | sh
-
-# Windows (PowerShell)
-irm https://dystos.dev/install.ps1 | iex
-```
-
 Vérifie l'installation :
 
 ```bash
-dystos --version
 dystos run hello.dys
 ```
 
@@ -45,14 +36,19 @@ cd Dystos/compiler
 ./gradlew build
 ```
 
-## Alternatives
+Le binaire résultant se trouve dans `compiler/interp/build/libs/`. Utilise-le
+avec `java -jar dystos.jar run programme.dys [options]`.
 
-| Besoin | Outil |
+## Options de la CLI
+
+| Option | Effet |
 | --- | --- |
-| Éditeur local | Éditeur avec l'extension Dystos (coloration par le lexer) |
-| Sans installation | Application Android, contenu embarqué, mode avion |
-| CI | `dystos check --json` renvoie les diagnostics en JSON |
+| `run fichier.dys` | Analyse puis exécute |
+| `test fichier.dys` | Analyse et exécute les blocs `@test` |
+| `--sandbox` | Limites strictes (playground) |
+| `--json` | Résultat JSON sur la sortie standard |
+| `--max-steps N` | Nombre maximal d'étapes d'exécution |
+| `--timeout-ms N` | Délai maximal d'exécution |
+| `--max-output N` | Taille maximale de la sortie |
 
-## Prochaine étape
-
-Écris ton [premier programme](/docs/demarrer/premier-programme).
+Le fichier `-` lit le programme sur l'entrée standard.

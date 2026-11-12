@@ -8,33 +8,70 @@ description: Forme syntaxique de Dystos, du jeton à l'expression.
 
 # Grammaire
 
-Cette page décrit la forme syntaxique. Elle suit l'implémentation du lexer et
-du parser : en cas d'écart, le code fait foi.
+Cette page décrit la forme syntaxique de Dystos. Elle suit l'implémentation du
+lexer et du parser : en cas d'écart, le code fait foi.
 
-## Programme
+## Mots-clés
+
+| Mot-clé | Rôle |
+| --- | --- |
+| `def` | Déclare une fonction |
+| `val` | Lie une valeur immuable |
+| `var` | Lie une variable modifiable |
+| `class` | Déclare une classe |
+| `interface` | Déclare un contrat |
+| `enum` | Déclare une énumération |
+| `abstract` | Classe abstrait (ne peut pas être instanciée directement) |
+| `final` | Classe/méthode non extensible |
+| `import` `package` | Modules et importations |
+| `if` `elif` `else` | Condition |
+| `for` `while` | Boucle |
+| `match` `case` | Motif |
+| `return` | Rend une valeur |
+| `break` `continue` | Contrôle de boucle |
+| `pass` | Corps vide |
+| `try` `except` `finally` `raise` | Exceptions |
+| `assert` | Assertion |
+| `with` | Bloc avec gestion de ressource |
+| `as` | Alias d'import / cast |
+| `is` | Test de type |
+| `in` | Appartenance |
+| `and` `or` `not` | Logique |
+
+Il n'y a pas de `new`, `throw`, `catch`, `this` ni `__init__`. Le constructeur
+s'appelle `init`, et on instancie une classe directement : `Compte("Awa")`.
+
+## Types
+
+| Type | Rôle |
+| --- | --- |
+| `int` | Entier |
+| `float` | Nombre à virgule |
+| `bool` | `true` ou `false` |
+| `str` | Chaîne de caractères |
+| `list[T]` | Liste ordonnée |
+| `map[K, V]` | Dictionnaire |
+| `set[T]` | Ensemble |
+| `unit` | Absence de valeur (retour d'une procédure) |
+| `any` | Tout type |
+
+Les types sont paramétrables avec des crochets : `list[str]`, `map[str, int]`.
+Un type nullable s'écrit `str?`.
+
+## Littéraux
 
 ```
-programme    := declaration*
-declaration := instruction | fonctionClasse
-instruction := expression | declarationVariable | retour | boucle | ...
+entier      := 0 | -42 | 1_000 | 0xFF | 0b1010
+flottant    := 3.14 | 1.0e-3
+chaîne      := "texte" | 'texte' | f"expr {x}"
+booléen     := true | false
+liste       := [expr, ...]
+dictionnaire:= {clé: valeur, ...}
+ensemble    := {expr, ...}
 ```
 
-## Instructions
-
-```
-instruction     := affectation
-                 | expressionAppel
-                 | retour
-                 | boucleWhile
-                 | boucleFor
-                 | instructionSi
-                 | instructionMatch
-                 | lever
-
-affectation     := identifiant ("=" | "+=" | "-=" | "*=" | "/=" | "%=") expression
-retour          := "return" expression?
-lever           := "throw" expression
-```
+Les guillemets simples et doubles produisent tous deux une `str`. Il n'y a pas
+de type `char` séparé.
 
 ## Expressions
 
@@ -44,74 +81,38 @@ Precedence croissante :
 | --- | --- |
 | 1 | `or` |
 | 2 | `and` |
-| 3 | `not` (unaire) |
-| 4 | `==` `!=` `<` `<=` `>` `>=` `is` `in` |
-| 5 | `+` `-` `\|` |
-| 6 | `*` `/` `%` |
-| 7 | appel, indexation, accès `.`, `?.` |
-| 8 | unaire `-` `+` `!` |
-| 9 | postfixe : `(...)` `[...]` `.` `?.` `?` |
+| 3 | `not` |
+| 4 | `==` `!=` `<` `<=` `>` `>=` `in` `not in` `is` `is not` |
+| 5 | `?.` `?:` |
+| 6 | `+` `-` |
+| 7 | `*` `/` `%` |
+| 8 | `**` (puissance, associative à droite) |
+| 9 | `->` (lambda) |
+
+`/` est une vraie division : `7 / 2` vaut `3.5`.
+
+## Instructions
 
 ```
-expression     := lambda | "if" expression "else" expression | orExpr
-orExpr         := andExpr ("or" andExpr)*
-andExpr        := notExpr ("and" notExpr)*
-notExpr        := "not" notExpr | comparaison
-comparaison    := somme (("==" | "!=" | "<" | "<=" | ">" | ">=") somme)*
-somme          := produit (("+" | "-") produit)*
-produit        := unaire (("*" | "/" | "%" | "**") unaire)*
-unaire         := ("-" | "+") unaire | postfixe
-postfixe       := primaire ( "(" args ")" | "[" expression "]" | "." identifiant
-                             | "?." identifiant | "?" | argumentsLambda )*
-primaire       := litteral | identifiant | "(" expression ")" | liste | dict
-                 | construction | lambda
-```
-
-## Types
-
-```
-type      := "int" | "float" | "string" | "bool" | "char" | "void" | "any"
-            | nomType ("<" types ">")? ("?")?
-types     := type ("," type)*
+programme    := declaration*
+declaration  := instruction | fonctionClasse
+instruction  := expression | affectation | retour | boucle | si | match | lever | assertion
+affectation  := identifiant ("=" | "+=" | ...) expression
+retour       := "return" expression?
+lever        := "raise" expression
+assertion    := "assert" expression ["," expression]
 ```
 
 ## Déclarations
 
 ```
-variable    := ("val" | "var") identifiant (":" type)? ("=" expression)?
-fonction    := "def" identifiant "(" parametres? ")" (":" type)? ":" bloc
-parametres  := parametre ("," parametre)*
-parametre   := identifiant ":" type ("=" expression)?
-classe      := "class" identifiant (":" types)? ":" bloc
-interface   := "interface" identifiant ":" bloc
-enum        := "enum" identifiant ":" (membreCorps)+
-lambda      := "(" parametres? ")" "=>" expression
-             | identifiant "=>" expression
+fonction     := "def" nom "(" parametres ")" ["->" type] ":" bloc
+constructeur := "def" "init" "(" "self" "," parametres ")" ":" bloc
+classe       := "class" nom ["(" parents ")"] ":" bloc
+interface    := "interface" nom ":" bloc
+enum         := "enum" nom ":" constante ("," constante)*
 ```
 
-## Commentaires
-
-```
-ligne     := "#" texte
-bloc      := "###" texte "###"
-```
-
-## Jetons réservés
-
-`def` `val` `var` `class` `interface` `enum` `record` `object` `if` `elif`
-`else` `for` `while` `match` `case` `return` `break` `continue` `import`
-`package` `extends` `implements` `new` `this` `self` `super` `try` `catch`
-`finally` `throw` `as` `is` `in` `and` `or` `not` `typealias` `static`
-`public` `private` `protected` `internal` `fun` `where` `yield`
-
-## Littéraux
-
-| Type | Forme |
-| --- | --- |
-| Entier | `42`, `1_000`, `0xFF`, `0b1010`, `0o17` |
-| Flottant | `3.14`, `1e-3`, `2.0f` |
-| Booléen | `true`, `false` |
-| Chaîne | `"texte"`, `'c'`, `"` multi-lignes `"""` |
-| Formatée | `f"Bonjour, {nom}"` |
-| Bruts | `r"mot\s"` |
-| Collection | `[1, 2]`, `{"a": 1}`, `{1, 2}` |
+Un fichier exécute ses instructions de haut en bas. S'il définit une fonction
+`main`, elle est appelée automatiquement ; il ne faut pas l'appeler soi-même
+(sinon `E0307`, point d'entrée ambigu).

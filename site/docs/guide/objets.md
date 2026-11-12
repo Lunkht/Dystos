@@ -10,92 +10,92 @@ description: Classes, constructeurs, héritage, interfaces et génériques.
 
 ## Déclarer une classe
 
-`class` introduit un type. Les champs non privés sont publics, un `_` en
-tête de nom signale l'usage interne.
+`class` introduit un type. Les champs sont publics par défaut ; un `_` en tête
+de nom signale un usage interne (accès restreint depuis l'extérieur de la
+classe).
 
 ```dystos
 class Compte:
+    titulaire: str
     _solde: float = 0.0
 
-    def __init__(self, nom: string):
-        self.nom = nom
+    def init(self, titulaire: str):
+        self.titulaire = titulaire
 
     def deposer(self, montant: float):
-        if montant <= 0.0:
-            throw ValueError("montant invalide")
         self._solde += montant
+
+    def solde(self) -> float:
         return self._solde
 
-    def __str__(self) -> string:
-        return f"{self.nom} ({self._solde:.2f})"
+    def toString(self) -> str:
+        return f"Compte({self.titulaire}, {self._solde})"
+
+def main():
+    c = Compte("Awa")
+    c.deposer(150.0)
+    print(c)
 ```
 
-`__init__` est le constructeur, appelé avec `new` ou directement :
-
-```dystos
-val compte = Compte("Awa")
-print(compte.deposer(150.0))
 ```
+Compte(Awa, 150.0)
+```
+
+`init` est le constructeur. On invoque la classe directement, sans `new` :
+`Compte("Awa")`. `self` fait référence à l'instance courante. `toString`
+définit l'affichage de l'objet.
 
 ## Héritage
 
-```dystos
-class CompteEpargne(Compte):
-    def __init__(self, nom: string, taux: float):
-        super.__init__(nom)
-        self.taux = taux
-
-    def interets(self) -> float:
-        return self._solde * self.taux
-```
-
-## Interfaces
+Une classe hérite d'une autre ou implémente une interface.
 
 ```dystos
-interface Exportable:
-    def exporter() -> string
+interface Forme:
+    def aire(self) -> float
 
-class Facture(Exportable):
-    def exporter(self) -> string:
-        return "facture"
+abstract class Base(Forme):
+    nom: str
+    def init(self, nom: str):
+        self.nom = nom
 
-def sauvegarder(item: Exportable):
-    print(item.exporter())
+class Carre(Base):
+    cote: float
+    def init(self, cote: float):
+        super().init("carré")
+        self.cote = cote
+    def aire(self) -> float:
+        return self.cote * self.cote
+
+def main():
+    formes: list[Forme] = [Carre(2.0), Carre(3.0)]
+    total = sum(f.aire() for f in formes)
+    print(total)
 ```
+
+```
+13.0
+```
+
+`super().init(...)` appelle le constructeur de la classe parente.
 
 ## Génériques
 
 ```dystos
-class Pile<T>:
-    _elements: list<T> = []
+class Boite[T]:
+    contenu: T
+    def init(self, contenu: T):
+        self.contenu = contenu
+    def get(self) -> T:
+        return self.contenu
 
-    def ajouter(self, element: T):
-        self._elements.append(element)
+def premier[T](items: list[T]) -> T:
+    return items[0]
 
-    def dépiler(self) -> T:
-        return self._elements.pop()
-
-var pile = Pile<string>()
-pile.ajouter("a")
-pile.ajouter("b")
-print(pile.dépiler())
+def main():
+    b = Boite[int](42)
+    print(b.get(), premier(["x", "y"]))
 ```
 
-## `enum` et `match`
-
-```dystos
-enum Role:
-    ADMIN
-    CLIENT
-
-val roles = [Role.ADMIN, Role.CLIENT]
-
-for role in roles:
-    match role:
-        case Role.ADMIN:
-            print("accès total")
-        case Role.CLIENT:
-            print("accès limité")
-        case _:
-            print("rôle inconnu")
+```
+42 x
 ```

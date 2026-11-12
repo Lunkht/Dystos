@@ -12,10 +12,8 @@ Crée un fichier `hello.dys` :
 
 ```dystos
 def main():
-    nom: string = "Dystos"
+    nom: str = "Dystos"
     print(f"Bonjour, {nom} !")
-
-main()
 ```
 
 Puis :
@@ -30,41 +28,28 @@ Bonjour, Dystos !
 
 ## Anatomie d'un programme
 
-- `def main():` déclare une fonction. Le `:` ouvre le bloc, l'indentation le
-  délimite, il n'y a pas de accolades.
-- `nom: string = "Dystos"` déclare une variable **immuable** avec son type.
+- `def main():` déclare la fonction d'entrée. Le `:` ouvre le bloc,
+  l'indentation le délimite, il n'y a pas d'accolades.
+- `nom: str = "Dystos"` déclare une variable **immuable** avec son type.
 - `f"..."` est une chaîne formatée : `{nom}` est remplacé par la valeur.
-- `main()` appelle la fonction. Les programmes Dystos s'exécutent à partir du
-  haut niveau.
+- `main` est appelée automatiquement à la fin du fichier : n'ajoute pas
+  `main()` à la fin, cela provoquerait une erreur `E0307` (point d'entrée
+  ambigu).
+
+Un fichier sans `main` exécute simplement ses instructions de haut en bas.
 
 ## Vérifier avant d'exécuter
 
 ```bash
-dystos check hello.dys
+dystos run hello.dys --json
 ```
 
-Le vérificateur rapporte les erreurs lexicales, syntaxiques et de types avant
-toute exécution. Le format JSON est le même que celui consommé par le site et
-l'application :
+Le résultat est un objet JSON contenant `stdout`, `stderr`, `exitCode`,
+`durationMs` et `diagnostics` :
 
 ```json
-{
-  "severity": "error",
-  "code": "E0101",
-  "message": "ligne 1, colonne 1 : '}' sans délimiteur ouvrant",
-  "line": 1,
-  "column": 1
-}
+{"stdout":"Bonjour, Dystos !\n","stderr":"","exitCode":0,"durationMs":120,"diagnostics":[]}
 ```
 
-## Erreurs fréquentes
-
-| Message | Cause |
-| --- | --- |
-| indentation inattendue | Mélange d'espaces et de tabulations |
-| identifiant inconnu | Typo, ou variable déclarée dans un autre bloc |
-| type incompatible | Affectation d'un `int` à une variable `string` |
-
-## Prochaine étape
-
-Les [variables, `val` et `var`](/docs/tour/premiers-pas/variables).
+En cas d'erreur de compilation, `exitCode` vaut `2` et `diagnostics`
+contient le code, la ligne et la colonne du problème.

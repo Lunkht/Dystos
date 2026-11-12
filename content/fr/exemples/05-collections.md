@@ -1,0 +1,22 @@
+---
+id: 05-collections
+titre: Collections
+chapitre: donnees
+ordre: 5
+categorie: Données
+note: >-
+  Nécessite les méthodes de collection (.add, .items) et les ensembles, pas encore implémentés dans l’application.
+---
+
+def main():
+    fruits: list[str] = ["pomme", "poire"]
+    fruits.add("kiwi")
+    print(fruits[0], len(fruits))
+
+    stock: map[str, int] = {"pomme": 3, "poire": 5}
+    stock["kiwi"] = 7
+    for nom, qte in stock.items():
+        print(f"{nom}: {qte}")
+
+    uniques = {1, 2, 2, 3}
+    print(len(uniques))

@@ -12,21 +12,22 @@ description: Listes, dictionnaires, ensembles, tranches et compréhensions.
 
 ```dystos
 val fruits = ["pomme", "banane", "kiwi"]
-fruits.append("orange")
+fruits.add("orange")
 
-print(fruits[0])
-print(len(fruits))
-print(fruits[1:])
+print(fruits[0])      # pomme
+print(len(fruits))    # 4
+print(fruits[1:])     # ["banane", "kiwi", "orange"]
+print("kiwi" in fruits)  # true
 ```
 
-| Méthode | Effet |
+| Opération | Effet |
 | --- | --- |
-| `append(x)` | Ajoute à la fin |
-| `pop()` | Retire et rend le dernier élément |
-| `insert(i, x)` | Insère à la position `i` |
-| `remove(x)` | Retire la première occurrence |
-| `contains(x)` | Teste la présence |
-| `len(c)` | Nombre d'éléments |
+| `fruits.add(x)` | Ajoute `x` à la fin |
+| `fruits.pop()` | Retire et rend le dernier élément |
+| `fruits[i]` | Accède à l'index `i` |
+| `fruits[i:j]` | Tranche de `i` à `j` exclus |
+| `len(fruits)` | Nombre d'éléments |
+| `x in fruits` | Teste la présence |
 
 ## Dictionnaires
 
@@ -38,12 +39,26 @@ for nom, quantite in stock.items():
     print(f"{nom} : {quantite}")
 ```
 
-## Ensembles et tuples
+| Opération | Effet |
+| --- | --- |
+| `stock["clé"]` | Accède à une valeur |
+| `stock["clé"] = v` | Ajoute ou modifie |
+| `stock.get("clé")` | Rend la valeur, ou `null` |
+| `stock.keys()` | Liste des clés |
+| `stock.values()` | Liste des valeurs |
+| `stock.items()` | Paires (clé, valeur) |
+| `len(stock)` | Nombre d'entrées |
+| `"clé" in stock` | Teste la présence |
+
+`stock.get("inconnu")` rend `null` quand la clé est absente.
+
+## Ensembles
 
 ```dystos
 val uniques = {1, 2, 2, 3}       # {1, 2, 3}
-val paire = (10, "Awa")           # tuple heterogene
-val premier, second = paire       # destructuring
+uniques.add(4)
+print(len(uniques))              # 4
+print(2 in uniques)              # true
 ```
 
 ## Tranches
@@ -53,7 +68,7 @@ val lettres = ["a", "b", "c", "d", "e"]
 print(lettres[1:3])     # ["b", "c"]
 print(lettres[:2])      # ["a", "b"]
 print(lettres[3:])      # ["d", "e"]
-print(lettres[::-1])    # à l'envers
+print(lettres[::-1])    # ["e", "d", "c", "b", "a"]
 ```
 
 ## Compréhensions
@@ -67,17 +82,15 @@ val pairs = [n for n in nombres if n % 2 == 0]
 val carres = [n * n for n in nombres]
 val initiales = {nom: len(nom) for nom in ["a", "bb", "ccc"]}
 
-print(pairs)
-print(carres)
-print(initiales)
+print(pairs)    # [2, 4, 6, 8, 10]
+print(carres)   # [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+print(initiales)  # {"a": 1, "bb": 2, "ccc": 3}
 ```
 
-## Itérer sur plusieurs séquences
+Il n'y a pas de tuple, ni de `zip`. Pour parcourir plusieurs séquences en même
+temps, utilisez `enumerate` ou itérez sur les paires d'un dictionnaire :
 
 ```dystos
-for nom, quantite in zip(["a", "b"], [1, 2]):
-    print(nom, quantite)
-
 for index, valeur in enumerate(["x", "y"]):
     print(index, valeur)
 ```

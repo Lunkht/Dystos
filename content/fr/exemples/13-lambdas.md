@@ -1,0 +1,18 @@
+---
+id: 13-lambdas
+titre: Fonctions d’ordre supérieur
+chapitre: fonctionnel
+ordre: 13
+categorie: Fonctionnel
+note: >-
+  Nécessite les fonctions lambda et les fonctions d’ordre supérieur, pas encore implémentées dans l’application.
+---
+
+def appliquer(f: (int) -> int, valeurs: list[int]) -> list[int]:
+    return [f(v) for v in valeurs]
+
+def main():
+    doubles = appliquer(x -> x * 2, [1, 2, 3])
+    pairs = filter(x -> x % 2 == 0, doubles)
+    tries = sorted(["bb", "a", "ccc"], key=s -> s.length)
+    print(doubles, pairs, tries)

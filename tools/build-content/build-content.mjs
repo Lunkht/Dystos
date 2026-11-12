@@ -9,6 +9,7 @@
  *   site/docs/tour/<chapitre>/<lesson>.mdx     pages du parcours guidé
  *   apps/android/app/src/main/assets/content/content.json
  *   apps/android/app/src/main/assets/content/search-index.json
+ *   apps/android/app/src/main/assets/content/exemples.json
  *   site/static/examples/index.json            index des exemples du site
  *
  * Usage
@@ -23,7 +24,12 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import YAML from 'yaml';
 
-import {CONTENT_LANGS, validate} from './schema.mjs';
+import {
+  CONTENT_LANGS,
+  validate,
+  validateExample,
+  validateQuizzes,
+} from './schema.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '..', '..');
@@ -39,6 +45,7 @@ const ANDROID_ASSETS = path.join(
   'assets',
   'content',
 );
+const SITE_STATIC_EXAMPLES = path.join(ROOT, 'site', 'static', 'examples');
 
 const checkOnly = process.argv.includes('--check');
 
@@ -85,6 +92,8 @@ async function main() {
 
   const allErrors = [];
   const lessonsByLang = {};
+  const examplesByLang = {};
+  const quizzesByLang = {};
 
   for (const lang of langs) {
     const lessons = await loadLessons(path.join(CONTENT_DIR, lang, 'tour'));
@@ -93,6 +102,20 @@ async function main() {
       for (const error of validate(lesson)) {
         allErrors.push(`${lang}/${lesson.file}: ${error}`);
       }
+    }
+
+    const examples = await loadExamples(path.join(CONTENT_DIR, lang, 'exemples'));
+    examplesByLang[lang] = examples;
+    for (const example of examples) {
+      for (const error of validateExample(example)) {
+        allErrors.push(`${lang}/exemples/${example.file}: ${error}`);
+      }
+    }
+
+    const quizzes = await loadQuizzes(path.join(CONTENT_DIR, lang, 'quiz'));
+    quizzesByLang[lang] = quizzes;
+    for (const error of validateQuizzes(quizzes)) {
+      allErrors.push(`${lang}/quiz/quiz.json: ${error}`);
     }
   }
 
@@ -106,7 +129,9 @@ async function main() {
   }
 
   const counts = Object.entries(lessonsByLang).map(
-    ([lang, lessons]) => `${lang}: ${lessons.length} leçons`,
+    ([lang, lessons]) =>
+      `${lang}: ${lessons.length} leçons, ${(examplesByLang[lang] ?? []).length} exemples, ` +
+      `${(quizzesByLang[lang] ?? []).length} quiz`,
   );
   console.log(`Contenu valide (${counts.join(', ')})`);
 
@@ -123,11 +148,15 @@ async function main() {
   }
 
   const fr = lessonsByLang.fr ?? [];
-  await writeAndroidAssets(fr);
+  const frExamples = examplesByLang.fr ?? [];
+  const frQuizzes = quizzesByLang.fr ?? [];
+  await writeAndroidAssets(fr, frExamples, frQuizzes);
+  await writeSiteExamples(frExamples);
   await generateCategoryFiles(lessonsByLang);
 
   console.log(
-    `Genere ${fr.length} pages de tour, assets Android et index de recherche.`,
+    `Genere ${fr.length} pages de tour, ${frExamples.length} exemples, ` +
+      `${frQuizzes.length} quiz, assets Android et index de recherche.`,
   );
 }
 
@@ -200,7 +229,7 @@ async function generateCategoryFiles(lessonsByLang) {
   }
 }
 
-async function writeAndroidAssets(lessons) {
+async function writeAndroidAssets(lessons, examples, quizzes) {
   await mkdir(ANDROID_ASSETS, {recursive: true});
 
   const content = {
@@ -233,6 +262,45 @@ async function writeAndroidAssets(lessons) {
   await writeFile(
     path.join(ANDROID_ASSETS, 'search-index.json'),
     `${JSON.stringify({version: 1, documents: index}, null, 2)}\n`,
+    'utf8',
+  );
+
+  // Les exemples sont un catalogue à part : ils s'ouvrent dans l'éditeur, ils
+  // ne font pas partie du parcours de chapitres.
+  const payload = examples.map(toExamplePayload);
+  await writeFile(
+    path.join(ANDROID_ASSETS, 'exemples.json'),
+    `${JSON.stringify({version: 1, exemples: payload}, null, 2)}\n`,
+    'utf8',
+  );
+
+  await writeFile(
+    path.join(ANDROID_ASSETS, 'quiz.json'),
+    `${JSON.stringify({version: 1, quiz: quizzes}, null, 2)}\n`,
+    'utf8',
+  );
+}
+
+/**
+ * Index des exemples pour le site.
+ *
+ * Le site lit ce fichier au build plutôt qu'un tableau codé en dur : le site et
+ * l'application montrent donc exactement les mêmes programmes.
+ */
+async function writeSiteExamples(examples) {
+  await mkdir(SITE_STATIC_EXAMPLES, {recursive: true});
+  const payload = examples.map((example) => ({
+    id: example.id,
+    nom: example.titre,
+    chapitre: example.categorie ?? example.chapitre,
+    code: example.code,
+    sortie: example.sortie_attendue ?? null,
+    note: example.note || null,
+  }));
+
+  await writeFile(
+    path.join(SITE_STATIC_EXAMPLES, 'index.json'),
+    `${JSON.stringify(payload, null, 2)}\n`,
     'utf8',
   );
 }
@@ -327,6 +395,115 @@ function toLessonPayload(lesson) {
           solution: lesson.exercice.solution ?? '',
         }
       : null,
+  };
+}
+
+/**
+ * Charge le catalogue de quiz d'une langue.
+ *
+ * Le fichier est déjà au format attendu par l'application : il est relu et
+ * validé, pas réécrit, pour éviter une seconde représentation à maintenir.
+ */
+async function loadQuizzes(dir) {
+  const file = path.join(dir, 'quiz.json');
+  if (!existsSync(file)) {
+    return [];
+  }
+
+  const parsed = JSON.parse(await readFile(file, 'utf8'));
+  const quizzes = Array.isArray(parsed.quiz) ? parsed.quiz : [];
+  quizzes.sort((a, b) => String(a.id).localeCompare(String(b.id)));
+  return quizzes;
+}
+
+/** Un exemple est un programme complet : il porte un identifiant, un titre,
+ * le code et la sortie attendue.
+ */
+async function loadExamples(dir) {
+  if (!existsSync(dir)) {
+    return [];
+  }
+
+  const examples = [];
+  const files = (await readdir(dir)).filter(
+    (file) => file.endsWith('.md') || file.endsWith('.mdx'),
+  );
+  files.sort();
+
+  for (const file of files) {
+    const raw = await readFile(path.join(dir, file), 'utf8');
+    examples.push(parseExample(raw, file));
+  }
+
+  examples.sort((a, b) => a.ordre - b.ordre);
+  return examples;
+}
+
+/**
+ * Découpe un exemple.
+ *
+ * Le programme est le corps Markdown ; la sortie attendue est écrite après un
+ * séparateur `---` en tête de sortie, ce qui évite de la mettre dans le
+ * frontmatter (où un retour à la ligne ne se lit pas).
+ *
+ * Un exemple que le moteur embarqué ne sait pas encore exécuter porte une
+ * `note:` dans son frontmatter plutôt qu'une sortie attendue : on préfère dire
+ * ce qui manque plutôt que d'annoncer une sortie qui ne viendra jamais.
+ */
+function parseExample(raw, file) {
+  const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/.exec(raw);
+  if (!match) {
+    throw new Error(`${file} : en-tête YAML manquant`);
+  }
+
+  const frontmatter = YAML.parse(match[1]) ?? {};
+  const rest = match[2];
+  const split = rest.split(/\n---\n/);
+
+  const code = split[0].trim();
+  let sortie_attendue = null;
+
+  if (split.length > 1) {
+    const block = /\n?sortie_attendue: \|?\n([\s\S]*)$/.exec(split.slice(1).join('\n---\n'));
+    if (block) {
+      sortie_attendue = dedent(block[1]).trimEnd();
+    }
+  }
+
+  if (sortie_attendue === '' && typeof frontmatter.sortie_attendue === 'string') {
+    sortie_attendue = frontmatter.sortie_attendue.trimEnd();
+  }
+
+  const note = typeof frontmatter.note === 'string' ? frontmatter.note.trim() : '';
+
+  return {
+    ...frontmatter,
+    file,
+    code,
+    note,
+    sortie_attendue,
+  };
+}
+
+function dedent(text) {
+  const lines = text.split('\n');
+  const indents = lines
+    .filter((line) => line.trim() !== '')
+    .map((line) => /^\s*/.exec(line)[0].length);
+  const shortest = indents.length > 0 ? Math.min(...indents) : 0;
+  return lines.map((line) => line.slice(shortest)).join('\n');
+}
+
+function toExamplePayload(example) {
+  return {
+    id: example.id,
+    titre: example.titre,
+    chapitre: example.chapitre,
+    categorie: example.categorie ?? example.chapitre,
+    ordre: Number(example.ordre ?? 0),
+    code: example.code,
+    sortieAttendue: example.sortie_attendue ?? null,
+    note: example.note || null,
   };
 }
 

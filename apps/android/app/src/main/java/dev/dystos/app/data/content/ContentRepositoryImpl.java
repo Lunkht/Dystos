@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import dev.dystos.app.core.json.Json;
 import dev.dystos.app.domain.model.Chapter;
+import dev.dystos.app.domain.model.Example;
 import dev.dystos.app.domain.model.Exercise;
 import dev.dystos.app.domain.model.Lesson;
 import dev.dystos.app.domain.repository.ContentRepository;
@@ -27,10 +28,12 @@ public final class ContentRepositoryImpl implements ContentRepository {
 
     private static final String TAG = "DystosContent";
     private static final String CONTENT_ASSET = "content/content.json";
+    private static final String EXAMPLES_ASSET = "content/exemples.json";
 
     private final AssetManager assets;
     private volatile List<Chapter> chapters;
     private volatile List<Lesson> lessons;
+    private volatile List<Example> examples;
 
     public ContentRepositoryImpl(AssetManager assets) {
         this.assets = assets;
@@ -62,6 +65,26 @@ public final class ContentRepositoryImpl implements ContentRepository {
         return lessons.size();
     }
 
+    @Override
+    public List<Example> getExamples() {
+        loadExamples();
+        return examples;
+    }
+
+    @Override
+    public Example getExample(String exampleId) {
+        loadExamples();
+        if (exampleId == null) {
+            return null;
+        }
+        for (Example example : examples) {
+            if (exampleId.equals(example.getId())) {
+                return example;
+            }
+        }
+        return null;
+    }
+
     private void load() {
         if (chapters != null) {
             return;
@@ -90,6 +113,52 @@ public final class ContentRepositoryImpl implements ContentRepository {
             chapters = List.copyOf(parsedChapters);
             lessons = List.copyOf(parsedLessons);
         }
+    }
+
+    /**
+     * Charge le catalogue d'exemples.
+     *
+     * Volontairement séparé du parcours : ouvrir un exemple n'a pas à passer
+     * par les chapitres.
+     */
+    private void loadExamples() {
+        if (examples != null) {
+            return;
+        }
+        synchronized (this) {
+            if (examples != null) {
+                return;
+            }
+            List<Example> parsed = new ArrayList<>();
+            try {
+                JSONObject root = Json.object(readAsset(EXAMPLES_ASSET));
+                JSONArray array = Json.optArray(root, "exemples");
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject json = Json.optObject(array, i);
+                    if (json == null) {
+                        Log.w(TAG, "exemple ignoré : entrée " + i + " malformée");
+                        continue;
+                    }
+                    parsed.add(parseExample(json));
+                }
+                parsed.sort(Comparator.comparingInt(Example::getOrder));
+            } catch (IOException e) {
+                Log.e(TAG, "impossible de lire " + EXAMPLES_ASSET, e);
+            }
+            examples = List.copyOf(parsed);
+        }
+    }
+
+    private Example parseExample(JSONObject json) {
+        return new Example(
+                Json.optString(json, "id", ""),
+                Json.optString(json, "titre", ""),
+                Json.optString(json, "chapitre", ""),
+                Json.optString(json, "categorie", null),
+                Json.optInt(json, "ordre", 0),
+                Json.optString(json, "code", ""),
+                Json.optString(json, "sortieAttendue", null),
+                Json.optString(json, "note", ""));
     }
 
     private Chapter parseChapter(JSONObject json, List<Lesson> accumulator) {

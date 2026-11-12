@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 /**
  * Préférence de thème.
  *
- * Un {@link SharedPreferences} suffit : une seule valeur booléenne. Le mode
+ * Un {@link SharedPreferences} suffit : quelques valeurs booléennes. Le mode
  * sombre est celui de Dystos, mais l'utilisateur doit pouvoir choisir.
  */
 public final class ThemePreferences {
@@ -40,7 +40,7 @@ public final class ThemePreferences {
         return prefs(context).getBoolean(KEY_DARK, true);
     }
 
-    private static SharedPreferences prefs(Context context) {
+    static SharedPreferences prefs(Context context) {
         return context.getApplicationContext().getSharedPreferences(FILE, Context.MODE_PRIVATE);
     }
 }

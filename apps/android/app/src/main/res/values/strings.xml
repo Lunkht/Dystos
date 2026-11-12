@@ -1,11 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Dystos</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_mission">Mission</string>
+    <string name="nav_revision">Révisions</string>
+    <string name="nav_profile">Profil</string>
+    <string name="nav_settings">Paramètres</string>
     <string name="theme_toggle">Thème</string>
     <string name="chapter_progress">%1$d leçons sur %2$d lues</string>
     <string name="exercise_title">Exercice</string>
     <string name="lesson_missing">Leçon introuvable</string>
-    <string name="expected_output">sortie attendue</string>
+    <string name="learning_progress">TA PROGRESSION</string>
+    <string name="learning_next">À CONTINUER</string>
+    <string name="learning_continue">Continuer l’apprentissage</string>
+    <string name="learning_review">Revoir le parcours</string>
+    <string name="learning_all_complete">Parcours terminé · à revoir</string>
+    <string name="learning_unavailable">Aucune leçon disponible pour le moment.</string>
+    <string name="ide_settings_title">Paramètres de l\'IDE</string>
+    <string name="ide_settings_editor">ÉDITEUR</string>
+    <string name="ide_settings_language">LANGAGE DE PROGRAMMATION</string>
+    <string name="ide_font_size">Taille du texte</string>
+    <string name="ide_font_size_value">%1$d sp</string>
+    <string name="ide_line_numbers">Afficher les numéros de ligne</string>
+    <string name="ide_indentation">Indentation automatique</string>
+    <string name="ide_indent_two_spaces">2 espaces</string>
+    <string name="ide_indent_four_spaces">4 espaces</string>
+    <string name="ide_auto_indent">Continuer l\'indentation après Entrée</string>
+    <string name="ide_auto_close_pairs">Fermer automatiquement () [] {} et les guillemets</string>
+    <string name="ide_language_description">Le langage choisi contrôle la coloration syntaxique, les symboles rapides et l\'exécution dans les éditeurs.</string>
+    <string name="ide_reset_settings">Rétablir les paramètres par défaut</string>
+
+    <!-- Éditeur d'exercice -->
+    <string name="back">Retour</string>
+    <string name="reset">Réinitialiser</string>
+    <string name="share">Partager</string>
+    <string name="share_title">Partager le code</string>
+    <string name="share_subject">Programme Dystos</string>
+    <string name="share_as_text">Comme texte</string>
+    <string name="share_as_file">Comme fichier .dys</string>
+    <string name="hint">Indice</string>
+    <string name="solution">Solution</string>
+    <string name="verify">Vérifier</string>
+    <string name="run">Exécuter</string>
+    <string name="code_hint">Écris ton programme Dystos ici</string>
+    <string name="code_autofill">no</string>
+    <string name="hint_label">Indice</string>
+    <string name="solution_label">Solution</string>
+    <string name="no_hint_left">Tous les indices ont été affichés.</string>
+    <string name="result_success">Réussi</string>
+    <string name="result_wrong_output">La sortie ne correspond pas</string>
+    <string name="result_runtime_error">Le programme ne s\'exécute pas</string>
+    <string name="result_timeout">Le programme ne se termine pas</string>
+    <string name="error_at_line">Ligne %1$d : %2$s</string>
+    <string name="error_no_line">%s</string>
+    <string name="solution_confirm_title">Afficher la solution</string>
+    <string name="expected_output_block">sortie attendue\n%1$s</string>
+    <string name="solution_confirm_message">Tu peux la voir, mais l\'apprentissage se fera seul.</string>
+    <string name="cancel">Annuler</string>
+    <string name="ok">D\'accord</string>
+
+    <!-- Accueil et catalogues -->
+    <string name="section_examples">Exemples</string>
+    <string name="section_shortcuts">Outils</string>
+    <string name="section_search">Recherche</string>
+    <string name="section_reference">Référence</string>
+    <string name="section_quizzes">Quiz</string>
+    <string name="example_count">%1$d exemples</string>
+    <string name="example_expected">sortie : %1$s</string>
+    <string name="example_not_executable">Pas encore exécutable dans l\'application</string>
+    <string name="examples_empty">Aucun exemple disponible.</string>
+    <string name="result_ran">Programme exécuté</string>
+    <string name="result_matches">La sortie correspond</string>
+    <string name="result_compile_error">Le programme ne compile pas</string>
+    <string name="code_missing">Exemple introuvable</string>
+
+    <!-- Recherche -->
+    <string name="search_hint">Rechercher dans les leçons</string>
+    <string name="search_empty">Aucun résultat.</string>
+    <string name="search_prompt">Tapez deux mots pour lancer la recherche.</string>
+    <string name="search_results_for">%1$d résultat(s)</string>
+    <string name="search_index_failed">Index indisponible</string>
+
+    <!-- Référence -->
+    <string name="reference_empty">Référence indisponible.</string>
+    <string name="reference_section_symbols">Symboles</string>
+    <string name="reference_section_types">Types</string>
+    <string name="reference_section_control">Contrôle</string>
+    <string name="reference_section_functions">Fonctions</string>
+    <string name="reference_section_listes">Listes</string>
+    <string name="reference_section_errors">Erreurs</string>
+
+    <!-- Quiz -->
+    <string name="quiz_empty">Aucun quiz disponible.</string>
+    <string name="quiz_question">Question %1$d sur %2$d</string>
+    <string name="quiz_correct">Bonne réponse.</string>
+    <string name="quiz_incorrect">Raté. La bonne réponse était : %1$s</string>
+    <string name="quiz_score">Score : %1$d / %2$d</string>
+    <string name="quiz_finish">Terminer</string>
+    <string name="quiz_next">Suivante</string>
+    <string name="quiz_done_title">Quiz terminé</string>
+    <string name="quiz_missing">Quiz introuvable</string>
+    <string name="quiz_best_score">Meilleur score : %1$d / %2$d</string>
+    <string name="quiz_saved_hint">Score enregistré pour ce quiz</string>
+    <string name="quiz_score_saved">Score : %1$d / %2$d\n%3$s</string>
+    <string name="quiz_result_passed">Réussi</string>
+    <string name="quiz_result_failed">À retravailler</string>
+    <string name="quiz_result_correct">Bonnes réponses</string>
+    <string name="quiz_result_saved">Score enregistré</string>
+    <string name="quiz_result_retry">Recommencer</string>
+    <string name="quiz_result_success">Bravo, continue comme ça !</string>
+    <string name="quiz_result_retry_hint">Relis la leçon puis retente le quiz.</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_brand">Dystos</string>
+    <string name="onboarding_title_1">Progresse partout</string>
+    <string name="onboarding_subtitle_1">Développe tes compétences facilement grâce à un programme complet de programmation</string>
+    <string name="onboarding_title_2">Apprends comme un pro</string>
+    <string name="onboarding_subtitle_2">Aborde les grands concepts étape par étape, à ton propre rythme</string>
+    <string name="onboarding_title_3">Relève des défis</string>
+    <string name="onboarding_subtitle_3">Complète ton entraînement quotidien pour débloquer des défis stimulants</string>
+    <string name="onboarding_title_4">Prends de bonnes habitudes</string>
+    <string name="onboarding_subtitle_4">Apprends un peu chaque jour et Dystos optimisera tes sessions</string>
+    <string name="onboarding_get_started">Commencer</string>
+    <string name="onboarding_login">J\'ai déjà un compte</string>
+    <string name="onboarding_register">Créer un compte</string>
+
+    <!-- Fin d\'onboarding : choix du compte -->
+    <string name="account_prompt_title">Presque terminé !</string>
+    <string name="account_prompt_subtitle">Connecte-toi ou crée un compte pour conserver tes réponses et ta progression.</string>
+    <string name="account_prompt_register">Créer un compte</string>
+    <string name="account_prompt_login">Se connecter</string>
+    <string name="account_prompt_skip">Continuer sans compte</string>
 
     <plurals name="chapter_lesson_count">
         <item quantity="one">%d leçon</item>

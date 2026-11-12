@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Bandeau d'illustration d'une carte, mode clair. -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-<solid android:color="#132123" />
-    <corners android:radius="10dp"/>
-    <stroke android:width="1dp" android:color="#7E7D7D"/>
+    <solid android:color="#F1F1F1" />
+    <corners
+        android:topLeftRadius="10dp"
+        android:topRightRadius="8dp" />
 </shape>

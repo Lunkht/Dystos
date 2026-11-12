@@ -230,10 +230,22 @@
   box-shadow: var(--dystos-shadow-neon);
 }
 
-/* Pied de page sombre */
+/* Pied de page noir */
 footer {
   border-top: 1px solid var(--dystos-border);
-  background: var(--ifm-footer-background-color) !important;
+  background: #000000 !important;
+}
+
+footer * {
+  color: var(--dystos-gray-300) !important;
+}
+
+footer a {
+  color: var(--ifm-color-primary) !important;
+}
+
+footer a:hover {
+  color: var(--ifm-color-primary-light) !important;
 }
 
 /* ============================================================

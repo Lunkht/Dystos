@@ -4,12 +4,14 @@
    ============================================================ */
 
 .playground {
-  display: flex;
+  display: block;
   flex-direction: column;
-  min-height: 80vh;
+  min-height: 100vh;
+  height: 100vh;
   background: var(--dystos-black);
   color: var(--dystos-gray-100);
   font-family: var(--ifm-font-family-base);
+  overflow: hidden;
 }
 
 /* ---------- Sidebar ---------- */

@@ -7,6 +7,7 @@ import {Icon} from '@site/src/components/Icon';
 
 import LogoDystos from '@site/static/img/dystos.svg';
 import LogoDystosDark from '@site/static/img/dystos_for_dark_mode.svg';
+import Partenaires from '@site/src/components/Partenaires';
 
 import styles from './index.module.css';
 
@@ -230,6 +231,8 @@ export default function Home(): ReactNode {
             </div>
           </div>
         </section>
+
+        <Partenaires />
       </main>
     </Layout>
   );

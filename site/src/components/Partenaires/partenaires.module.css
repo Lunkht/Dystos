@@ -3,7 +3,7 @@
    ============================================================ */
 
 .partenaires {
-  padding: 4rem 0;
+  padding: 2rem 0;
   background: var(--dystos-gray-900);
   border-top: 1px solid var(--dystos-border);
   border-bottom: 1px solid var(--dystos-border);
@@ -15,20 +15,12 @@
   padding: 0 1rem;
 }
 
-.titre {
-  text-align: center;
-  font-size: 1.8rem;
-  letter-spacing: -0.02em;
-  margin-bottom: 2.5rem;
-  color: var(--dystos-white);
-}
-
 /* Bandeau défilant horizontal */
 .defilant {
   display: flex;
-  gap: 3rem;
+  gap: 2.5rem;
   overflow: hidden;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   mask-image: linear-gradient(
     90deg,
     transparent 0%,
@@ -52,7 +44,7 @@
 }
 
 .logo {
-  height: 4rem;
+  height: 2rem;
   width: auto;
   display: block;
   filter: grayscale(0.6) brightness(0.8);
@@ -67,14 +59,14 @@
 
 /* Dupliquer le contenu pour le défilement continu */
 .defilant {
-  animation: defilement 20s linear infinite;
+  animation: defilement 15s linear infinite;
 }
 
 @media screen and (max-width: 640px) {
   .defilant {
-    gap: 2rem;
+    gap: 1.5rem;
   }
   .logo {
-    height: 3rem;
+    height: 1.5rem;
   }
 }

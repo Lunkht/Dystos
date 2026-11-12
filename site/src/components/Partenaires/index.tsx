@@ -22,7 +22,6 @@ export default function Partenaires(): ReactNode {
   return (
     <section className={styles.partenaires}>
       <div className={styles.container}>
-        <h2 className={styles.titre}>Nos partenaires</h2>
         <div className={styles.defilant}>
           {PARTENAIRES.map((p) => (
             <img

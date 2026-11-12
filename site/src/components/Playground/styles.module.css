@@ -4,10 +4,10 @@
    ============================================================ */
 
 .playground {
-  display: block;
+  display: flex;
   flex-direction: column;
-  min-height: 100vh;
   height: 100vh;
+  min-height: 60rem;
   background: var(--dystos-black);
   color: var(--dystos-gray-100);
   font-family: var(--ifm-font-family-base);
@@ -21,7 +21,6 @@
   width: 260px;
   max-width: 80vw;
   background: var(--dystos-gray-900);
-  border-right: 1px solid var(--dystos-border);
   z-index: 50;
   display: flex;
   flex-direction: column;
@@ -34,16 +33,11 @@
   transform: translateX(0);
 }
 
-.sidebarOpen {
-  /* classe appliquée sur le conteneur quand la sidebar est ouverte */
-}
-
 .sidebarHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1.25rem;
-  border-bottom: 1px solid var(--dystos-border);
   background: var(--dystos-gray-800);
 }
 
@@ -57,7 +51,7 @@
 
 .sidebarClose {
   background: transparent;
-  border: 1px solid var(--dystos-border);
+  border: none;
   color: var(--dystos-gray-300);
   width: 2rem;
   height: 2rem;
@@ -67,20 +61,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
 }
 
 .sidebarClose:hover {
-  border-color: var(--ifm-color-primary);
   color: var(--ifm-color-primary);
 }
 
 .sidebarSection {
   padding: 1rem 1.25rem;
-}
-
-.sidebarSection + .sidebarSection {
-  border-top: 1px solid var(--dystos-border);
 }
 
 .sidebarSectionLabel {
@@ -113,7 +101,6 @@
   font-size: 0.85rem;
   cursor: pointer;
   text-align: left;
-  transition: all 0.2s ease;
 }
 
 .exampleItem:hover {
@@ -124,7 +111,6 @@
 .exampleItem.exampleActive {
   background: rgba(0, 242, 255, 0.12);
   color: var(--ifm-color-primary);
-  border-left: 3px solid var(--ifm-color-primary);
 }
 
 .sidebarOverlay {
@@ -141,6 +127,7 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 /* ---------- Toolbar ---------- */
@@ -149,13 +136,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1.25rem;
-  border-bottom: 1px solid var(--dystos-border);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.03) 0%,
-    rgba(255, 255, 255, 0.01) 100%
-  );
-  backdrop-filter: blur(10px);
+  background: var(--dystos-gray-900);
+  flex-shrink: 0;
   z-index: 10;
 }
 
@@ -172,7 +154,7 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.5rem 1rem;
-  border: 1px solid var(--dystos-border);
+  border: none;
   border-radius: 6px;
   background: var(--dystos-gray-800);
   color: var(--dystos-gray-100);
@@ -180,13 +162,11 @@
   font-weight: 500;
   font-family: var(--ifm-font-family-base);
   cursor: pointer;
-  transition: all 0.2s ease;
 }
 
 .toolbarButton:hover:not(:disabled) {
-  border-color: var(--ifm-color-primary);
+  background: var(--dystos-gray-700);
   color: var(--ifm-color-primary);
-  box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
 }
 
 .toolbarButton:disabled {
@@ -195,9 +175,8 @@
 }
 
 .btnAnalyze {
-  border-color: var(--ifm-color-primary);
-  color: var(--ifm-color-primary);
   background: rgba(0, 242, 255, 0.08);
+  color: var(--ifm-color-primary);
 }
 
 .btnAnalyze:hover:not(:disabled) {
@@ -206,9 +185,8 @@
 }
 
 .btnRun {
-  border-color: var(--ifm-color-primary);
-  color: var(--ifm-color-primary);
   background: rgba(0, 242, 255, 0.08);
+  color: var(--ifm-color-primary);
 }
 
 .btnRun:hover:not(:disabled) {
@@ -222,12 +200,11 @@
 
 .activeExample {
   padding: 0.35rem 0.75rem;
-  border: 1px solid var(--dystos-border);
-  border-radius: 4px;
   background: var(--dystos-gray-800);
   font-size: 0.75rem;
   color: var(--ifm-color-primary);
   font-weight: 600;
+  border-radius: 4px;
 }
 
 .statusIndicator {
@@ -241,10 +218,9 @@
   font-family: var(--ifm-font-family-monospace);
   font-size: 0.7rem;
   color: var(--dystos-gray-500);
-  background: var(--dystos-gray-900);
   padding: 0.2rem 0.5rem;
   border-radius: 3px;
-  border: 1px solid var(--dystos-border);
+  background: var(--dystos-gray-900);
 }
 
 /* ---------- Panes ---------- */
@@ -263,12 +239,12 @@
 
 .editorPane {
   flex: 1.2;
-  border-right: 1px solid var(--dystos-border);
+  min-width: 0;
 }
 
 .resultPane {
   flex: 1;
-  border-left: 1px solid var(--dystos-border);
+  min-width: 0;
   display: flex;
   flex-direction: column;
 }
@@ -278,14 +254,12 @@
     flex-direction: column;
   }
   .editorPane {
-    border-right: none;
-    border-bottom: 1px solid var(--dystos-border);
     flex: 1;
+    min-height: 0;
   }
   .resultPane {
-    border-left: none;
-    border-top: 1px solid var(--dystos-border);
     flex: 0.8;
+    min-height: 0;
   }
 }
 
@@ -295,8 +269,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 1rem;
-  border-bottom: 1px solid var(--dystos-border);
   background: var(--dystos-gray-800);
+  flex-shrink: 0;
 }
 
 .editorTab {
@@ -323,7 +297,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
 }
 
 .editorActionButton:hover {
@@ -350,7 +323,6 @@
   line-height: 1.6;
   text-align: right;
   user-select: none;
-  border-right: 1px solid var(--dystos-border);
   flex-shrink: 0;
 }
 
@@ -380,8 +352,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 1rem;
-  border-bottom: 1px solid var(--dystos-border);
   background: var(--dystos-gray-800);
+  flex-shrink: 0;
 }
 
 .resultActions {
@@ -401,7 +373,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
 }
 
 .clearButton:hover {
@@ -413,14 +384,13 @@
   display: flex;
   gap: 0.25rem;
   padding: 0.5rem 1rem;
-  border-bottom: 1px solid var(--dystos-border);
   background: var(--dystos-gray-900);
   flex-wrap: wrap;
+  flex-shrink: 0;
 }
 
 .tab {
-  border: 1px solid transparent;
-  border-bottom: 2px solid transparent;
+  border: none;
   border-radius: 4px 4px 0 0;
   background: transparent;
   color: var(--dystos-gray-500);
@@ -428,7 +398,6 @@
   font-weight: 600;
   padding: 0.5rem 0.9rem;
   cursor: pointer;
-  transition: all 0.2s ease;
   font-family: var(--ifm-font-family-base);
 }
 
@@ -438,8 +407,6 @@
 }
 
 .tabActive {
-  border-color: var(--dystos-border);
-  border-bottom-color: var(--ifm-color-primary);
   background: var(--dystos-black);
   color: var(--ifm-color-primary);
 }
@@ -470,14 +437,7 @@
   font-size: 0.85rem;
   padding: 0.6rem 0.75rem;
   border-radius: 6px;
-  border-left: 3px solid var(--dystos-border);
   background: var(--dystos-gray-900);
-  transition: all 0.2s ease;
-}
-
-.diagnostic:hover {
-  border-left-color: var(--ifm-color-primary);
-  box-shadow: 0 0 10px rgba(0, 242, 255, 0.1);
 }
 
 .diagnosticCode {
@@ -485,24 +445,12 @@
   flex-shrink: 0;
 }
 
-.severityError {
-  border-left-color: #ff6b6b;
-}
-
 .severityError .diagnosticCode {
   color: #ff6b6b;
 }
 
-.severityWarning {
-  border-left-color: #ffb020;
-}
-
 .severityWarning .diagnosticCode {
   color: #ffb020;
-}
-
-.severityInfo {
-  border-left-color: var(--ifm-color-primary);
 }
 
 .severityInfo .diagnosticCode {
@@ -537,7 +485,6 @@
   padding: 0.8rem 1rem;
   border-radius: 6px;
   background: rgba(255, 107, 107, 0.1);
-  border: 1px solid rgba(255, 107, 107, 0.2);
   margin-bottom: 1rem;
 }
 
@@ -554,7 +501,6 @@
 /* ---------- Sortie ---------- */
 .outputWrapper {
   background: var(--dystos-gray-900);
-  border: 1px solid var(--dystos-border);
   border-radius: 6px;
   overflow: auto;
 }
@@ -591,7 +537,6 @@
   gap: 0.5rem;
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
-  transition: background 0.2s ease;
 }
 
 .tokens li:hover {
@@ -617,11 +562,11 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 1.25rem;
-  border-top: 1px solid var(--dystos-border);
-  background: var(--dystos-gray-800);
+  background: var(--dystos-gray-900);
   font-family: var(--ifm-font-family-monospace);
   font-size: 0.75rem;
   color: var(--dystos-gray-500);
+  flex-shrink: 0;
 }
 
 .statusLeft,
@@ -634,15 +579,11 @@
 .statusRight > span {
   padding: 0.15rem 0.5rem;
   border-radius: 3px;
-  background: var(--dystos-gray-900);
-  border: 1px solid var(--dystos-border);
+  background: var(--dystos-black);
 }
 
 /* ---------- Responsive ---------- */
 @media screen and (max-width: 996px) {
-  .playground {
-    min-height: 50rem;
-  }
   .toolbar {
     flex-wrap: wrap;
     gap: 0.5rem;

@@ -58,13 +58,6 @@ const ENDPOINT =
 
 type Tab = 'diagnostics' | 'output' | 'tokens' | 'ast';
 
-const TAB_LABELS: Record<Tab, string> = {
-  diagnostics: 'Diagnostics',
-  output: 'Sortie',
-  tokens: 'Jetons',
-  ast: 'AST',
-};
-
 export default function Playground(): ReactNode {
   const [code, setCode] = useState(DEFAULT_CODE);
   const [tab, setTab] = useState<Tab>('diagnostics');
@@ -151,7 +144,6 @@ export default function Playground(): ReactNode {
     });
   };
 
-  // Ouvre un exemple depuis la sidebar.
   useEffect(() => {
     const id = new URLSearchParams(window.location.search).get('exemple');
     const example = id ? EXAMPLES.find((entry) => entry.id === id) : undefined;
@@ -169,9 +161,9 @@ export default function Playground(): ReactNode {
   const lineCount = code.split('\n').length;
 
   return (
-    <div className={clsx(styles.playground, sidebarOpen && styles.sidebarOpen)}>
-      {/* Sidebar gauche — explorateur */}
-      <aside className={styles.sidebar}>
+    <div className={styles.playground}>
+      {/* Sidebar — explorateur */}
+      <aside className={clsx(styles.sidebar, sidebarOpen && styles.sidebarOpen)}>
         <div className={styles.sidebarHeader}>
           <span className={styles.sidebarTitle}>Explorateur</span>
           <button
@@ -202,27 +194,11 @@ export default function Playground(): ReactNode {
             ))}
           </div>
         </div>
-        <div className={styles.sidebarSection}>
-          <span className={styles.sidebarSectionLabel}>Fichiers</span>
-          <div className={styles.exampleList}>
-            <button type="button" className={styles.exampleItem}>
-              main.dys
-            </button>
-          </div>
-        </div>
       </aside>
 
-      {/* Overlay pour fermer la sidebar sur mobile */}
-      {sidebarOpen && (
-        <div
-          className={styles.sidebarOverlay}
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
+      {sidebarOpen && <div className={styles.sidebarOverlay} onClick={() => setSidebarOpen(false)} />}
 
-      {/* Contenu principal */}
       <div className={styles.main}>
-        {/* Header supérieure — barre d'outils IDE */}
         <header className={styles.toolbar}>
           <div className={styles.toolbarLeft}>
             <button
@@ -233,9 +209,7 @@ export default function Playground(): ReactNode {
               Menu
             </button>
             {loadedExample && (
-              <span className={styles.activeExample}>
-                {loadedExample}
-              </span>
+              <span className={styles.activeExample}>{loadedExample}</span>
             )}
           </div>
 
@@ -260,29 +234,21 @@ export default function Playground(): ReactNode {
 
           <div className={styles.toolbarRight}>
             <span className={styles.statusIndicator}>
-              {busy ? '● Occupé' : '● Prêt'}
+              {busy ? 'Occupé' : 'Prêt'}
             </span>
             <span className={styles.endpoint}>{ENDPOINT}</span>
           </div>
         </header>
 
-        {/* Zone éditeur + résultats */}
         <div className={styles.panes}>
-          {/* Éditeur de code */}
           <div className={clsx(styles.pane, styles.editorPane)}>
             <div className={styles.editorHeader}>
               <span className={styles.editorTab}>main.dys</span>
               <div className={styles.editorActions}>
-                <button
-                  type="button"
-                  className={styles.editorActionButton}
-                  aria-label="Réduire">
+                <button type="button" className={styles.editorActionButton} aria-label="Réduire">
                   —
                 </button>
-                <button
-                  type="button"
-                  className={styles.editorActionButton}
-                  aria-label="Fermer">
+                <button type="button" className={styles.editorActionButton} aria-label="Fermer">
                   ✕
                 </button>
               </div>
@@ -305,7 +271,6 @@ export default function Playground(): ReactNode {
             </div>
           </div>
 
-          {/* Panneau de résultats */}
           <div className={clsx(styles.pane, styles.resultPane)}>
             <div className={styles.resultHeader}>
               <div className={styles.tabs} role="tablist">
@@ -368,8 +333,7 @@ export default function Playground(): ReactNode {
                         {diagnostic.code}
                       </span>
                       <span>
-                        {diagnostic.line}:{diagnostic.column}{' '}
-                        {diagnostic.message}
+                        {diagnostic.line}:{diagnostic.column} {diagnostic.message}
                       </span>
                     </li>
                   ))}
@@ -405,14 +369,11 @@ export default function Playground(): ReactNode {
                 </ol>
               )}
 
-              {tab === 'ast' && (
-                <pre className={styles.output}>{ast || '—'}</pre>
-              )}
+              {tab === 'ast' && <pre className={styles.output}>{ast || '—'}</pre>}
             </div>
           </div>
         </div>
 
-        {/* Barre de statut IDE */}
         <footer className={styles.statusBar}>
           <div className={styles.statusLeft}>
             <span>main.dys</span>

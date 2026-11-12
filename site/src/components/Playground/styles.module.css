@@ -194,6 +194,16 @@
   box-shadow: 0 0 20px rgba(0, 242, 255, 0.35);
 }
 
+.btnNew {
+  background: var(--dystos-gray-800);
+  color: var(--dystos-gray-300);
+}
+
+.btnNew:hover:not(:disabled) {
+  background: var(--dystos-gray-700);
+  color: var(--dystos-white);
+}
+
 .sidebarToggle {
   font-size: 1.2rem;
 }

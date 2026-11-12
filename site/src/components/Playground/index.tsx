@@ -58,6 +58,9 @@ const ENDPOINT =
 
 type Tab = 'diagnostics' | 'output' | 'tokens' | 'ast';
 
+/** Délai avant réanalyse automatique après la dernière frappe (ms). */
+const ANALYZE_DEBOUNCE_MS = 400;
+
 export default function Playground(): ReactNode {
   const [code, setCode] = useState(DEFAULT_CODE);
   const [tab, setTab] = useState<Tab>('diagnostics');
@@ -70,7 +73,9 @@ export default function Playground(): ReactNode {
   const [loadedExample, setLoadedExample] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  /** Déclenche une analyse complète (diagnostics + tokens + AST). */
   const analyze = useCallback(async () => {
     setBusy(true);
     setError(null);
@@ -100,6 +105,16 @@ export default function Playground(): ReactNode {
       setBusy(false);
     }
   }, [code]);
+
+  /** Analyse avec debounce : appelée à chaque frappe. */
+  const analyzeDebounced = useCallback(() => {
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+    debounceRef.current = setTimeout(() => {
+      void analyze();
+    }, ANALYZE_DEBOUNCE_MS);
+  }, [analyze]);
 
   const run = useCallback(async () => {
     setBusy(true);
@@ -144,13 +159,38 @@ export default function Playground(): ReactNode {
     });
   };
 
+  /**
+   * Charge un exemple depuis l'URL (?exemple=) ou depuis la barre latérale.
+   * Réinitialise l'état d'exécution pour ne pas afficher de résultats obsolètes.
+   */
+  const loadExample = (id: string) => {
+    const example = EXAMPLES.find((entry) => entry.id === id);
+    if (!example) {
+      return;
+    }
+    setCode(example.code);
+    setLoadedExample(example.nom);
+    setResult(null);
+    setDiagnostics([]);
+    setTokens([]);
+    setAst('');
+    setError(null);
+  };
+
   useEffect(() => {
     const id = new URLSearchParams(window.location.search).get('exemple');
-    const example = id ? EXAMPLES.find((entry) => entry.id === id) : undefined;
-    if (example) {
-      setCode(example.code);
-      setLoadedExample(example.nom);
+    if (id) {
+      loadExample(id);
+    } else if (!loadedExample) {
+      // Aucun exemple demandé : repartir du code par défaut.
+      setCode(DEFAULT_CODE);
+      setResult(null);
+      setDiagnostics([]);
+      setTokens([]);
+      setAst('');
+      setError(null);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -159,6 +199,18 @@ export default function Playground(): ReactNode {
   }, [loadedExample]);
 
   const lineCount = code.split('\n').length;
+
+  /** Réinitialise l'éditeur avec le code par défaut. */
+  const resetToDefault = () => {
+    setCode(DEFAULT_CODE);
+    setLoadedExample(null);
+    setResult(null);
+    setDiagnostics([]);
+    setTokens([]);
+    setAst('');
+    setError(null);
+    setSidebarOpen(false);
+  };
 
   return (
     <div className={clsx(styles.playground, sidebarOpen && styles.sidebarOpen)}>
@@ -185,8 +237,7 @@ export default function Playground(): ReactNode {
                   [styles.exampleActive]: loadedExample === example.nom,
                 })}
                 onClick={() => {
-                  setCode(example.code);
-                  setLoadedExample(example.nom);
+                  loadExample(example.id);
                   setSidebarOpen(false);
                 }}>
                 {example.nom}
@@ -208,6 +259,13 @@ export default function Playground(): ReactNode {
               aria-label="Ouvrir l'explorateur">
               Menu
             </button>
+            <button
+              type="button"
+              className={clsx(styles.toolbarButton, styles.btnNew)}
+              onClick={resetToDefault}
+              aria-label="Nouveau fichier">
+              Nouveau
+            </button>
             {loadedExample && (
               <span className={styles.activeExample}>{loadedExample}</span>
             )}
@@ -217,7 +275,12 @@ export default function Playground(): ReactNode {
             <button
               type="button"
               className={clsx(styles.toolbarButton, styles.btnAnalyze)}
-              onClick={() => void analyze()}
+              onClick={() => {
+                if (debounceRef.current) {
+                  clearTimeout(debounceRef.current);
+                }
+                void analyze();
+              }}
               disabled={busy}
               aria-label="Analyser le code">
               Analyser
@@ -243,7 +306,9 @@ export default function Playground(): ReactNode {
         <div className={styles.panes}>
           <div className={clsx(styles.pane, styles.editorPane)}>
             <div className={styles.editorHeader}>
-              <span className={styles.editorTab}>main.dys</span>
+              <span className={styles.editorTab}>
+                {loadedExample ? `${loadedExample}.dys` : 'main.dys'}
+              </span>
               <div className={styles.editorActions}>
                 <button type="button" className={styles.editorActionButton} aria-label="Réduire">
                   —
@@ -263,7 +328,14 @@ export default function Playground(): ReactNode {
                 ref={textareaRef}
                 className={styles.editor}
                 value={code}
-                onChange={(event) => setCode(event.target.value)}
+                onChange={(event) => {
+                  setCode(event.target.value);
+                  // L'utilisateur édite manuellement : l'exemple chargé n'est plus d'actualité.
+                  if (loadedExample) {
+                    setLoadedExample(null);
+                  }
+                  analyzeDebounced();
+                }}
                 onKeyDown={onTabKeyDown}
                 spellCheck={false}
                 aria-label="Éditeur de code Dystos"
@@ -376,7 +448,7 @@ export default function Playground(): ReactNode {
 
         <footer className={styles.statusBar}>
           <div className={styles.statusLeft}>
-            <span>main.dys</span>
+            <span>{loadedExample ? loadedExample : 'main'}.dys</span>
             <span>{lineCount} lignes</span>
             <span>UTF-8</span>
             <span>Dystos</span>

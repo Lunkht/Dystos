@@ -69,11 +69,12 @@ export default function Playground(): ReactNode {
   const [tokens, setTokens] = useState<Token[]>([]);
   const [ast, setAst] = useState<string>('');
   const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<ErrorState>(null);
   const [loadedExample, setLoadedExample] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const retryRef = useRef<(() => void) | null>(null);
 
   /** Déclenche une analyse complète (diagnostics + tokens + AST). */
   const analyze = useCallback(async () => {
@@ -95,7 +96,9 @@ export default function Playground(): ReactNode {
     } catch (cause) {
       setError(
         cause instanceof Error
-          ? cause.message
+          ? cause.message === 'Failed to fetch'
+            ? 'Impossible de joindre le service de playground. Vérifiez que le backend est démarré sur le port 8080.'
+            : cause.message
           : 'impossible de joindre le service de playground',
       );
       setDiagnostics([]);
@@ -114,6 +117,11 @@ export default function Playground(): ReactNode {
     debounceRef.current = setTimeout(() => {
       void analyze();
     }, ANALYZE_DEBOUNCE_MS);
+  }, [analyze]);
+
+  const retryAnalyze = useCallback(() => {
+    setError(null);
+    void analyze();
   }, [analyze]);
 
   const run = useCallback(async () => {
@@ -135,7 +143,9 @@ export default function Playground(): ReactNode {
     } catch (cause) {
       setError(
         cause instanceof Error
-          ? cause.message
+          ? cause.message === 'Failed to fetch'
+            ? 'Impossible de joindre le service de playground. Vérifiez que le backend est démarré sur le port 8080.'
+            : cause.message
           : 'impossible de joindre le service de playground',
       );
       setResult(null);
@@ -367,13 +377,24 @@ export default function Playground(): ReactNode {
               </div>
               <div className={styles.resultActions}>
                 {error && (
-                  <button
-                    type="button"
-                    className={styles.clearButton}
-                    onClick={() => setError(null)}
-                    aria-label="Effacer l'erreur">
-                    ✕
-                  </button>
+                  <>
+                    <button
+                      type="button"
+                      className={styles.clearButton}
+                      onClick={() => setError(null)}
+                      aria-label="Effacer l'erreur">
+                      ✕
+                    </button>
+                    {retryRef.current && (
+                      <button
+                        type="button"
+                        className={styles.toolbarButton}
+                        onClick={retryRef.current}
+                        aria-label="Réessayer l'analyse">
+                        ↻
+                      </button>
+                    )}
+                  </>
                 )}
               </div>
             </div>

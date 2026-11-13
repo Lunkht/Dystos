@@ -1,72 +1,79 @@
 /* ============================================================
-   Section Partenaires — logos défilants
+   Écosystème — bandeau de libellés monospace
    ============================================================ */
 
 .partenaires {
-  padding: 2rem 0;
-  background: var(--dystos-gray-900);
-  border-top: 1px solid var(--dystos-border);
-  border-bottom: 1px solid var(--dystos-border);
+  padding: 3.5rem 0;
+  background: var(--dystos-black);
+  border-bottom: 1px solid var(--dystos-border-soft);
 }
 
 .container {
-  max-width: 80rem;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
-/* Bandeau défilant horizontal */
-.defilant {
+/* Libellé de section, dans l'esprit de Jinim : tiret + monospace. */
+.label {
   display: flex;
-  gap: 2.5rem;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 0.9rem;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dystos-moss);
+}
+
+.label::before {
+  content: '';
+  width: 16px;
+  height: 1px;
+  background: var(--dystos-moss);
+}
+
+.bandeau {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1px;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
-  padding: 0.5rem 0;
-  mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--dystos-white) 15%,
-    var(--dystos-white) 85%,
-    transparent 100%
-  );
+  list-style: none;
+  background: var(--dystos-border);
+  border: 1px solid var(--dystos-border);
+  border-radius: 2px;
 }
 
-.defilant:hover {
-  animation-play-state: paused;
+.bandeau li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0.75rem;
+  background: var(--dystos-gray-900);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.66rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dystos-gray-400);
+  text-align: center;
 }
 
-@keyframes defilement {
-  0% {
-    transform: translateX(0);
+@media screen and (max-width: 900px) {
+  .bandeau {
+    grid-template-columns: repeat(3, 1fr);
   }
-  100% {
-    transform: translateX(-50%);
+}
+
+@media screen and (max-width: 560px) {
+  .partenaires {
+    padding: 2.5rem 0;
   }
-}
 
-.logo {
-  height: 2rem;
-  width: auto;
-  display: block;
-  filter: grayscale(0.6) brightness(0.8);
-  transition: filter 0.3s ease, transform 0.3s ease;
-  flex-shrink: 0;
-}
-
-.logo:hover {
-  filter: grayscale(0) brightness(1.2);
-  transform: scale(1.1);
-}
-
-/* Dupliquer le contenu pour le défilement continu */
-.defilant {
-  animation: defilement 15s linear infinite;
-}
-
-@media screen and (max-width: 640px) {
-  .defilant {
-    gap: 1.5rem;
-  }
-  .logo {
-    height: 1.5rem;
+  .bandeau {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

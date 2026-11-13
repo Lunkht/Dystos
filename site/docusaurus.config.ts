@@ -1,10 +1,59 @@
-import {themes as prismThemes} from 'prism-react-renderer';
+import type {PrismTheme} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const REPO_URL = 'https://github.com/Lunkht/Dystos';
+
+/**
+ * Coloration syntaxique du site.
+ *
+ * Le reste du site est monochrome : le code est le seul endroit où la couleur
+ * porte du sens. La palette reste volontairement sourde (terracotta, sauge,
+ * sable, bleu poussière) pour se poser sur le noir sans lueur ni néon.
+ */
+const dystosPrismTheme: PrismTheme = {
+  plain: {
+    color: '#cfcfca',
+    backgroundColor: '#0c0c0c',
+  },
+  styles: [
+    {
+      types: ['comment', 'prolog', 'doctype', 'cdata'],
+      style: {color: '#7c7c77', fontStyle: 'italic'},
+    },
+    {types: ['punctuation'], style: {color: '#8f8f8a'}},
+    {types: ['namespace'], style: {opacity: 0.8}},
+    {
+      types: ['keyword', 'atrule', 'important'],
+      style: {color: '#e2a48f', fontWeight: '600'},
+    },
+    {
+      types: ['string', 'char', 'inserted', 'regex', 'attr-value'],
+      style: {color: '#a8c9a3'},
+    },
+    {
+      types: ['number', 'boolean', 'constant', 'symbol'],
+      style: {color: '#e3c184'},
+    },
+    {
+      types: ['function', 'class-name', 'builtin'],
+      style: {color: '#9dbfd8'},
+    },
+    {types: ['tag', 'selector', 'deleted'], style: {color: '#e2a48f'}},
+    {types: ['attr-name', 'property'], style: {color: '#d8c3a2'}},
+    {types: ['operator', 'entity', 'url'], style: {color: '#b9b9b4'}},
+    {types: ['variable'], style: {color: '#cfcfca'}},
+    {
+      types: ['annotation', 'decorator'],
+      style: {color: '#c3aed6'},
+    },
+    {types: ['bold'], style: {fontWeight: '600'}},
+    {types: ['italic'], style: {fontStyle: 'italic'}},
+  ],
+};
+
 
 const config: Config = {
   title: 'Dystos',
@@ -20,6 +69,17 @@ const config: Config = {
   // Le bandeau de secours de Docusaurus contient un lien vers docusaurus.io.
   // Le principe de souverainete interdit toute reference a un domaine externe.
   baseUrlIssueBanner: false,
+
+  // Thème sombre unique : on force le mode avant le premier rendu pour
+  // qu'un ancien choix « clair » stocké dans le navigateur ne réapparaisse pas.
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: {},
+      innerHTML:
+        "try{localStorage.setItem('theme','dark');document.documentElement.setAttribute('data-theme','dark');}catch(e){}",
+    },
+  ],
 
   organizationName: 'Lunkht',
   projectName: 'Dystos',
@@ -50,6 +110,7 @@ const config: Config = {
         blog: {
           showReadingTime: true,
           blogTitle: 'Actualités',
+          blogSidebarTitle: 'Articles récents',
           blogDescription: 'Versions de Dystos et décisions de conception.',
           feedOptions: {
             type: ['rss', 'atom'],
@@ -73,12 +134,14 @@ const config: Config = {
     ],
     colorMode: {
       defaultMode: 'dark',
-      respectPrefersColorScheme: true,
+      disableSwitch: true,
+      respectPrefersColorScheme: false,
     },
     navbar: {
       logo: {
         alt: 'Logo Dystos',
-        src: 'img/logo.svg',
+        src: 'img/dystos_for_dark_mode.svg',
+        srcDark: 'img/dystos_for_dark_mode.svg',
       },
       items: [
         {to: '/docs/introduction', label: 'Documentation', position: 'left'},
@@ -130,8 +193,8 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} Dystos. Langage libre, distribué sous licence MIT.`,
     },
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      theme: dystosPrismTheme,
+      darkTheme: dystosPrismTheme,
       additionalLanguages: ['dystos'],
     },
   } satisfies Preset.ThemeConfig,

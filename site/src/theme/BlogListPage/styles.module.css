@@ -1,0 +1,229 @@
+/* Liste des actualités — en-tête de page et cartes de billets. */
+
+.hero {
+  margin: 0 0 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--dystos-border-soft);
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 0.9rem;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dystos-moss);
+}
+
+.label::before {
+  content: '';
+  width: 16px;
+  height: 1px;
+  background: var(--dystos-moss);
+}
+
+.title {
+  margin: 0 0 0.9rem;
+  font-size: clamp(2.6rem, 5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 0.97;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--dystos-white);
+}
+
+.lede {
+  max-width: 52ch;
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--dystos-gray-400);
+}
+
+/* ============================================================
+   Billets
+   ============================================================ */
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.list > article {
+  padding: 1.75rem;
+  border: 1px solid var(--dystos-border);
+  border-radius: 2px;
+  background: var(--dystos-gray-900);
+  transition: border-color 0.18s ease, background 0.18s ease;
+  /* Le thème applique margin-bottom--xl (5rem) à chaque billet. */
+  margin-bottom: 1.25rem !important;
+}
+
+.list > article:hover {
+  border-color: var(--dystos-gray-600);
+  background: var(--dystos-surface);
+}
+
+.list article h2 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.list article h2 a {
+  color: var(--dystos-white);
+  text-decoration: none;
+}
+
+.list article h2 a:hover {
+  color: var(--dystos-accent-dim);
+  text-decoration: none;
+}
+
+/* Ligne date + temps de lecture */
+.list article > header > div:first-of-type {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dystos-gray-500);
+}
+
+.list article time {
+  font-family: var(--ifm-font-family-monospace);
+}
+
+/* L'auteur est le même sur tous les billets : inutile dans la liste. */
+.list article > header > div:global(.row) {
+  display: none;
+}
+
+/* Chapô */
+.list article :global(.markdown) p {
+  max-width: 66ch;
+  margin: 0 0 0.75rem;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--dystos-gray-400);
+}
+
+.list article :global(.markdown) p:last-child {
+  margin-bottom: 0;
+}
+
+.list article :global(.markdown) a {
+  color: var(--dystos-gray-100);
+}
+
+/* Pied de carte */
+.list article footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--dystos-border-soft);
+}
+
+.list article footer > div:first-child {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.75rem;
+  width: auto;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.list article footer > div:last-child {
+  flex: 0 0 auto;
+  width: auto;
+  max-width: 100%;
+  margin-left: auto;
+  text-align: right;
+}
+
+.list article footer b {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.64rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dystos-gray-500);
+}
+
+.list article footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+}
+
+.list article a[rel='tag'] {
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--dystos-border);
+  border-radius: 2px;
+  background: transparent;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dystos-gray-400);
+  text-decoration: none;
+}
+
+.list article a[rel='tag']:hover {
+  border-color: var(--dystos-gray-500);
+  color: var(--dystos-white);
+}
+
+.list article footer > div:last-child a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding-bottom: 0.15rem;
+  border-bottom: 1px solid var(--dystos-accent-dim);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--dystos-white);
+  text-decoration: none;
+}
+
+.list article footer > div:last-child a::after {
+  content: '→';
+  transition: transform 0.18s ease;
+}
+
+.list article footer > div:last-child a:hover {
+  border-color: var(--dystos-white);
+  color: var(--dystos-white);
+  text-decoration: none;
+}
+
+.list article footer > div:last-child a:hover::after {
+  transform: translateX(3px);
+}
+
+@media screen and (max-width: 640px) {
+  .hero {
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .list > article {
+    padding: 1.35rem;
+  }
+}

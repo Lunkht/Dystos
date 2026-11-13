@@ -1,0 +1,337 @@
+/* Page Téléchargements — sections, cartes et blocs de commande. */
+
+/* ============================================================
+   En-tête
+   ============================================================ */
+
+.hero {
+  padding: 80px 0 56px;
+  border-bottom: 1px solid var(--dystos-border-soft);
+  background: radial-gradient(
+    900px 480px at 82% -20%,
+    rgba(255, 255, 255, 0.045),
+    transparent 60%
+  );
+}
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 1.1rem;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dystos-moss);
+}
+
+.label::before {
+  content: '';
+  width: 16px;
+  height: 1px;
+  background: var(--dystos-moss);
+}
+
+.title {
+  margin: 0 0 1.25rem;
+  font-size: clamp(2.8rem, 6vw, 4.4rem);
+  font-weight: 800;
+  line-height: 0.96;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--dystos-white);
+}
+
+.lede {
+  max-width: 62ch;
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--dystos-gray-400);
+}
+
+/* ============================================================
+   Sections
+   ============================================================ */
+
+.section {
+  padding: 72px 0;
+  border-bottom: 1px solid var(--dystos-border-soft);
+  background: var(--dystos-black);
+}
+
+.sectionAlt {
+  background: var(--dystos-gray-900);
+}
+
+.verifySection {
+  border-bottom: 0;
+  padding-bottom: 96px;
+}
+
+.sectionHead {
+  margin-bottom: 2rem;
+}
+
+.kicker {
+  margin: 0 0 0.6rem;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dystos-moss);
+}
+
+.section h2 {
+  margin: 0;
+  font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--dystos-white);
+}
+
+.body {
+  max-width: 56ch;
+  margin: 0 0 1.75rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--dystos-gray-400);
+}
+
+/* ============================================================
+   Méthodes d'installation
+   ============================================================ */
+
+.installGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  background: var(--dystos-border);
+  border: 1px solid var(--dystos-border);
+  border-radius: 2px;
+}
+
+.installCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+  padding: 1.75rem;
+  background: var(--dystos-black);
+}
+
+.installLabel {
+  font-family: var(--ifm-heading-font-family);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--dystos-white);
+}
+
+.installNote {
+  margin-top: auto;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dystos-gray-500);
+}
+
+/* Bloc de commande */
+.command {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--dystos-border);
+  border-radius: 2px;
+  background: var(--dystos-gray-900);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.78rem;
+  line-height: 1.65;
+  color: var(--dystos-gray-200);
+  white-space: pre;
+}
+
+/* ============================================================
+   Application Android
+   ============================================================ */
+
+.android {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(16rem, 1fr);
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.android .body {
+  margin-bottom: 1.85rem;
+}
+
+.facts {
+  margin: 0;
+  padding: 0.5rem 1.5rem;
+  list-style: none;
+  border: 1px solid var(--dystos-border);
+  border-radius: 2px;
+  background: var(--dystos-black);
+}
+
+.facts li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--dystos-border-soft);
+}
+
+.facts li:last-child {
+  border-bottom: 0;
+}
+
+.facts span {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dystos-gray-500);
+}
+
+.facts strong {
+  font-weight: 500;
+  color: var(--dystos-gray-100);
+}
+
+/* ============================================================
+   Autres accès
+   ============================================================ */
+
+.accessGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  background: var(--dystos-border);
+  border: 1px solid var(--dystos-border);
+  border-radius: 2px;
+}
+
+.accessCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  min-width: 0;
+  min-height: 12rem;
+  padding: 1.75rem;
+  background: var(--dystos-black);
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.18s ease;
+}
+
+.accessCard:hover {
+  background: var(--dystos-surface);
+  color: inherit;
+  text-decoration: none;
+}
+
+.accessName {
+  font-family: var(--ifm-heading-font-family);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--dystos-white);
+}
+
+.accessDetail {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--dystos-gray-400);
+}
+
+.accessArrow {
+  margin-top: auto;
+  padding-top: 1rem;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.9rem;
+  color: var(--dystos-moss);
+  transition: color 0.18s ease;
+}
+
+.accessCard:hover .accessArrow {
+  color: var(--dystos-white);
+}
+
+/* ============================================================
+   Intégrité
+   ============================================================ */
+
+.verify {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(20rem, 1.1fr);
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.verify .body {
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media screen and (max-width: 996px) {
+  .hero {
+    padding: 64px 0 44px;
+  }
+
+  .section {
+    padding: 56px 0;
+  }
+
+  .installGrid,
+  .accessGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .accessCard {
+    min-height: 0;
+  }
+
+  .android,
+  .verify {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .hero {
+    padding: 48px 0 36px;
+  }
+
+  .command {
+    font-size: 0.72rem;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .facts {
+    padding: 0.35rem 1.1rem;
+  }
+}

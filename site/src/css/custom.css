@@ -1,132 +1,976 @@
 /**
- * Variables globales de Dystos — thème Noir / Blanc / Gris
- * Fond sombre profond, accents électriques, contrastes élevés,
- * mise en valeur forte du code et animations futuristes.
+ * Dystos — thème global.
+ *
+ * Le système visuel reprend celui de Jinim : noir et blanc, typographie
+ * condensée en capitales pour les titres, libellés en monospace, filets de
+ * 1 px, angles de 2 px, aucune lueur ni dégradé décoratif.
+ *
+ * Les polices sont auto-hébergées dans /static/fonts : aucun appel à Google
+ * Fonts ni à un quelconque CDN, conformément au principe de souveraineté.
  */
 
-:root {
-  /* Nuances de gris / noir / blanc */
-  --dystos-black: #0a0a0a;
-  --dystos-black-deep: #050505;
-  --dystos-gray-900: #111111;
-  --dystos-gray-800: #1a1a1a;
-  --dystos-gray-700: #2a2a2a;
-  --dystos-gray-600: #3a3a3a;
-  --dystos-gray-500: #525252;
-  --dystos-gray-400: #737373;
-  --dystos-gray-300: #a8a8a8;
-  --dystos-gray-200: #d4d4d4;
-  --dystos-gray-100: #e8e8e8;
-  --dystos-white: #ffffff;
+/* ============================================================
+   Polices auto-hébergées
+   ============================================================ */
 
-  /* Accent électrique (cyan néon) pour le look futuriste */
-  --ifm-color-primary: #00f2ff;
-  --ifm-color-primary-dark: #00cfe0;
-  --ifm-color-primary-darker: #00b8c9;
-  --ifm-color-primary-darkest: #009aa8;
-  --ifm-color-primary-light: #33f6ff;
-  --ifm-color-primary-lighter: #66f9ff;
-  --ifm-color-primary-lightest: #99fcff;
-
-  --ifm-code-font-size: 92%;
-  --ifm-font-family-base: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto,
-    sans-serif;
-  --ifm-font-family-monospace: 'JetBrains Mono', ui-monospace, SFMono-Regular,
-    Menlo, Consolas, monospace;
-  --ifm-heading-font-weight: 400;
-  --ifm-font-weight-light: 400;
-  --ifm-font-weight-normal: 400;
-  --ifm-font-weight-semibold: 400;
-  --ifm-font-weight-bold: 400;
-  --ifm-table-head-font-weight: 400;
-  --ifm-button-font-weight: 400;
-  --ifm-dropdown-font-weight: 400;
-  --ifm-navbar-height: 4rem;
-  --ifm-navbar-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
-
-  --docusaurus-highlighted-code-line-bg: rgba(0, 242, 255, 0.1);
-
-  --dystos-surface: #0a0a0a;
-  --dystos-surface-raised: #111111;
-  --dystos-border: #2a2a2a;
-  --dystos-hero-glow: rgba(0, 242, 255, 0.15);
-
-  /* Ombres et lueurs néon */
-  --dystos-shadow-neon: 0 0 20px rgba(0, 242, 255, 0.35),
-    0 0 40px rgba(0, 242, 255, 0.15);
-  --dystos-shadow-card: 0 20px 40px rgba(0, 0, 0, 0.5);
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/barlow-400.woff2') format('woff2');
 }
 
-[data-theme='dark'] {
-  --ifm-color-primary: #00f2ff;
-  --ifm-color-primary-dark: #00cfe0;
-  --ifm-color-primary-darker: #00b8c9;
-  --ifm-color-primary-darkest: #009aa8;
-  --ifm-color-primary-light: #33f6ff;
-  --ifm-color-primary-lighter: #66f9ff;
-  --ifm-color-primary-lightest: #99fcff;
-
-  --ifm-background-color: var(--dystos-black);
-  --ifm-background-surface-color: var(--dystos-gray-900);
-  --ifm-background-color-dark: var(--dystos-black-deep);
-  --ifm-background-color-light: var(--dystos-gray-800);
-  --ifm-font-color-base: var(--dystos-gray-100);
-  --ifm-font-color-dark: var(--dystos-black-deep);
-  --ifm-heading-color: var(--dystos-white);
-
-  --ifm-navbar-background-color: rgba(5, 5, 5, 0.92);
-  --ifm-footer-background-color: var(--dystos-black-deep);
-
-  --docusaurus-highlighted-code-line-bg: rgba(0, 242, 255, 0.12);
-
-  --dystos-hero-glow: rgba(0, 242, 255, 0.2);
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/barlow-500.woff2') format('woff2');
 }
 
-[data-theme='dark'] .docusaurus-highlight-code-line {
-  --docusaurus-highlighted-code-line-bg: rgba(0, 242, 255, 0.12);
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/barlow-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/barlow-condensed-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/barlow-condensed-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('/fonts/barlow-condensed-800.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono-500.woff2') format('woff2');
 }
 
 /* ============================================================
-   Animations clé — look futuriste
+   Jetons de design
    ============================================================ */
 
-/* Lueur pulsante derrière le hero */
-@keyframes dystosPulseGlow {
-  0%, 100% {
-    opacity: 0.4;
-    transform: scale(1);
+:root {
+  /* Palette monochrome Jinim */
+  --dystos-black: #050505;
+  --dystos-black-deep: #050505;
+  --dystos-gray-900: #0c0c0c;
+  --dystos-gray-800: #171717;
+  --dystos-gray-700: #262626;
+  --dystos-gray-600: #4a4a47;
+  --dystos-gray-500: #6b6b68;
+  --dystos-gray-400: #9a9a96;
+  --dystos-gray-300: #b9b9b5;
+  --dystos-gray-200: #c9c9c6;
+  --dystos-gray-100: #e8e8e5;
+  --dystos-white: #ffffff;
+
+  --dystos-surface: #111111;
+  --dystos-surface-raised: #171717;
+  --dystos-border: #262626;
+  --dystos-border-soft: #1a1a1a;
+  --dystos-moss: #8c8c89;
+  --dystos-accent: #ffffff;
+  --dystos-accent-dim: #c9c9c6;
+  --dystos-accent-soft: rgba(255, 255, 255, 0.07);
+
+  /* Accent unique : le blanc. Hors de question de réintroduire un néon. */
+  --ifm-color-primary: #ffffff;
+  --ifm-color-primary-dark: #e8e8e5;
+  --ifm-color-primary-darker: #d4d4d0;
+  --ifm-color-primary-darkest: #b9b9b5;
+  --ifm-color-primary-light: #ffffff;
+  --ifm-color-primary-lighter: #ffffff;
+  --ifm-color-primary-lightest: #ffffff;
+  --ifm-color-primary-contrast-background: #050505;
+  --ifm-color-primary-contrast-foreground: #ffffff;
+
+  /* Typographie */
+  --ifm-font-family-base: 'Barlow', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, sans-serif;
+  --ifm-heading-font-family: 'Barlow Condensed', 'Arial Narrow', 'Barlow',
+    sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', 'Courier New', monospace;
+
+  --ifm-font-size-base: 100%;
+  --ifm-line-height-base: 1.6;
+  --ifm-heading-line-height: 1.05;
+  --ifm-heading-font-weight: 700;
+  --ifm-font-weight-light: 300;
+  --ifm-font-weight-normal: 400;
+  --ifm-font-weight-semibold: 500;
+  --ifm-font-weight-bold: 600;
+  --ifm-table-head-font-weight: 600;
+  --ifm-button-font-weight: 600;
+  --ifm-dropdown-font-weight: 500;
+  --ifm-code-font-size: 90%;
+
+  /* Surfaces */
+  --ifm-background-color: #050505;
+  --ifm-background-surface-color: #111111;
+  --ifm-font-color-base: #b9b9b5;
+  --ifm-heading-color: #ffffff;
+  --ifm-link-color: #ffffff;
+  --ifm-link-hover-color: #c9c9c6;
+  --ifm-link-decoration: underline;
+  --ifm-hr-border-color: #262626;
+  --ifm-blockquote-color: #9a9a96;
+
+  /* Géométrie : filets fins et angles nets */
+  --ifm-global-radius: 2px;
+  --ifm-button-border-radius: 2px;
+  --ifm-card-border-radius: 2px;
+  --ifm-alert-border-radius: 2px;
+  --ifm-code-border-radius: 2px;
+  --ifm-breadcrumb-border-radius: 2px;
+  --ifm-global-shadow-lw: none;
+  --ifm-global-shadow-md: none;
+  --ifm-global-shadow-tl: none;
+
+  --ifm-container-width: 1180px;
+  --ifm-container-width-xl: 1180px;
+
+  /* Navigation */
+  --ifm-navbar-height: 4rem;
+  --ifm-navbar-background-color: rgba(5, 5, 5, 0.97);
+  --ifm-navbar-shadow: none;
+  --ifm-navbar-link-color: #9a9a96;
+  --ifm-navbar-link-hover-color: #ffffff;
+  --ifm-navbar-link-active-color: #ffffff;
+  --ifm-navbar-padding-vertical: 0.75rem;
+  --ifm-navbar-padding-horizontal: 0;
+
+  /* Menus et sommaire */
+  --ifm-menu-color: #9a9a96;
+  --ifm-menu-color-active: #ffffff;
+  --ifm-menu-color-background-active: rgba(255, 255, 255, 0.07);
+  --ifm-menu-color-background-hover: rgba(255, 255, 255, 0.04);
+  --ifm-toc-border-color: #1a1a1a;
+  --ifm-toc-link-color: #9a9a96;
+
+  /* Tableaux */
+  --ifm-table-border-color: #262626;
+  --ifm-table-stripe-background: #0c0c0c;
+  --ifm-table-head-background: #111111;
+  --ifm-table-head-color: #ffffff;
+
+  /* Code */
+  --ifm-code-background: #171717;
+  --ifm-pre-background: #0c0c0c;
+  --ifm-pre-color: #c9c9c6;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.08);
+
+  /* Pied de page */
+  --ifm-footer-background-color: #050505;
+  --ifm-footer-color: #9a9a96;
+  --ifm-footer-link-color: #9a9a96;
+  --ifm-footer-link-hover-color: #ffffff;
+  --ifm-footer-title-color: #6b6b68;
+  --ifm-footer-padding-vertical: 4rem;
+
+  /* Ombres : uniquement des ombres portées neutres, jamais de lueur */
+  --dystos-shadow-card: 0 24px 48px rgba(0, 0, 0, 0.45);
+  --dystos-shadow-neon: none;
+  --dystos-hero-glow: transparent;
+
+  color-scheme: dark;
+}
+
+/* Le site est sombre uniquement ; les deux sélecteurs portent les mêmes
+   valeurs pour éviter tout éclair blanc au chargement. */
+[data-theme='dark'] {
+  --ifm-background-color: #050505;
+  --ifm-background-surface-color: #111111;
+  --ifm-font-color-base: #b9b9b5;
+  --ifm-heading-color: #ffffff;
+  --ifm-navbar-background-color: rgba(5, 5, 5, 0.97);
+  --ifm-footer-background-color: #050505;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+
+html {
+  background: var(--dystos-black);
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--dystos-black);
+  color: var(--ifm-font-color-base);
+  font-family: var(--ifm-font-family-base);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--dystos-white);
+  color: var(--dystos-black);
+}
+
+:focus-visible {
+  outline: 2px solid var(--dystos-white);
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--ifm-heading-font-family);
+  color: var(--ifm-heading-color);
+  letter-spacing: 0.01em;
+}
+
+h1,
+h2 {
+  text-transform: uppercase;
+}
+
+h1 {
+  font-weight: 700;
+  line-height: 0.98;
+}
+
+h2 {
+  font-weight: 700;
+  line-height: 1.02;
+}
+
+h3,
+h4 {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+h5,
+h6 {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+p {
+  line-height: 1.65;
+}
+
+strong,
+b {
+  font-weight: 600;
+  color: var(--dystos-gray-100);
+}
+
+a {
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  text-decoration-color: var(--dystos-white);
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--dystos-border);
+}
+
+/* ============================================================
+   En-tête de navigation
+   ============================================================ */
+
+.navbar {
+  background: var(--ifm-navbar-background-color) !important;
+  border-bottom: 1px solid var(--dystos-border-soft);
+  box-shadow: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Le logo doit tomber exactement sur le bord du conteneur de page. */
+.navbar__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.navbar__title {
+  font-family: var(--ifm-heading-font-family);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dystos-white);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+}
+
+.navbar__logo img {
+  filter: none;
+}
+
+.navbar__link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ifm-navbar-link-color);
+  text-decoration: none;
+}
+
+.navbar__link:hover,
+.navbar__link--active {
+  color: var(--dystos-white);
+}
+
+.navbar__link--active {
+  text-decoration: none;
+}
+
+.navbar__items--right .navbar__link {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Menu déroulant */
+.dropdown__menu {
+  background: var(--dystos-gray-900);
+  border: 1px solid var(--dystos-border);
+  border-radius: 2px;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6);
+}
+
+.dropdown__link {
+  border-radius: 2px;
+  font-size: 0.9rem;
+  color: var(--dystos-gray-300);
+}
+
+.dropdown__link:hover,
+.dropdown__link--active {
+  background: var(--dystos-accent-soft);
+  color: var(--dystos-white);
+}
+
+/* ============================================================
+   Boutons
+   ============================================================ */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.75rem;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-family: var(--ifm-font-family-base);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.18s ease, border-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.button:hover {
+  text-decoration: none;
+  transform: none;
+  box-shadow: none;
+}
+
+.button--primary {
+  background: var(--dystos-white);
+  border-color: var(--dystos-white);
+  color: #0a0a0a;
+}
+
+.button--primary:hover,
+.button--primary:focus {
+  background: var(--dystos-gray-300);
+  border-color: var(--dystos-gray-300);
+  color: #0a0a0a;
+}
+
+.button--secondary {
+  background: transparent;
+  border-color: var(--dystos-white);
+  color: var(--dystos-white);
+}
+
+.button--secondary:hover,
+.button--secondary:focus {
+  background: var(--dystos-white);
+  border-color: var(--dystos-white);
+  color: #050505;
+}
+
+.button--outline.button--secondary {
+  background: transparent;
+  border-color: var(--dystos-border);
+  color: var(--dystos-gray-200);
+}
+
+.button--outline.button--secondary:hover {
+  border-color: var(--dystos-white);
+  background: var(--dystos-accent-soft);
+  color: var(--dystos-white);
+}
+
+.button--lg {
+  padding: 1rem 2rem;
+  font-size: 0.85rem;
+}
+
+.button--sm {
+  padding: 0.6rem 1.1rem;
+  font-size: 0.72rem;
+}
+
+/* ============================================================
+   Documentation, articles et contenu Markdown
+   ============================================================ */
+
+.theme-doc-markdown,
+.markdown {
+  color: var(--dystos-gray-300);
+}
+
+.theme-doc-markdown > h1:first-child,
+.markdown > h1:first-child {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  margin-bottom: 1.5rem;
+}
+
+.theme-doc-markdown h2,
+.markdown h2 {
+  margin-top: 3rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--dystos-border-soft);
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+}
+
+.theme-doc-markdown h3,
+.markdown h3 {
+  margin-top: 2.25rem;
+  font-size: 1.35rem;
+}
+
+.theme-doc-markdown p,
+.markdown p,
+.theme-doc-markdown li,
+.markdown li {
+  max-width: 72ch;
+}
+
+.theme-doc-markdown p,
+.markdown p {
+  color: var(--dystos-gray-400);
+}
+
+.theme-doc-markdown li,
+.markdown li {
+  color: var(--dystos-gray-300);
+}
+
+.theme-doc-markdown ul,
+.theme-doc-markdown ol,
+.markdown ul,
+.markdown ol {
+  padding-left: 1.4rem;
+}
+
+.theme-doc-markdown li + li,
+.markdown li + li {
+  margin-top: 0.35rem;
+}
+
+/* Les tableaux sont traités partout de la même façon, y compris sur les
+   pages écrites en TSX où le contenu n'est pas dans un bloc Markdown. */
+table {
+  display: table;
+  width: 100%;
+  border: 1px solid var(--dystos-border);
+  border-radius: 2px;
+  border-collapse: collapse;
+  overflow: hidden;
+}
+
+th {
+  padding: 0.85rem 1rem;
+  background: var(--dystos-surface);
+  border-bottom: 1px solid var(--dystos-border);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dystos-white);
+  text-align: left;
+}
+
+td {
+  padding: 0.8rem 1rem;
+  border-top: 1px solid var(--dystos-border-soft);
+  color: var(--dystos-gray-300);
+}
+
+tr:nth-child(2n) {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+/* Sur mobile, un tableau trop large défile dans son cadre au lieu de
+   pousser toute la page. */
+@media screen and (max-width: 640px) {
+  table {
+    display: block;
+    overflow-x: auto;
   }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.15);
+
+  th,
+  td {
+    padding: 0.7rem 0.8rem;
   }
 }
 
-/* Défilement lent de la grille d'arrière-plan */
-@keyframes dystosGridMove {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 40px 40px;
-  }
+/* Code en ligne */
+code {
+  padding: 0.12em 0.4em;
+  background: var(--dystos-surface-raised);
+  border: 1px solid var(--dystos-border);
+  border-radius: 2px;
+  color: var(--dystos-gray-100);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.86em;
+  vertical-align: baseline;
 }
 
-/* Flottement vertical doux */
-@keyframes dystosFloat {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
+a code {
+  color: inherit;
 }
 
-/* Apparition progressive avec décalage */
+/* Blocs de code */
+.theme-code-block {
+  border-radius: 2px;
+  box-shadow: none;
+}
+
+.theme-code-block pre,
+pre[class*='language-'] {
+  border-radius: 2px;
+  background: var(--dystos-gray-900) !important;
+}
+
+.theme-doc-markdown .theme-code-block,
+.markdown .theme-code-block {
+  border: 1px solid var(--dystos-border);
+}
+
+.theme-code-block code {
+  padding: 0;
+  background: none;
+  border: 0;
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+
+/* Titre de bloc de code */
+.theme-code-block > div:first-child:not([class*='codeBlockContent']) {
+  border-bottom: 1px solid var(--dystos-border-soft);
+  background: var(--dystos-surface);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Citations et séparateurs */
+blockquote {
+  border-left: 2px solid var(--dystos-moss);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 0.9rem 1.25rem;
+  color: var(--dystos-gray-400);
+}
+
+/* Sommaire de droite */
+.table-of-contents {
+  font-size: 0.82rem;
+}
+
+.table-of-contents__link {
+  color: var(--dystos-gray-500);
+  text-decoration: none;
+}
+
+.table-of-contents__link:hover,
+.table-of-contents__link--active {
+  color: var(--dystos-white);
+  text-decoration: none;
+}
+
+.table-of-contents__left-border {
+  border-left: 1px solid var(--dystos-border-soft);
+}
+
+/* Menu latéral */
+.menu {
+  background: transparent;
+  font-size: 0.9rem;
+}
+
+.menu__link {
+  border-radius: 2px;
+  font-weight: 500;
+  color: var(--dystos-gray-400);
+  text-decoration: none;
+}
+
+.menu__link:hover {
+  color: var(--dystos-white);
+}
+
+.menu__link--active,
+.menu__link--active:hover {
+  color: var(--dystos-white);
+  background: var(--dystos-accent-soft);
+}
+
+.menu__list-item-collapsible:hover {
+  background: var(--dystos-accent-soft);
+  border-radius: 2px;
+}
+
+.menu__caret::before,
+.menu__link--sublist-caret::after {
+  filter: invert(1);
+  opacity: 0.55;
+}
+
+/* Fil d'Ariane */
+.breadcrumbs__link {
+  border-radius: 2px;
+  color: var(--dystos-gray-400);
+}
+
+.breadcrumbs__item--active .breadcrumbs__link {
+  background: var(--dystos-surface);
+  color: var(--dystos-white);
+}
+
+/* Pagination */
+.pagination-nav__link {
+  border: 1px solid var(--dystos-border);
+  border-radius: 2px;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.pagination-nav__link:hover {
+  border-color: var(--dystos-gray-500);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.pagination-nav__sublabel {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dystos-gray-500);
+}
+
+.pagination-nav__label {
+  font-family: var(--ifm-heading-font-family);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Encarts */
+.theme-admonition {
+  border: 1px solid var(--dystos-border);
+  border-left-width: 2px;
+  border-radius: 2px;
+  background: var(--dystos-surface);
+  box-shadow: none;
+}
+
+.theme-admonition p:last-child {
+  margin-bottom: 0;
+}
+
+/* Blocs dépliables (indices, solutions) : aucune couleur d'alerte. */
+.alert,
+details.alert {
+  --ifm-alert-background-color: var(--dystos-surface);
+  --ifm-alert-background-color-highlight: rgba(255, 255, 255, 0.04);
+  --ifm-alert-border-color: var(--dystos-border);
+  --ifm-alert-foreground-color: var(--dystos-gray-200);
+  border: 1px solid var(--dystos-border);
+  border-left: 2px solid var(--dystos-moss);
+  border-radius: 2px;
+  background: var(--dystos-surface);
+  box-shadow: none;
+}
+
+details.alert > summary {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dystos-gray-200);
+  cursor: pointer;
+}
+
+details.alert[open] > summary {
+  margin-bottom: 0.9rem;
+  color: var(--dystos-white);
+}
+
+/* Étiquettes et badges */
+.badge {
+  border: 1px solid var(--dystos-border);
+  border-radius: 2px;
+  background: var(--dystos-surface);
+  color: var(--dystos-gray-300);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.tag {
+  border: 1px solid var(--dystos-border);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--dystos-gray-400);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.tag:hover {
+  border-color: var(--dystos-white);
+  color: var(--dystos-white);
+  text-decoration: none;
+}
+
+/* Onglets */
+.tabs__item {
+  border-radius: 0;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dystos-gray-500);
+}
+
+.tabs__item:hover {
+  color: var(--dystos-gray-200);
+}
+
+.tabs__item--active {
+  border-bottom-color: var(--dystos-white);
+  color: var(--dystos-white);
+}
+
+/* ============================================================
+   Accueil : le hero Docusaurus est toujours transparent
+   ============================================================ */
+
+.hero.hero--primary {
+  --ifm-hero-background-color: transparent;
+  --ifm-hero-text-color: var(--dystos-white);
+}
+
+/* ============================================================
+   Pied de page
+   ============================================================ */
+
+footer.footer {
+  padding: 4.5rem 0 2rem;
+  border-top: 1px solid var(--dystos-border-soft);
+  background: var(--dystos-black);
+  color: var(--dystos-gray-400);
+}
+
+.footer__title {
+  margin-bottom: 1rem;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dystos-gray-500);
+}
+
+.footer__link-item {
+  font-size: 0.9rem;
+  color: var(--dystos-gray-400);
+}
+
+.footer__link-item:hover {
+  color: var(--dystos-white);
+  text-decoration: none;
+}
+
+.footer__copyright {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--dystos-border-soft);
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--dystos-gray-500);
+}
+
+/* ============================================================
+   Actualités — colonne et sommaire
+   ============================================================ */
+
+/* La liste n'a pas de sommaire : elle occupe neuf colonnes sur douze. */
+.blog-list-page main.col--7 {
+  flex: 0 0 75%;
+  max-width: 75%;
+}
+
+.blog-list-page aside nav {
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--dystos-border-soft);
+}
+
+.blog-list-page aside nav > div:first-child {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dystos-gray-500);
+}
+
+.blog-list-page aside h3 {
+  margin: 1.75rem 0 0.5rem;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.66rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dystos-gray-600);
+}
+
+.blog-list-page aside ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.blog-list-page aside li {
+  border-top: 1px solid var(--dystos-border-soft);
+}
+
+.blog-list-page aside li a {
+  display: block;
+  padding: 0.55rem 0;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: var(--dystos-gray-400);
+  text-decoration: none;
+}
+
+.blog-list-page aside li a:hover {
+  color: var(--dystos-white);
+}
+
+/* ============================================================
+   Détails annexes
+   ============================================================ */
+
+.skipToContent_fallback:focus {
+  background: var(--dystos-white);
+  color: #050505;
+}
+
+.docusaurus-highlight-code-line {
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme='dark'] {
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.08);
+}
+
+/* Barres de défilement discrètes */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--dystos-gray-700) var(--dystos-black);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dystos-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dystos-gray-700);
+  border: 2px solid var(--dystos-black);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dystos-gray-500);
+}
+
+/* ============================================================
+   Animations : une seule apparition sobre
+   ============================================================ */
+
 @keyframes dystosFadeUp {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -134,192 +978,16 @@
   }
 }
 
-/* Remplissage néon au survol */
-@keyframes dystosNeonFill {
-  0% {
-    box-shadow: 0 0 0 0 rgba(0, 242, 255, 0.4);
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-  70% {
-    box-shadow: 0 0 0 6px rgba(0, 242, 255, 0);
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
-  100% {
-    box-shadow: 0 0 0 0 rgba(0, 242, 255, 0);
-  }
-}
-
-/* Texte qui brille (gradient animé) */
-@keyframes dystosGradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* ============================================================
-   Accessibilité : lien d'évitement visible au clavier
-   ============================================================ */
-.skipToContent_fallback:focus {
-  background: var(--ifm-color-primary);
-  color: #050505;
-}
-
-/* ============================================================
-   Thème général
-   ============================================================ */
-.theme-doc-markdown h1 {
-  letter-spacing: -0.02em;
-}
-
-.theme-doc-markdown table {
-  display: table;
-  width: 100%;
-}
-
-.navbar__title {
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  background: linear-gradient(
-    90deg,
-    var(--dystos-white),
-    var(--dystos-gray-300)
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Navbar plus discrète sur fond noir */
-.navbar {
-  background: var(--ifm-navbar-background-color) !important;
-  border-bottom: 1px solid var(--dystos-border);
-}
-
-.navbar__logo img {
-  filter: drop-shadow(0 0 8px rgba(0, 242, 255, 0.4));
-}
-
-/* Boutons Docusaurus personnalisés */
-.button {
-  border-radius: 8px;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  transition: all 0.3s ease;
-}
-
-.button--primary {
-  background: var(--ifm-color-primary);
-  color: var(--dystos-black-deep);
-  border: none;
-}
-
-.button--primary:hover {
-  background: var(--ifm-color-primary-light);
-  color: var(--dystos-black-deep);
-  transform: translateY(-2px);
-  box-shadow: var(--dystos-shadow-neon);
-}
-
-.button--secondary {
-  background: transparent;
-  color: var(--ifm-color-primary);
-  border: 1px solid var(--ifm-color-primary);
-}
-
-.button--secondary:hover {
-  background: var(--ifm-color-primary);
-  color: var(--dystos-black-deep);
-  transform: translateY(-2px);
-  box-shadow: var(--dystos-shadow-neon);
-}
-
-/* ============================================================
-   Graisses allégées — cohérence sur tout le site
-   ============================================================ */
-strong,
-b,
-th,
-.footer__title,
-.pagination-nav__label,
-.menu__link--active,
-.navbar__link--active,
-.table-of-contents__link--active {
-  font-weight: 400;
-}
-
-/* Pied de page noir */
-footer {
-  border-top: 1px solid var(--dystos-border);
-  background: #000000 !important;
-}
-
-footer * {
-  color: var(--dystos-gray-300) !important;
-}
-
-footer a {
-  color: var(--ifm-color-primary) !important;
-}
-
-footer a:hover {
-  color: var(--ifm-color-primary-light) !important;
-}
-
-/* ============================================================
-   Utilitaires d'animation réutilisables
-   ============================================================ */
-.animate-fade-up {
-  animation: dystosFadeUp 0.8s ease-out both;
-}
-
-.animate-float {
-  animation: dystosFloat 6s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: dystosPulseGlow 4s ease-in-out infinite;
-}
-
-.delay-100 {
-  animation-delay: 0.1s;
-}
-.delay-200 {
-  animation-delay: 0.2s;
-}
-.delay-300 {
-  animation-delay: 0.3s;
-}
-.delay-400 {
-  animation-delay: 0.4s;
-}
-.delay-500 {
-  animation-delay: 0.5s;
-}
-
-/* ============================================================
-   Graisse unique : tout le texte du site en normal
-   ============================================================ */
-* {
-  font-weight: 400 !important;
-}
-
-/* Titres : graisse normale mais visuellement présents */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 400 !important;
-  letter-spacing: -0.02em;
-}
-
-/* Liens : souligné léger au survol pour lisibilité */
-a {
-  text-underline-offset: 2px;
-  text-decoration-thickness: 1px;
-}
-
-/* Cartes : espacement intérieur cohérent */
-.card, .feature {
-  padding: 1.75rem 1.5rem !important;
 }

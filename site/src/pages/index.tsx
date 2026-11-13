@@ -126,27 +126,10 @@ export default function Home(): ReactNode {
     <Layout
       title="Dystos, un langage simple et sûr"
       description="Dystos est un langage de programmation lisible comme Python, sûr comme Java, qui tourne sur la JVM. Apprends-le sur le web ou hors ligne sur Android.">
-      {/* ======== HERO FUTURISTE ======== */}
+      {/* ======== HERO ======== */}
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
-        {/* Fond en grille animée */}
-        <div className={styles.heroGrid} />
-        {/* Lueurs néon abstraites */}
-        <div className={`${styles.heroGlow} ${styles.glow1}`} />
-        <div className={`${styles.heroGlow} ${styles.glow2}`} />
-        <div className={`${styles.heroGlow} ${styles.glow3}`} />
-        {/* Particules flottantes */}
-        {Array.from({length: 12}).map((_, i) => (
-          <div
-            key={i}
-            className={styles.heroParticle}
-            style={{
-              left: `${10 + i * 8}%`,
-              top: `${20 + (i % 4) * 15}%`,
-              animationDelay: `${i * 0.5}s`,
-              animationDuration: `${6 + i * 2}s`,
-            }}
-          />
-        ))}
+        {/* Grille de fond statique */}
+        <div className={styles.heroGrid} aria-hidden="true" />
 
         <div className="container">
           <div className={styles.heroContent}>

@@ -144,8 +144,6 @@ export default function CommunautePage(): ReactNode {
       description="La communauté Dystos : apprendre, contribuer, signaler un bug et faire vivre un langage libre, souverain et hors ligne.">
       <header className={styles.hero}>
         <div className={styles.heroGrid} aria-hidden="true" />
-        <div className={clsx(styles.glow, styles.glowA)} aria-hidden="true" />
-        <div className={clsx(styles.glow, styles.glowB)} aria-hidden="true" />
 
         <div className={clsx('container', styles.heroContent)}>
           <div className={styles.badge}>

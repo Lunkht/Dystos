@@ -1,17 +1,28 @@
+/* Catalogue d'exemples — cartes à filets, libellés monospace. */
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  overflow: hidden;
+  background: var(--dystos-border);
+  border: 1px solid var(--dystos-border);
+  border-radius: 2px;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  border: 1px solid var(--dystos-border);
-  border-radius: 10px;
-  padding: 1rem;
-  background: var(--ifm-background-surface-color);
+  gap: 0.85rem;
+  padding: 1.75rem;
+  border: 0;
+  border-radius: 0;
+  background: var(--dystos-gray-900);
+  transition: background 0.18s ease;
+}
+
+.card:hover {
+  background: var(--dystos-surface);
 }
 
 .cardHeader {
@@ -22,58 +33,98 @@
 }
 
 .cardTitle {
-  font-size: 1.05rem;
   margin: 0;
+  font-family: var(--ifm-heading-font-family);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--dystos-white);
 }
 
 .chapter {
-  font-size: 0.7rem;
+  flex-shrink: 0;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--ifm-color-primary);
+  color: var(--dystos-gray-500);
   white-space: nowrap;
+}
+
+.card > :global(.theme-code-block) {
+  border: 1px solid var(--dystos-border);
+  border-radius: 2px;
+  box-shadow: none;
+  margin-bottom: 0;
 }
 
 .output {
   margin: 0;
-  padding: 0.7rem;
-  background: var(--dystos-surface);
-  border: 1px dashed var(--dystos-border);
-  border-radius: 6px;
+  padding: 0.75rem 0.9rem;
+  background: var(--dystos-black);
+  border: 1px solid var(--dystos-border);
+  border-radius: 2px;
   font-family: var(--ifm-font-family-monospace);
   font-size: 0.82rem;
+  line-height: 1.6;
   white-space: pre-wrap;
+  color: var(--dystos-gray-200);
 }
 
 .outputLabel {
   display: block;
-  font-family: var(--ifm-font-family-base);
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--ifm-color-primary);
   margin-bottom: 0.3rem;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dystos-gray-500);
 }
 
 .note {
   margin: 0;
-  padding: 0.7rem;
-  background: var(--dystos-surface);
+  padding: 0.75rem 0.9rem;
+  background: var(--dystos-black);
   border: 1px solid var(--dystos-border);
-  border-radius: 6px;
+  border-radius: 2px;
   font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--dystos-gray-400);
 }
 
 .noteLabel {
   display: block;
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--ifm-color-primary);
   margin-bottom: 0.3rem;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dystos-gray-500);
 }
 
 .openInPlayground {
-  font-size: 0.85rem;
+  align-self: flex-start;
   margin-top: auto;
+  padding-bottom: 0.15rem;
+  border-bottom: 1px solid var(--dystos-accent-dim);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dystos-white);
+  text-decoration: none;
+}
+
+.openInPlayground:hover {
+  border-color: var(--dystos-white);
+  color: var(--dystos-white);
+  text-decoration: none;
+}
+
+@media screen and (max-width: 996px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }

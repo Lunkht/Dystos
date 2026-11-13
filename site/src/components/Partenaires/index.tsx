@@ -1,47 +1,33 @@
 import type {ReactNode} from 'react';
-import clsx from 'clsx';
 
 import styles from './partenaires.module.css';
 
-type Partenaire = {
-  nom: string;
-  url: string;
-  logo: string;
-};
-
-const PARTENAIRES: Partenaire[] = [
-  {nom: 'Dystos Core', url: '/', logo: '/img/dystos.svg'},
-  {nom: 'JVM', url: '/', logo: '/img/dystos_for_dark_mode.svg'},
-  {nom: 'Android', url: '/', logo: '/img/dystos.svg'},
-  {nom: 'VS Code', url: '/', logo: '/img/dystos_for_dark_mode.svg'},
-  {nom: 'Playground', url: '/playground', logo: '/img/dystos.svg'},
-  {nom: 'Documentation', url: '/docs/introduction', logo: '/img/dystos_for_dark_mode.svg'},
+/**
+ * Surfaces sur lesquelles Dystos s'exécute ou s'intègre.
+ *
+ * Le bandeau affiche des libellés plutôt que des logos : le projet n'a pas
+ * encore d'assets partenaires, et répéter le logo Dystos donnait l'impression
+ * d'une image cassée. Les libellés restent sobres et lisibles en monochrome.
+ */
+const ECOSYSTEME = [
+  'Dystos Core',
+  'JVM',
+  'Android',
+  'VS Code',
+  'Playground',
+  'Documentation',
 ];
 
 export default function Partenaires(): ReactNode {
   return (
-    <section className={styles.partenaires}>
+    <section className={styles.partenaires} aria-label="Écosystème Dystos">
       <div className={styles.container}>
-        <div className={styles.defilant}>
-          {PARTENAIRES.map((p) => (
-            <img
-              key={p.nom}
-              src={p.logo}
-              alt={p.nom}
-              className={styles.logo}
-              loading="lazy"
-            />
+        <p className={styles.label}>Écosystème</p>
+        <ul className={styles.bandeau}>
+          {ECOSYSTEME.map((nom) => (
+            <li key={nom}>{nom}</li>
           ))}
-          {PARTENAIRES.map((p) => (
-            <img
-              key={p.nom + '-2'}
-              src={p.logo}
-              alt={p.nom}
-              className={styles.logo}
-              loading="lazy"
-            />
-          ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

@@ -123,8 +123,6 @@ export default function CreateurPage(): ReactNode {
       description="Hakim Lunkht est le créateur et le mainteneur de Dystos, un langage lisible comme Python, sûr comme Java et souverain sur la JVM.">
       <header className={styles.hero}>
         <div className={styles.heroGrid} aria-hidden="true" />
-        <div className={clsx(styles.glow, styles.glowA)} aria-hidden="true" />
-        <div className={clsx(styles.glow, styles.glowB)} aria-hidden="true" />
 
         <div className={clsx('container', styles.heroContent)}>
           <div className={styles.avatar} aria-hidden="true">

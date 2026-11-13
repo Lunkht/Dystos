@@ -250,12 +250,12 @@ public final class IdeFragment extends BaseFragment {
         if (etPrompt != null) {
             etPrompt.setText("");
             etPrompt.setHint("Que souhaitez-vous coder ?");
-            etPrompt.setTextColor(0xFFFFFFFF);
+            etPrompt.setTextColor(requireContext().getColor(R.color.dystos_on_surface));
         }
 
         if (etOutput != null) {
             etOutput.setHint("Le code généré apparaîtra ici...");
-            etOutput.setTextColor(0xFF4DD4C0);
+            etOutput.setTextColor(requireContext().getColor(R.color.dystos_code_on_background));
             etOutput.setTextSize(14f);
             etOutput.setMinHeight(180);
         }

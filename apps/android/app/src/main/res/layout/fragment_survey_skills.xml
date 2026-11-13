@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
         android:id="@+id/tv_header_title_skills"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:backgroundTint="?attr/colorOutline"
-        app:cornerRadius="28dp"
+        app:cornerRadius="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

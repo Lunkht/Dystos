@@ -27,7 +27,7 @@
             android:src="@drawable/ic_arrow_back"
             app:tint="?attr/colorOnSurface" />
 
-        <TextView
+        <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
             android:id="@+id/screen_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

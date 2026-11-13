@@ -30,7 +30,7 @@
                 android:src="@drawable/ic_arrow_back"
                 app:tint="?attr/colorOnSurface" />
 
-            <TextView
+            <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -61,7 +61,7 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
+                    <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                         android:id="@+id/stat_lessons_read"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
+                    <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                         android:id="@+id/stat_completion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
         </LinearLayout>
 
         <!-- Progression globale -->
-        <TextView
+        <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -157,7 +157,7 @@
         </LinearLayout>
 
         <!-- Chapitres -->
-        <TextView
+        <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -174,7 +174,7 @@
             android:nestedScrollingEnabled="false" />
 
         <!-- Quiz disponibles -->
-        <TextView
+        <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -192,7 +192,7 @@
             android:nestedScrollingEnabled="false" />
 
         <!-- Section référence rapide -->
-        <TextView
+        <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -216,7 +216,7 @@
             android:textAllCaps="false"
             app:strokeColor="?attr/colorOutline"
             app:strokeWidth="1dp"
-            app:cornerRadius="0dp"
+            app:cornerRadius="2dp"
             app:backgroundTint="?attr/colorSurface"
             app:icon="@drawable/ic_nav_revision"
             app:iconTint="?attr/colorPrimary"
@@ -236,7 +236,7 @@
             android:textAllCaps="false"
             app:strokeColor="?attr/colorOutline"
             app:strokeWidth="1dp"
-            app:cornerRadius="0dp"
+            app:cornerRadius="2dp"
             app:backgroundTint="?attr/colorSurface" />
 
     </LinearLayout>

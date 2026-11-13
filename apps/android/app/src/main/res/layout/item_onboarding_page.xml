@@ -16,7 +16,7 @@
         android:background="@drawable/bg_cube_container">
 
         <!-- Number inside cube -->
-        <TextView
+        <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
             android:id="@+id/tv_cube_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
     </FrameLayout>
 
     <!-- Title -->
-    <TextView
+    <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

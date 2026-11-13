@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Code Dys"
-            android:textColor="#8FC1E9"
+            android:textColor="@color/dystos_code_label"
             android:textSize="12sp"
             android:textStyle="bold" />
         <LinearLayout
@@ -46,7 +46,7 @@
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp"
                 android:text="Copier"
-                android:textColor="#8FC1E9"
+                android:textColor="@color/dystos_code_label"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
@@ -57,8 +57,8 @@
         android:id="@+id/code_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="monospace"
-        android:textColor="#FFFFFF"
+        android:fontFamily="@font/jetbrains_mono"
+        android:textColor="@color/dystos_on_surface"
         android:textSize="13sp"
         android:textIsSelectable="true" />
 </LinearLayout>

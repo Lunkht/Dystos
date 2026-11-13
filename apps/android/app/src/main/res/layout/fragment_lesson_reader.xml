@@ -31,7 +31,7 @@
                 android:src="@drawable/ic_arrow_back"
                 app:tint="?attr/colorOnSurface" />
 
-            <TextView
+            <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -106,7 +106,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Sortie"
-                        android:textColor="#4DD4C0"
+                        android:textColor="@color/dystos_code_output"
                         android:textSize="12sp"
                         android:textStyle="bold"
                         android:paddingBottom="4dp" />
@@ -115,8 +115,8 @@
                         android:id="@+id/example_output_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="monospace"
-                        android:textColor="#4DD4C0"
+                        android:fontFamily="@font/jetbrains_mono"
+                        android:textColor="@color/dystos_code_output"
                         android:textSize="13sp"
                         android:textIsSelectable="true" />
                 </LinearLayout>
@@ -171,7 +171,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Sortie attendue"
-                        android:textColor="#4DD4C0"
+                        android:textColor="@color/dystos_code_output"
                         android:textSize="12sp"
                         android:textStyle="bold"
                         android:paddingBottom="4dp" />
@@ -180,8 +180,8 @@
                         android:id="@+id/exercise_output_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="monospace"
-                        android:textColor="#4DD4C0"
+                        android:fontFamily="@font/jetbrains_mono"
+                        android:textColor="@color/dystos_code_output"
                         android:textSize="13sp"
                         android:textIsSelectable="true" />
                 </LinearLayout>

@@ -30,7 +30,7 @@
                 android:src="@drawable/ic_arrow_back"
                 app:tint="?attr/colorOnSurface" />
 
-            <TextView
+            <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -43,7 +43,7 @@
 
 
         <!-- Section Apparence -->
-        <TextView
+        <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -123,7 +123,7 @@
         </LinearLayout>
 
         <!-- Section Aide & Support -->
-        <TextView
+        <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -210,7 +210,7 @@
         </LinearLayout>
 
         <!-- Section À propos -->
-        <TextView
+        <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"

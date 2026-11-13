@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Onglet actif de l editeur : fond clair, texte inverse. -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#2B5561"/>
-    <corners android:radius="8dp"/>
+    <solid android:color="@color/dystos_primary" />
+    <corners android:radius="2dp" />
 </shape>

@@ -2,8 +2,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--
-      Thème sombre : les mêmes noms de couleurs pointent vers la palette
-      monochrome de values-night/colors.xml.
+      Thème sombre : même structure que values/themes.xml, mais la palette et
+      la typographie pointent vers values-night et restent identiques au site.
     -->
     <style name="Theme.Dystos" parent="Theme.Material3.Dark.NoActionBar">
         <item name="mainBackground">@drawable/black_white_gradient_main_bg</item>
@@ -23,6 +23,36 @@
         <item name="colorOnError">@color/dystos_on_error</item>
         <item name="colorControlActivated">@color/dystos_primary</item>
         <item name="colorControlNormal">@color/dystos_outline</item>
+
+        <!-- Typographie : Barlow au repos, titres en Barlow Condensed. -->
+        <item name="android:fontFamily">@font/barlow</item>
+        <item name="fontFamily">@font/barlow</item>
+        <item name="textAppearanceDisplayLarge">@style/TextAppearance.Dystos.Display</item>
+        <item name="textAppearanceDisplayMedium">@style/TextAppearance.Dystos.Display</item>
+        <item name="textAppearanceDisplaySmall">@style/TextAppearance.Dystos.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.Dystos.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.Dystos.HeadlineMedium</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.Dystos.HeadlineSmall</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.Dystos.TitleLarge</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.Dystos.TitleMedium</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.Dystos.TitleSmall</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Dystos.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Dystos.BodyMedium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.Dystos.BodySmall</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.Dystos.LabelLarge</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.Dystos.LabelMedium</item>
+        <item name="textAppearanceLabelSmall">@style/TextAppearance.Dystos.LabelSmall</item>
+
+        <!-- Angles : 2 dp, jamais d'ombre portée. -->
+        <item name="shapeAppearanceCornerExtraSmall">@style/ShapeAppearance.Dystos.Corner</item>
+        <item name="shapeAppearanceCornerSmall">@style/ShapeAppearance.Dystos.Corner</item>
+        <item name="shapeAppearanceCornerMedium">@style/ShapeAppearance.Dystos.Corner</item>
+        <item name="shapeAppearanceCornerLarge">@style/ShapeAppearance.Dystos.Corner</item>
+        <item name="shapeAppearanceCornerExtraLarge">@style/ShapeAppearance.Dystos.Corner</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Dystos.Corner</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Dystos.Corner</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Dystos.Corner</item>
+
         <item name="android:statusBarColor">@color/dystos_background</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:navigationBarColor">@color/dystos_background</item>
@@ -30,6 +60,14 @@
         <item name="android:windowBackground">@drawable/black_white_gradient_main_bg</item>
         <item name="materialAlertDialogTheme">@style/Theme.Dystos.Dialog</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+    </style>
+
+    <style name="Theme.Dystos.Dialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="shapeAppearanceCornerMedium">@style/ShapeAppearance.Dystos.Corner</item>
+        <item name="android:fontFamily">@font/barlow</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.Dystos.HeadlineSmall</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Dystos.BodyMedium</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.Dystos.LabelLarge</item>
     </style>
 
 </resources>

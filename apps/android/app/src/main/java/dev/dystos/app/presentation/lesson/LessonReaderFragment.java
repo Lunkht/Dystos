@@ -109,7 +109,7 @@ public final class LessonReaderFragment extends BaseFragment {
                     TextView tvCode = codeCard.findViewById(R.id.code_content);
                     if (tvCode != null) {
                         tvCode.setText(codeContent);
-                        tvCode.setTextColor(0xFF4DD4C0);
+                        tvCode.setTextColor(requireContext().getColor(R.color.dystos_code_on_background));
                         tvCode.setTextIsSelectable(true);
                     }
                 } else {

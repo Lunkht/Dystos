@@ -50,7 +50,7 @@
         android:layout_gravity="center"
         android:padding="16dp">
 
-        <TextView
+        <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
             android:id="@+id/chapter_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

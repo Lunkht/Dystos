@@ -16,9 +16,9 @@
         android:id="@+id/tab_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="monospace"
+        android:fontFamily="@font/jetbrains_mono"
         android:maxLines="1"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/dystos_on_surface"
         android:textSize="13sp" />
 
     <ImageView
@@ -32,5 +32,5 @@
         android:contentDescription="Fermer"
         android:rotation="45"
         android:src="@drawable/cross_small"
-        app:tint="#9FB6BD" />
+        app:tint="@color/dystos_on_surface_variant" />
 </LinearLayout>

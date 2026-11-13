@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Poignee de feuille basse. -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#33585D"/>
-    <corners android:radius="2dp"/>
+    <solid android:color="@color/dystos_border" />
+    <corners android:radius="2dp" />
 </shape>

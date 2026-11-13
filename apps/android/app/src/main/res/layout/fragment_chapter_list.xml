@@ -59,7 +59,7 @@
                     android:layout_weight="1"
                     android:layout_margin="10dp"
                     android:padding="0dp">
-                    <TextView
+                    <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                         android:id="@+id/workoutCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
                     android:layout_weight="1"
                     android:layout_margin="10dp"
                     android:padding="0dp">
-                    <TextView
+                    <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                         android:id="@+id/streakCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
                     android:layout_weight="1"
                     android:layout_margin="10dp"
                     android:padding="0dp">
-                    <TextView
+                    <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                         android:id="@+id/maxStreakCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -277,7 +277,7 @@
                     android:background="@drawable/day_bg"
                     android:layout_margin="10dp"
                     android:padding="5dp">
-                    <TextView
+                    <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                         android:id="@+id/mon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -295,7 +295,7 @@
                     android:background="@drawable/day_bg"
                     android:layout_margin="10dp"
                     android:padding="5dp">
-                    <TextView
+                    <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                         android:id="@+id/tue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -313,7 +313,7 @@
                     android:background="@drawable/day_bg"
                     android:layout_margin="10dp"
                     android:padding="5dp">
-                    <TextView
+                    <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                         android:id="@+id/wed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -331,7 +331,7 @@
                     android:background="@drawable/day_bg"
                     android:layout_margin="10dp"
                     android:padding="5dp">
-                    <TextView
+                    <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                         android:id="@+id/thu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -349,7 +349,7 @@
                     android:background="@drawable/day_bg"
                     android:layout_margin="10dp"
                     android:padding="5dp">
-                    <TextView
+                    <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                         android:id="@+id/fra"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -367,7 +367,7 @@
                     android:background="@drawable/day_bg"
                     android:layout_margin="10dp"
                     android:padding="5dp">
-                    <TextView
+                    <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                         android:id="@+id/sat"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -385,7 +385,7 @@
                     android:background="@drawable/day_bg"
                     android:layout_margin="10dp"
                     android:padding="5dp">
-                    <TextView
+                    <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                         android:id="@+id/sun"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -431,7 +431,7 @@
                 app:trackCornerRadius="4dp"
                 app:trackThickness="8dp" />
 
-            <TextView
+            <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                 android:id="@+id/progress_percent"
                 android:layout_width="48dp"
                 android:layout_height="wrap_content"
@@ -469,7 +469,7 @@
             android:focusable="true"
             android:foreground="?attr/selectableItemBackground"
             app:cardBackgroundColor="?attr/colorSurface"
-            app:cardCornerRadius="20dp"
+            app:cardCornerRadius="2dp"
             app:cardElevation="0dp">
 
             <LinearLayout
@@ -485,7 +485,7 @@
                     android:textColor="?attr/colorOnSurfaceVariant"
                     android:textSize="13sp" />
 
-                <TextView
+                <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                     android:id="@+id/learning_lesson"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -504,7 +504,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <!-- Tools / Shortcuts Section Header -->
-        <TextView
+        <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -566,7 +566,7 @@
                         android:text="Voir plus d'exemples"
                         android:layout_margin="6dp"
                         android:textStyle="normal" />
-                    <TextView
+                    <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="?attr/colorPrimary"
@@ -624,7 +624,7 @@
                         android:text="Commence un quiz"
                         android:layout_margin="6dp"
                         android:textStyle="normal" />
-                    <TextView
+                    <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="?attr/colorPrimary"

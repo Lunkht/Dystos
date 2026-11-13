@@ -25,7 +25,7 @@
         android:layout_weight="1"
         android:textColor="?attr/colorOnSurface"
         android:textSize="15sp"
-        android:fontFamily="monospace" />
+        android:fontFamily="@font/jetbrains_mono" />
 
     <ImageView
         android:id="@+id/btn_delete"

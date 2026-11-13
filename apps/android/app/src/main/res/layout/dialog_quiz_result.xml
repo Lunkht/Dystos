@@ -32,8 +32,8 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:src="@drawable/check"
-                android:fontFamily="sans"
-                app:tint="#fff"
+                android:fontFamily="@font/barlow"
+                app:tint="@color/dystos_on_surface"
                 android:includeFontPadding="false"/>
             <ImageView
                 android:id="@+id/dysBot"
@@ -41,7 +41,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:src="@drawable/bjimo"
-                android:fontFamily="sans"
+                android:fontFamily="@font/barlow"
                 android:includeFontPadding="false"/>
 
         </RelativeLayout>
@@ -53,10 +53,10 @@
             android:layout_weight="1"
             android:layout_marginStart="22dp"
             android:text="Fantastique !"
-            android:textColor="#35CFFF"
+            android:textColor="@color/dystos_on_surface"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:fontFamily="monospace"
+            android:fontFamily="@font/jetbrains_mono"
             android:maxLines="2"/>
     </LinearLayout>
 
@@ -76,9 +76,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Dystos"
-            android:textColor="#8BEAFF"
+            android:textColor="@color/dystos_on_surface_variant"
             android:textSize="25sp"
-            android:fontFamily="monospace"
+            android:fontFamily="@font/jetbrains_mono"
             android:letterSpacing="0.04"/>
 
     </LinearLayout>
@@ -98,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ada a créé le premier algorithme destiné à être exécuté par une machine, ce qui fait d'elle une pionnière de la programmation."
-            android:textColor="#D4E1E6"
+            android:textColor="@color/dystos_on_surface"
             android:textSize="19sp"
             android:lineSpacingExtra="6dp"/>
 
@@ -110,10 +110,10 @@
             android:gravity="center"
             android:background="@drawable/bg_quiz_next"
             android:text="SUIVANT"
-            android:textColor="#003B4C"
+            android:textColor="@color/dystos_on_primary"
             android:textSize="21sp"
             android:textStyle="bold"
-            android:fontFamily="monospace"
+            android:fontFamily="@font/jetbrains_mono"
             android:clickable="true"
             android:focusable="true"
             android:contentDescription="Passer à la question suivante"/>

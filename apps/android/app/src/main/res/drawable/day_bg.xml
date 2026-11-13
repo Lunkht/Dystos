@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Puce jour (streak), mode clair. -->
+<!-- Puce jour (série), mode clair. -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
-    <solid android:color="#EDEDED" />
+    <solid android:color="@color/dystos_surface_variant" />
 </shape>

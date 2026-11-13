@@ -37,11 +37,11 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="monospace"
+            android:fontFamily="@font/jetbrains_mono"
             android:text="Assistant IA Bjimo"
             android:layout_weight="1"
             android:layout_gravity="center"
-            android:textColor="#35CFFF"
+            android:textColor="@color/dystos_on_surface"
             android:textSize="20sp"
             android:textStyle="bold" />
         <ImageView
@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginBottom="16dp"
-        android:background="#005366" />
+        android:background="@color/dystos_surface_variant" />
 
     <!-- Prompt input box -->
     <LinearLayout
@@ -77,7 +77,7 @@
             android:hint="Que souhaitez-vous coder ?"
             android:inputType="text"
             android:padding="12dp"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/dystos_on_surface"
             android:textColorHint="#8A9EA8"
             android:textSize="15sp" />
 
@@ -98,7 +98,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="6dp"
         android:text="Code généré :"
-        android:textColor="#8BEAFF"
+        android:textColor="@color/dystos_on_surface_variant"
         android:textSize="13sp"
         android:textStyle="bold" />
 
@@ -107,11 +107,11 @@
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:background="@drawable/code_block_bg"
-        android:fontFamily="monospace"
+        android:fontFamily="@font/jetbrains_mono"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:padding="14dp"
-        android:textColor="#4DD4C0"
+        android:textColor="@color/dystos_code_output"
         android:textIsSelectable="true"
         android:textSize="13sp" />
 

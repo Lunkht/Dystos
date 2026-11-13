@@ -1,32 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Palette claire monochrome : fond blanc, texte et accent noirs. -->
-    <color name="dystos_primary">#000000</color>
+    <!--
+      Palette claire, monochrome : papier blanc, encre noire, filets gris.
+      Mêmes noms que values-night/colors.xml, valeurs inversées.
+    -->
+    <color name="dystos_primary">#0A0A0A</color>
     <color name="dystos_on_primary">#FFFFFF</color>
-    <color name="dystos_primary_container">#EAEAEA</color>
-    <color name="dystos_on_primary_container">#111111</color>
-    <color name="dystos_secondary">#444444</color>
+    <color name="dystos_primary_container">#EDEDEA</color>
+    <color name="dystos_on_primary_container">#0A0A0A</color>
+    <color name="dystos_secondary">#5A5A57</color>
     <color name="dystos_on_secondary">#FFFFFF</color>
     <color name="dystos_background">#FFFFFF</color>
-    <color name="dystos_on_background">#000000</color>
-    <color name="dystos_surface">#FFFFFF</color>
-    <color name="dystos_on_surface">#000000</color>
-    <color name="dystos_surface_variant">#F1F1F1</color>
-    <color name="dystos_on_surface_variant">#424242</color>
-    <color name="dystos_outline">#737373</color>
-    <color name="dystos_error">#BA1A1A</color>
+    <color name="dystos_on_background">#0A0A0A</color>
+    <color name="dystos_surface">#FAFAF9</color>
+    <color name="dystos_on_surface">#0A0A0A</color>
+    <color name="dystos_surface_variant">#F1F1EF</color>
+    <color name="dystos_on_surface_variant">#5A5A57</color>
+    <color name="dystos_outline">#B8B8B3</color>
+    <color name="dystos_error">#9A2F2A</color>
     <color name="dystos_on_error">#FFFFFF</color>
-    <color name="dystos_ripple">#1F000000</color>
+    <color name="dystos_ripple">#14000000</color>
 
-    <!-- Blocs de code : fond sombre en toute saison, coloration syntaxique. -->
-    <color name="dystos_code_background">#1E1E1E</color>
-    <color name="dystos_code_on_background">#D4D4D4</color>
-    <color name="dystos_code_keyword">#569CD6</color>
-    <color name="dystos_code_builtin">#DCDCAA</color>
-    <color name="dystos_code_string">#CE9178</color>
-    <color name="dystos_code_number">#B5CEA8</color>
-    <color name="dystos_code_comment">#6A9955</color>
-    <color name="dystos_code_operator">#C586C0</color>
-    <color name="dystos_code_inline_background">#EDEDEF</color>
-    <color name="dystos_code_inline_text">#1F2937</color>
+    <!-- Filets : 1 dp, jamais d'ombre. -->
+    <color name="dystos_border">#E2E2DE</color>
+    <color name="dystos_border_soft">#EFEFEC</color>
+
+    <!-- Texte secondaire, comme les étiquettes mono du site. -->
+    <color name="dystos_text_dim">#8A8A85</color>
+    <color name="dystos_moss">#8C8C89</color>
+
+    <!--
+      Blocs de code : panneau sombre dans les deux thèmes, comme sur le site.
+      La couleur y porte du sens (mot-clé, chaîne, nombre, fonction).
+    -->
+    <color name="dystos_code_background">#0C0C0C</color>
+    <color name="dystos_code_on_background">#CFCFCA</color>
+    <color name="dystos_code_keyword">#E2A48F</color>
+    <color name="dystos_code_builtin">#9DBFD8</color>
+    <color name="dystos_code_string">#A8C9A3</color>
+    <color name="dystos_code_number">#E3C184</color>
+    <color name="dystos_code_comment">#7C7C77</color>
+    <color name="dystos_code_operator">#B9B9B4</color>
+    <color name="dystos_code_output">#CFCFCA</color>
+    <color name="dystos_code_label">#9A9A96</color>
+    <color name="dystos_code_inline_background">#EEEEEA</color>
+    <color name="dystos_code_inline_text">#1F1F1D</color>
+
+    <!--
+      États d'un choix de quiz : voile très discret, la couleur ne sert qu'à
+      distinguer juste et faux. Le texte et le filet portent le reste du sens.
+    -->
+    <color name="dystos_state_correct">#265F7A5C</color>
+    <color name="dystos_state_wrong">#269A2F2A</color>
 </resources>

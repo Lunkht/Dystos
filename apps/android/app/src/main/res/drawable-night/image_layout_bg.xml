@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Bandeau d'illustration d'une carte, mode sombre. -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#222222" />
-    <corners
-        android:topLeftRadius="10dp"
-        android:topRightRadius="8dp" />
-</shape>

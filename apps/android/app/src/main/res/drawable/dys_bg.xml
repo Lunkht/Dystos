@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Fond neutre : plus aucun degrade. -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <gradient
-        android:startColor="#0F172A"
-        android:centerColor="#25EB6E"
-        android:endColor="#7C3AED"
-        android:angle="45" />
+    <solid android:color="@color/dystos_background" />
 </shape>

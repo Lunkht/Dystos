@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Famille Barlow Condensed : titres.
+  Les titres du site sont composes en 600/700/800, toujours en majuscules.
+-->
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+    <font
+        android:font="@font/barlow_condensed_semibold"
+        android:fontStyle="normal"
+        android:fontWeight="600" />
+    <font
+        android:font="@font/barlow_condensed_bold"
+        android:fontStyle="normal"
+        android:fontWeight="700" />
+    <font
+        android:font="@font/barlow_condensed_extrabold"
+        android:fontStyle="normal"
+        android:fontWeight="800" />
+</font-family>

@@ -92,7 +92,7 @@
             android:layout_marginTop="12dp"
             android:visibility="gone"
             app:cardBackgroundColor="?attr/colorPrimaryContainer"
-            app:cardCornerRadius="0dp"
+            app:cardCornerRadius="2dp"
             app:cardElevation="0dp">
 
             <LinearLayout
@@ -174,7 +174,7 @@
             android:layout_marginTop="12dp"
             android:visibility="gone"
             app:cardBackgroundColor="?attr/colorSurface"
-            app:cardCornerRadius="0dp"
+            app:cardCornerRadius="2dp"
             app:cardElevation="0dp"
             app:strokeColor="?attr/colorOutline"
             app:strokeWidth="1dp">
@@ -203,7 +203,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:fontFamily="monospace"
+                    android:fontFamily="@font/jetbrains_mono"
                     android:textAppearance="?attr/textAppearanceBodySmall"
                     android:textIsSelectable="true" />
             </LinearLayout>

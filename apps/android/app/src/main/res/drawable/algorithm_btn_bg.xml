@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Bouton colle a droite : surface, angles 2 dp a droite. -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-<solid android:color="#fff"/>
-    <corners android:topRightRadius="12dp" android:bottomRightRadius="12dp"/>
+    <solid android:color="@color/dystos_surface" />
+    <stroke android:width="1dp" android:color="@color/dystos_border" />
+    <corners android:topRightRadius="2dp" android:bottomRightRadius="2dp" />
 </shape>

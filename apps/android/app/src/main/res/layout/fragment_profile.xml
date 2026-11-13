@@ -30,7 +30,7 @@
                 android:src="@drawable/ic_arrow_back"
                 app:tint="?attr/colorOnSurface" />
 
-            <TextView
+            <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -55,11 +55,11 @@
                 android:layout_height="64dp"
                 android:layout_marginEnd="16dp"
                 app:cardBackgroundColor="?attr/colorSurfaceVariant"
-                app:cardCornerRadius="32dp"
+                app:cardCornerRadius="2dp"
                 app:strokeColor="?attr/colorOutline"
                 app:strokeWidth="2dp">
 
-                <TextView
+                <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -75,7 +75,7 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
+                <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Utilisateur"
@@ -114,7 +114,7 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
+                    <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                         android:id="@+id/stat_lessons"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -145,7 +145,7 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
+                    <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                         android:id="@+id/stat_streak"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -176,7 +176,7 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
+                    <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
                         android:id="@+id/stat_completion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -197,7 +197,7 @@
         </LinearLayout>
 
         <!-- Section progression -->
-        <TextView
+        <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -242,7 +242,7 @@
         </LinearLayout>
 
         <!-- Section préférences (réponses au questionnaire) -->
-        <TextView
+        <TextView android:fontFamily="@font/barlow_condensed" android:textAllCaps="true" android:letterSpacing="0.02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"

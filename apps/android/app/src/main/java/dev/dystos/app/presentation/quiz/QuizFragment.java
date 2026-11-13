@@ -154,9 +154,9 @@ public final class QuizFragment extends BaseFragment {
             View choice = container.getChildAt(i);
             choice.setEnabled(false);
             if (i == question.getCorrectIndex()) {
-                choice.setBackgroundColor(0x224DD4C0);
+                choice.setBackgroundColor(requireContext().getColor(R.color.dystos_state_correct));
             } else if (i == selected) {
-                choice.setBackgroundColor(0x22FF5252);
+                choice.setBackgroundColor(requireContext().getColor(R.color.dystos_state_wrong));
             }
         }
 

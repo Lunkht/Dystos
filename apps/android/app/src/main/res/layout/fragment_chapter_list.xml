@@ -518,7 +518,7 @@
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnCount="2"
+            android:columnCount="1"
             android:alignmentMode="alignMargins"
             android:columnOrderPreserved="false">
             <LinearLayout

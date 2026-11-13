@@ -43,46 +43,71 @@
             android:layout_marginTop="8dp"
             android:textAppearance="?attr/textAppearanceBodyLarge" />
 
+        <!-- Toolbar Actions (Tools BG) -->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="12dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:background="@drawable/tools_bg"
+            android:orientation="horizontal"
+            android:padding="6dp">
 
-            <com.google.android.material.button.MaterialButton
+            <!-- Reset Icon -->
+            <ImageView
                 android:id="@+id/reset_button"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/reset" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="6dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/refresh"
+                app:tint="?attr/colorOnSurface"
+                android:contentDescription="@string/reset" />
 
-            <com.google.android.material.button.MaterialButton
+            <!-- Share Icon -->
+            <ImageView
                 android:id="@+id/share_button"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:text="@string/share" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="6dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/share"
+                app:tint="?attr/colorOnSurface"
+                android:contentDescription="@string/share" />
 
-            <com.google.android.material.button.MaterialButton
+            <!-- Hint Icon -->
+            <ImageView
                 android:id="@+id/hint_button"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:text="@string/hint" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="6dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/search"
+                app:tint="?attr/colorOnSurface"
+                android:contentDescription="@string/hint" />
 
-            <com.google.android.material.button.MaterialButton
+            <!-- Solution Icon -->
+            <ImageView
                 android:id="@+id/solution_button"
-                style="@style/Widget.Material3.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/solution" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginStart="6dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/code_window"
+                app:tint="?attr/colorOnSurface"
+                android:contentDescription="@string/solution" />
         </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView

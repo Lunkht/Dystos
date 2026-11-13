@@ -42,7 +42,7 @@
 }
 
 .sidebarTitle {
-  font-weight: 500;
+  font-weight: 400;
   font-size: 0.95rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -78,7 +78,7 @@
   letter-spacing: 0.12em;
   color: var(--dystos-gray-500);
   margin-bottom: 0.75rem;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .exampleList {
@@ -159,7 +159,7 @@
   background: var(--dystos-gray-800);
   color: var(--dystos-gray-100);
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 400;
   font-family: var(--ifm-font-family-base);
   cursor: pointer;
 }
@@ -213,14 +213,14 @@
   background: var(--dystos-gray-800);
   font-size: 0.75rem;
   color: var(--ifm-color-primary);
-  font-weight: 500;
+  font-weight: 400;
   border-radius: 4px;
 }
 
 .statusIndicator {
   font-family: var(--ifm-font-family-monospace);
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--ifm-color-primary);
 }
 
@@ -287,7 +287,7 @@
   font-family: var(--ifm-font-family-monospace);
   font-size: 0.75rem;
   color: var(--ifm-color-primary);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .editorActions {
@@ -405,7 +405,7 @@
   background: transparent;
   color: var(--dystos-gray-500);
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 400;
   padding: 0.5rem 0.9rem;
   cursor: pointer;
   font-family: var(--ifm-font-family-base);
@@ -451,7 +451,7 @@
 }
 
 .diagnosticCode {
-  font-weight: 500;
+  font-weight: 400;
   flex-shrink: 0;
 }
 

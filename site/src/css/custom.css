@@ -33,10 +33,14 @@
     sans-serif;
   --ifm-font-family-monospace: 'JetBrains Mono', ui-monospace, SFMono-Regular,
     Menlo, Consolas, monospace;
-  --ifm-heading-font-weight: 600;
+  --ifm-heading-font-weight: 400;
+  --ifm-font-weight-light: 400;
   --ifm-font-weight-normal: 400;
-  --ifm-font-weight-semibold: 500;
-  --ifm-font-weight-bold: 600;
+  --ifm-font-weight-semibold: 400;
+  --ifm-font-weight-bold: 400;
+  --ifm-table-head-font-weight: 400;
+  --ifm-button-font-weight: 400;
+  --ifm-dropdown-font-weight: 400;
   --ifm-navbar-height: 4rem;
   --ifm-navbar-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
 
@@ -177,7 +181,7 @@
 }
 
 .navbar__title {
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: -0.01em;
   background: linear-gradient(
     90deg,
@@ -202,7 +206,7 @@
 /* Boutons Docusaurus personnalisés */
 .button {
   border-radius: 8px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.02em;
   transition: all 0.3s ease;
 }
@@ -244,7 +248,7 @@ th,
 .menu__link--active,
 .navbar__link--active,
 .table-of-contents__link--active {
-  font-weight: var(--ifm-font-weight-bold);
+  font-weight: 400;
 }
 
 /* Pied de page noir */
@@ -294,4 +298,28 @@ footer a:hover {
 }
 .delay-500 {
   animation-delay: 0.5s;
+}
+
+/* ============================================================
+   Graisse unique : tout le texte du site en normal
+   ============================================================ */
+* {
+  font-weight: 400 !important;
+}
+
+/* Titres : graisse normale mais visuellement présents */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400 !important;
+  letter-spacing: -0.02em;
+}
+
+/* Liens : souligné léger au survol pour lisibilité */
+a {
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+
+/* Cartes : espacement intérieur cohérent */
+.card, .feature {
+  padding: 1.75rem 1.5rem !important;
 }

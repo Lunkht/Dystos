@@ -18,17 +18,17 @@ const HERO_CODE = `enum Role:
 class Compte:
     _solde: float = 0.0
 
-    def __init__(self, nom: string, role: Role):
+    def init(self, nom: str, role: Role):
         self.nom = nom
         self.role = role
 
     def deposer(self, montant: float) -> float:
         if montant <= 0:
-            throw ValueError("montant invalide")
+            raise ValueError("montant invalide")
         self._solde += montant
         return self._solde
 
-    def __str__(self) -> string:
+    def toString(self) -> str:
         return f"{self.nom} : {self._solde:.2f}"
 
 def main():

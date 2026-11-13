@@ -153,8 +153,11 @@ const config: Config = {
         {to: '/telechargements', label: 'Téléchargements', position: 'left'},
         {
           href: REPO_URL,
-          label: 'GitHub',
           position: 'right',
+          icon: {
+            alt: 'GitHub',
+            src: '/img/github.svg',
+          },
         },
       ],
     },

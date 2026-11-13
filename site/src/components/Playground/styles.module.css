@@ -254,6 +254,30 @@
   color: var(--dystos-gray-500);
 }
 
+/* Statut du service de playground */
+.serviceStatus {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.45rem;
+  border-radius: 2px;
+  margin-left: 0.5rem;
+}
+
+.serviceOnline {
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.serviceOffline {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
 /* ---------- Panes ---------- */
 .panes {
   display: flex;

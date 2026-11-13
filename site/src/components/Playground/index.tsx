@@ -43,7 +43,7 @@ type RunResponse = {
   diagnostics: Diagnostic[];
 };
 
-type ErrorState = string | null;
+type ServiceStatus = 'unknown' | 'online' | 'offline';
 
 const DEFAULT_CODE = `def fibonacci(n: int) -> int:
     if n < 2:
@@ -58,10 +58,13 @@ const ENDPOINT =
   (typeof process !== 'undefined' && process.env?.PLAYGROUND_URL) ||
   'http://localhost:8080';
 
-type Tab = 'diagnostics' | 'output' | 'tokens' | 'ast';
-
 /** Délai avant réanalyse automatique après la dernière frappe (ms). */
 const ANALYZE_DEBOUNCE_MS = 400;
+
+/** Délai avant le premier test de santé du service (ms). */
+const HEALTH_CHECK_DELAY_MS = 500;
+
+type Tab = 'diagnostics' | 'output' | 'tokens' | 'ast';
 
 export default function Playground(): ReactNode {
   const [code, setCode] = useState(DEFAULT_CODE);
@@ -71,11 +74,13 @@ export default function Playground(): ReactNode {
   const [tokens, setTokens] = useState<Token[]>([]);
   const [ast, setAst] = useState<string>('');
   const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<ErrorState>(null);
+  const [error, setError] = useState<string | null>(null);
   const [loadedExample, setLoadedExample] = useState<string | null>(null);
+  const [serviceStatus, setServiceStatus] = useState<ServiceStatus>('unknown');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const retryRef = useRef<(() => void) | null>(null);
 
   /** Déclenche une analyse complète (diagnostics + tokens + AST). */
   const analyze = useCallback(async () => {
@@ -94,14 +99,16 @@ export default function Playground(): ReactNode {
       setDiagnostics(data.diagnostics ?? []);
       setTokens(data.tokens ?? []);
       setAst(data.ast ?? '');
+      setServiceStatus('online');
     } catch (cause) {
-      setError(
+      setServiceStatus('offline');
+      const message =
         cause instanceof Error
           ? cause.message === 'Failed to fetch'
-            ? 'Impossible de joindre le service de playground. Vérifiez que le backend est démarré sur le port 8080.'
+            ? 'Service de playground introuvable : le backend n\'est pas démarré sur le port 8080. Démarrez-le avec `services/playground` ou définissez `PLAYGROUND_URL`.'
             : cause.message
-          : 'impossible de joindre le service de playground',
-      );
+          : 'impossible de joindre le service de playground';
+      setError(message);
       setDiagnostics([]);
       setTokens([]);
       setAst('');
@@ -120,10 +127,12 @@ export default function Playground(): ReactNode {
     }, ANALYZE_DEBOUNCE_MS);
   }, [analyze]);
 
+  /** Réessaie la dernière opération après une erreur. */
   const retryAnalyze = useCallback(() => {
     setError(null);
-    void run();
-  }, [run]);
+    void analyze();
+  }, [analyze]);
+
   retryRef.current = retryAnalyze;
 
   const run = useCallback(async () => {
@@ -142,19 +151,38 @@ export default function Playground(): ReactNode {
       const data = (await response.json()) as RunResponse;
       setResult(data);
       setDiagnostics(data.diagnostics ?? []);
+      setServiceStatus('online');
     } catch (cause) {
-      setError(
+      setServiceStatus('offline');
+      const message =
         cause instanceof Error
           ? cause.message === 'Failed to fetch'
-            ? 'Impossible de joindre le service de playground. Vérifiez que le backend est démarré sur le port 8080.'
+            ? 'Service de playground introuvable : le backend n\'est pas démarré sur le port 8080. Démarrez-le avec `services/playground` ou définissez `PLAYGROUND_URL`.'
             : cause.message
-          : 'impossible de joindre le service de playground',
-      );
+          : 'impossible de joindre le service de playground';
+      setError(message);
       setResult(null);
     } finally {
       setBusy(false);
     }
   }, [code]);
+
+  /** Vérifie si le service de playground est joignable. */
+  const checkHealth = useCallback(async () => {
+    try {
+      const response = await fetch(`${ENDPOINT}/api/v1/health`, {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'},
+      });
+      if (response.ok) {
+        setServiceStatus('online');
+      } else {
+        setServiceStatus('offline');
+      }
+    } catch {
+      setServiceStatus('offline');
+    }
+  }, []);
 
   const onTabKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key !== 'Tab') {
@@ -171,9 +199,7 @@ export default function Playground(): ReactNode {
     });
   };
 
-  /** Charge un exemple depuis l'URL (?exemple=) ou depuis la barre latérale.
-   * Réinitialise l'état d'exécution pour ne pas afficher de résultats obsolètes.
-   */
+  /** Charge un exemple depuis l'URL (?exemple=) ou depuis la barre latérale. */
   const loadExample = (id: string) => {
     const example = EXAMPLES.find((entry) => entry.id === id);
     if (!example) {
@@ -189,6 +215,9 @@ export default function Playground(): ReactNode {
   };
 
   useEffect(() => {
+    // Test de santé du service au démarrage.
+    void checkHealth();
+
     const id = new URLSearchParams(window.location.search).get('exemple');
     if (id) {
       loadExample(id);
@@ -203,6 +232,11 @@ export default function Playground(): ReactNode {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    void analyze();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadedExample]);
 
   const lineCount = code.split('\n').length;
 
@@ -275,6 +309,15 @@ export default function Playground(): ReactNode {
             {loadedExample && (
               <span className={styles.activeExample}>{loadedExample}</span>
             )}
+            {serviceStatus !== 'unknown' && (
+              <span
+                className={clsx(styles.serviceStatus, {
+                  [styles.serviceOnline]: serviceStatus === 'online',
+                  [styles.serviceOffline]: serviceStatus === 'offline',
+                })}>
+                {serviceStatus === 'online' ? '● Service en ligne' : '○ Service hors ligne'}
+              </span>
+            )}
           </div>
 
           <div className={styles.toolbarCenter}>
@@ -287,7 +330,7 @@ export default function Playground(): ReactNode {
                 }
                 void analyze();
               }}
-              disabled={busy}
+              disabled={busy || serviceStatus === 'offline'}
               aria-label="Analyser le code">
               Analyser
             </button>
@@ -295,7 +338,7 @@ export default function Playground(): ReactNode {
               type="button"
               className={clsx(styles.toolbarButton, styles.btnRun)}
               onClick={() => void run()}
-              disabled={busy}
+              disabled={busy || serviceStatus === 'offline'}
               aria-label="Exécuter le code">
               Exécuter
             </button>
@@ -352,7 +395,7 @@ export default function Playground(): ReactNode {
           <div className={clsx(styles.pane, styles.resultPane)}>
             <div className={styles.resultHeader}>
               <div className={styles.tabs} role="tablist">
-                (
+                {(
                   [
                     ['diagnostics', `Diagnostics (${diagnostics.length})`],
                     ['output', 'Sortie'],
@@ -369,7 +412,7 @@ export default function Playground(): ReactNode {
                     onClick={() => setTab(id)}>
                     {label}
                   </button>
-                ))
+                ))}
               </div>
               <div className={styles.resultActions}>
                 {error && (
@@ -396,6 +439,17 @@ export default function Playground(): ReactNode {
             </div>
 
             <div className={styles.panel}>
+              {serviceStatus === 'offline' && !error && (
+                <div className={styles.errorBanner}>
+                  <span className={styles.errorIcon}>⚠</span>
+                  <span className={styles.errorText}>
+                    Service de playground indisponible. Démarrez le backend sur le
+                    port 8080 (module « services/playground ») ou définissez la variable
+                    « PLAYGROUND_URL ».
+                  </span>
+                </div>
+              )}
+
               {error && (
                 <div className={styles.errorBanner}>
                   <span className={styles.errorIcon}>Erreur</span>
@@ -403,7 +457,7 @@ export default function Playground(): ReactNode {
                 </div>
               )}
 
-              {tab === 'diagnostics' && !error && (
+              {tab === 'diagnostics' && !error && serviceStatus !== 'offline' && (
                 <ul className={styles.diagnostics}>
                   {diagnostics.length === 0 && (
                     <li className={styles.okText}>
@@ -429,7 +483,7 @@ export default function Playground(): ReactNode {
                 </ul>
               )}
 
-              {tab === 'output' && (
+              {tab === 'output' && serviceStatus !== 'offline' && (
                 <div className={styles.outputWrapper}>
                   <pre className={styles.output}>
                     {result
@@ -444,7 +498,7 @@ export default function Playground(): ReactNode {
                 </div>
               )}
 
-              {tab === 'tokens' && (
+              {tab === 'tokens' && serviceStatus !== 'offline' && (
                 <ol className={styles.tokens}>
                   {tokens.map((token, index) => (
                     <li key={`${token.line}-${token.column}-${index}`}>
@@ -458,7 +512,9 @@ export default function Playground(): ReactNode {
                 </ol>
               )}
 
-              {tab === 'ast' && <pre className={styles.output}>{ast || '—'}</pre>}
+              {tab === 'ast' && serviceStatus !== 'offline' && (
+                <pre className={styles.output}>{ast || '—'}</pre>
+              )}
             </div>
           </div>
         </div>
